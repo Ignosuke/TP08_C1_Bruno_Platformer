@@ -40,7 +40,6 @@ public class PlayerAttacker : MonoBehaviour
     public event Action<int> OnAttacked;   // Manda 1, 2 o 3
     public event Action OnAirAttacked;
     public event Action OnHit;
-    public event Action OnHitboxChecked;
 
     private void Awake()
     {
@@ -175,8 +174,6 @@ public class PlayerAttacker : MonoBehaviour
             damageable.TakeDamage(currentDamage, new Vector2(facing, 0f));
             OnHit?.Invoke();
         }
-
-        OnHitboxChecked?.Invoke();
     }
 
     public Vector2 GetHitboxCenter()
@@ -192,5 +189,14 @@ public class PlayerAttacker : MonoBehaviour
     public bool GetIsAttacking()
     {
         return isAttacking;
+    }
+
+    // La hitbox depende de hacia donde mira el mover, por eso solo se dibuja en Play
+    private void OnDrawGizmosSelected()
+    {
+        if (!Application.isPlaying) return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(GetHitboxCenter(), GetHitboxSize());
     }
 }

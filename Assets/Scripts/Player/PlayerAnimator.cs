@@ -2,7 +2,7 @@ using UnityEngine;
 
 // Escucha los eventos de los demas componentes y se los pasa al Animator.
 // Sin Animator o sin controller asignado no hace nada, asi funciona con el placeholder.
-// El Animator Controller tiene que tener: Speed (float), Grounded y Defending (bool),
+// El Animator Controller tiene que tener: Speed y VerticalSpeed (float), Grounded y Defending (bool),
 // Jump, Dash, Attack1, Attack2, Attack3 y AirAttack (trigger).
 public class PlayerAnimator : MonoBehaviour
 {
@@ -50,6 +50,7 @@ public class PlayerAnimator : MonoBehaviour
 
         if (!HasAnimator()) return;
         animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+        animator.SetFloat("VerticalSpeed", rb.linearVelocity.y);
         animator.SetBool("Grounded", groundChecker.GetIsGrounded());
         animator.SetBool("Defending", defender.GetIsDefending());
     }
