@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 668b6234b80fe864c86cce638e8c83b9, type: 3}
+  m_Name: PlayerSo
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSo
+  moveAction: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  jumpAction: {fileID: -2099379676528639254, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  attackAction: {fileID: 1120369429361536294, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  dashAction: {fileID: -6317549735386072006, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  defendAction: {fileID: -7541954723995273918, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  moveSpeed: 9
+  acceleration: 90
+  deceleration: 120
+  jumpForce: 18
+  remainingForceOnTapJump: 0.45
+  riseGravity: 5
+  fallGravity: 8
+  heavyFallGravity: 11
+  heavyFallThreshold: 12
+  jumpBufferTime: 0.12
+  jumpLockTime: 0.1
+  coyoteTime: 0.1
+  feetWidth: 0.6
+  checkDistance: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  dashSpeed: 24
+  dashDuration: 0.15
+  dashCooldown: 0.5
+  comboDamage: 010000000100000002000000
+  comboDuration:
+  - 0.25
+  - 0.25
+  - 0.4
+  airAttackDamage: 1
+  airAttackDuration: 0.3
+  attackHitDelay: 0.08
+  comboWindow: 0.3
+  attackBufferTime: 0.2
+  hitboxOffset: {x: 1.1, y: 0}
+  hitboxSize: {x: 1.6, y: 1.3}
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  parryWindow: 0.15
+  defendCooldown: 0.25
+  jumpClip: {fileID: 0}
+  landClip: {fileID: 0}
+  dashClip: {fileID: 0}
+  attackClips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  airAttackClip: {fileID: 0}
+  hitClip: {fileID: 0}
+  defendClip: {fileID: 0}
