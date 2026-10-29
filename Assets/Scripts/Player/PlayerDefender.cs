@@ -104,7 +104,7 @@ public class PlayerDefender : MonoBehaviour
         return isDefending;
     }
 
-    // Los enemigos (historia 004) van a preguntar esto al pegar: parry si es true, bloqueo si solo defiende
+    // Los enemigos (historia 004) preguntan esto al pegar, parry si es true, bloqueo si solo defiende
     public bool GetIsParrying()
     {
         return isDefending && parryCounter > 0f;

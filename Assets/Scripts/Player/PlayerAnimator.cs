@@ -1,13 +1,25 @@
 using UnityEngine;
 
-// Escucha los eventos de los demas componentes y se los pasa al Animator.
-// Sin Animator o sin controller asignado no hace nada, asi funciona con el placeholder.
-// El Animator Controller tiene que tener: Speed y VerticalSpeed (float), Grounded y Defending (bool),
-// Jump, Dash, Attack1, Attack2, Attack3 y AirAttack (trigger).
+// Elige que animacion se ve segun el estado de los demas componentes y la reproduce con Play.
+// El Animator Controller no tiene transiciones, solo los estados con estos mismos nombres.
+// Sin Animator o sin controller asignado no hace nada.
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Transform visualRoot;      // Se da vuelta segun hacia donde mira
+
+    private const string IdleState = "Idle";
+    private const string RunState = "Run";
+    private const string DefendState = "Defend";
+    private const string JumpStartState = "JumpStart";
+    private const string JumpRiseState = "JumpRise";
+    private const string JumpApexState = "JumpApex";
+    private const string JumpFallState = "JumpFall";
+    private const string DashState = "Dash";
+    private const string AirAttackState = "AirAttack";
+
+    private const float MoveThreshold = 0.1f;       // Velocidad minima para correr / para considerar que sube
+    private const float ApexThreshold = 1f;         // Debajo de esta velocidad de subida empieza el punto alto
 
     private Rigidbody2D rb;
     private PlayerGroundChecker groundChecker;
@@ -16,6 +28,9 @@ public class PlayerAnimator : MonoBehaviour
     private PlayerDasher dasher;
     private PlayerAttacker attacker;
     private PlayerDefender defender;
+
+    private string currentState;
+    private string attackState;         // Que ataque mostrar mientras dura el golpe
 
     private void Awake()
     {
@@ -49,30 +64,71 @@ public class PlayerAnimator : MonoBehaviour
         visualRoot.localScale = new Vector3(mover.GetFacing(), 1f, 1f);
 
         if (!HasAnimator()) return;
-        animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
-        animator.SetFloat("VerticalSpeed", rb.linearVelocity.y);
-        animator.SetBool("Grounded", groundChecker.GetIsGrounded());
-        animator.SetBool("Defending", defender.GetIsDefending());
+        PlayState(ChooseState(), false);
+    }
+
+    // El orden es la prioridad, dash, ataque, defensa, suelo y aire
+    private string ChooseState()
+    {
+        if (dasher.GetIsDashing()) return DashState;
+        if (attacker.GetIsAttacking()) return attackState;
+        if (defender.GetIsDefending()) return DefendState;
+
+        float verticalSpeed = rb.linearVelocity.y;
+
+        // Al despegar el ground checker todavia marca suelo un instante, por eso tambien pide que no este subiendo
+        if (groundChecker.GetIsGrounded() && verticalSpeed < MoveThreshold)
+            return Mathf.Abs(rb.linearVelocity.x) > MoveThreshold ? RunState : IdleState;
+
+        return ChooseAirState(verticalSpeed);
+    }
+
+    private string ChooseAirState(float verticalSpeed)
+    {
+        // El arranque y el punto alto se ven enteros antes de seguir
+        if ((currentState == JumpStartState || currentState == JumpApexState) && !IsCurrentFinished()) return currentState;
+        if (verticalSpeed > ApexThreshold) return JumpRiseState;
+        if (currentState == JumpRiseState) return JumpApexState;
+        return JumpFallState;
     }
 
     private void PlayJump()
     {
-        if (HasAnimator()) animator.SetTrigger("Jump");
+        // Si salta atacando o en dash se sigue viendo esa animacion
+        if (!HasAnimator() || dasher.GetIsDashing() || attacker.GetIsAttacking()) return;
+        PlayState(JumpStartState, true);
     }
 
     private void PlayDash()
     {
-        if (HasAnimator()) animator.SetTrigger("Dash");
+        if (HasAnimator()) PlayState(DashState, true);
     }
 
     private void PlayAttack(int step)
     {
-        if (HasAnimator()) animator.SetTrigger("Attack" + step);
+        attackState = "Attack" + step;
+        if (HasAnimator()) PlayState(attackState, true);
     }
 
     private void PlayAirAttack()
     {
-        if (HasAnimator()) animator.SetTrigger("AirAttack");
+        attackState = AirAttackState;
+        if (HasAnimator()) PlayState(attackState, true);
+    }
+
+    // restart = true la arranca de cero aunque ya se este viendo (ej. Attack1 dos veces seguidas)
+    private void PlayState(string state, bool restart)
+    {
+        if (state == currentState && !restart) return;
+
+        currentState = state;
+        animator.Play(state, 0, 0f);
+    }
+
+    private bool IsCurrentFinished()
+    {
+        AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
+        return info.IsName(currentState) && info.normalizedTime >= 1f;
     }
 
     private bool HasAnimator()

@@ -31,7 +31,7 @@ public class PlayerSo : ScriptableObject
     [Header("Suelo")]
     [SerializeField] private float feetWidth = 0.5f;        // Ancho del personaje a la altura de los pies
     [SerializeField] private float checkDistance = 0.2f;    // Distancia del raycast para detectar el suelo
-    [SerializeField] private LayerMask groundLayer;         // Solo la capa Ground: los rayos salen de los pies y tocarian al propio jugador
+    [SerializeField] private LayerMask groundLayer;         // Solo la capa Ground, los rayos salen de los pies y tocarian al propio jugador
 
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 24f;

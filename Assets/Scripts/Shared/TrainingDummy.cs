@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Muñeco de prueba: parpadea y loguea al recibir un golpe, nunca muere
+// Muñeco de prueba, parpadea y loguea al recibir un golpe, nunca muere
 [RequireComponent(typeof(SpriteRenderer))]
 public class TrainingDummy : MonoBehaviour, IDamageable
 {

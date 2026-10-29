@@ -78,7 +78,7 @@ public class PlayerDasher : MonoBehaviour
     {
         if (!isDashing) return;
 
-        // Velocidad fija y sin caer: el dash siempre recorre la misma distancia
+        // Velocidad fija y sin caer, el dash siempre recorre la misma distancia
         rb.linearVelocity = new Vector2(dashDirection * dashSpeed, 0f);
     }
 

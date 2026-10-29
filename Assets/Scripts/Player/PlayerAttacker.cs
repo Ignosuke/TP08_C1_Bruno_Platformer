@@ -90,7 +90,7 @@ public class PlayerAttacker : MonoBehaviour
 
         if (isAttacking) UpdateAttack();
 
-        // Igual que el salto: el buffer guarda el click para encadenar el siguiente golpe al terminar este
+        // Igual que el salto, el buffer guarda el click para encadenar el siguiente golpe al terminar este
         if (attackRequested)
         {
             attackRequested = false;
@@ -191,10 +191,11 @@ public class PlayerAttacker : MonoBehaviour
         return isAttacking;
     }
 
-    // La hitbox depende de hacia donde mira el mover, por eso solo se dibuja en Play
+    // La hitbox depende de hacia donde mira el mover, por eso solo se dibuja en Play.
+    // Si se selecciona el prefab en Play, esa copia no corrio Awake y el mover es null
     private void OnDrawGizmosSelected()
     {
-        if (!Application.isPlaying) return;
+        if (!Application.isPlaying || mover == null) return;
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(GetHitboxCenter(), GetHitboxSize());

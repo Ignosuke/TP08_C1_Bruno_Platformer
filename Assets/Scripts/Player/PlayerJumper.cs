@@ -94,7 +94,7 @@ public class PlayerJumper : MonoBehaviour
         }
 
         ApplyGravity();
-        HandleJump();       // Primero el salto: si el tap fue muy rapido, el corte se aplica al salto recien hecho
+        HandleJump();       // Primero el salto, si el tap fue muy rapido el corte se aplica al salto recien hecho
         HandleTapJump();
     }
 
@@ -117,7 +117,7 @@ public class PlayerJumper : MonoBehaviour
         OnJumped?.Invoke();
     }
 
-    // Al soltar la tecla durante la subida se corta parte de la velocidad: tap = salto bajo, hold = salto completo
+    // Al soltar la tecla durante la subida se corta parte de la velocidad, tap = salto bajo, hold = salto completo
     private void HandleTapJump()
     {
         if (!jumpCutRequested) return;
