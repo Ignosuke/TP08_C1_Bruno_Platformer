@@ -29,11 +29,11 @@ MonoBehaviour:
   jumpBufferTime: 0.12
   jumpLockTime: 0.1
   coyoteTime: 0.1
-  feetWidth: 0.6
+  feetWidth: 0.3
   checkDistance: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 128
   dashSpeed: 16
   dashDuration: 0.15
   dashCooldown: 0.5

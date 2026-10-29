@@ -12,12 +12,12 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private InputActionReference dashAction;
     [SerializeField] private InputActionReference defendAction;
 
-    [Header("Movimiento")]
+    [Header("Movement")]
     [SerializeField] private float moveSpeed = 9f;
     [SerializeField] private float acceleration = 90f;      // Que tan rapido llega a la velocidad maxima
     [SerializeField] private float deceleration = 120f;     // Que tan rapido frena al soltar
 
-    [Header("Salto")]
+    [Header("Jump")]
     [SerializeField] private float jumpForce = 15f;
     [SerializeField] private float remainingForceOnTapJump = 0.45f; // Cuanto de la velocidad sobrevive al soltar
     [SerializeField] private float riseGravity = 3.5f;      // Mientras sube
@@ -28,7 +28,7 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private float jumpLockTime = 0.1f;
     [SerializeField] private float coyoteTime = 0.1f;
 
-    [Header("Suelo")]
+    [Header("Ground")]
     [SerializeField] private float feetWidth = 0.5f;        // Ancho del personaje a la altura de los pies
     [SerializeField] private float checkDistance = 0.2f;    // Distancia del raycast para detectar el suelo
     [SerializeField] private LayerMask groundLayer;         // Solo la capa Ground, los rayos salen de los pies y tocarian al propio jugador
@@ -38,7 +38,7 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private float dashDuration = 0.15f;
     [SerializeField] private float dashCooldown = 0.5f;     // Se cuenta desde que arranca el dash
 
-    [Header("Ataque")]
+    [Header("Attack")]
     [SerializeField] private int[] comboDamage = { 1, 1, 2 };            // Ataque 1, 2 y 3
     [SerializeField] private float[] comboDuration = { 0.25f, 0.25f, 0.4f };
     [SerializeField] private int airAttackDamage = 1;
@@ -50,11 +50,11 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private Vector2 hitboxSize = new Vector2(1.6f, 1.3f);
     [SerializeField] private LayerMask hitLayer = ~0;
 
-    [Header("Defensa")]
+    [Header("Defend")]
     [SerializeField] private float parryWindow = 0.15f;     // Primeros segundos de la defensa que cuentan como parry
     [SerializeField] private float defendCooldown = 0.25f;  // Para que no se pueda spamear el parry
 
-    [Header("Sonidos")]
+    [Header("Sounds")]
     [SerializeField] private AudioClip jumpClip;
     [SerializeField] private AudioClip landClip;
     [SerializeField] private AudioClip dashClip;
