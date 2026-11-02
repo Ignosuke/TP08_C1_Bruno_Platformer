@@ -191,6 +191,12 @@ public class PlayerAttacker : MonoBehaviour
         return isAttacking;
     }
 
+    // Termino el golpe pero todavia se puede encadenar el siguiente
+    public bool GetIsComboWindowOpen()
+    {
+        return !isAttacking && comboCounter > 0f;
+    }
+
     // La hitbox depende de hacia donde mira el mover, por eso solo se dibuja en Play.
     // Si se selecciona el prefab en Play, esa copia no corrio Awake y el mover es null
     private void OnDrawGizmosSelected()

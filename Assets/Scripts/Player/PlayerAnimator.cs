@@ -78,9 +78,19 @@ public class PlayerAnimator : MonoBehaviour
 
         // Al despegar el ground checker todavia marca suelo un instante, por eso tambien pide que no este subiendo
         if (groundChecker.GetIsGrounded() && verticalSpeed < MoveThreshold)
-            return Mathf.Abs(rb.linearVelocity.x) > MoveThreshold ? RunState : IdleState;
+            return ChooseGroundState();
 
         return ChooseAirState(verticalSpeed);
+    }
+
+    private string ChooseGroundState()
+    {
+        if (Mathf.Abs(rb.linearVelocity.x) > MoveThreshold) return RunState;
+
+        // En la ventana del combo se queda en el ultimo frame del golpe, asi el cuerpo no salta a Idle y vuelve
+        if (attacker.GetIsComboWindowOpen() && currentState == attackState) return attackState;
+
+        return IdleState;
     }
 
     private string ChooseAirState(float verticalSpeed)
