@@ -34,7 +34,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  dashSpeed: 16
+  dashSpeed: 20
   dashDuration: 0.15
   dashCooldown: 0.5
   comboDamage: 010000000100000002000000

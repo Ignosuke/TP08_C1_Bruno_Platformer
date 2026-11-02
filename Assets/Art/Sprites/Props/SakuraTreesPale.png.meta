@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 04d14e0d345608e42bdb2d16d3a0fbb8
+guid: 236cfec6f20b65945adc553f86edce79
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2778202501070124981
-    second: Torii gate_0
+      213: -929665730850905977
+    second: Color 2_0
+  - first:
+      213: -8868030554128596599
+    second: Color 2_1
+  - first:
+      213: 4919089329781886109
+    second: Color 2_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +78,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -126,23 +132,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Torii gate_0
+      name: SakuraTreesPale_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 96
-        height: 79
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 10
+        y: 16
+        width: 150
+        height: 130
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5b7f26684782e8620800000000000000
-      internalID: 2778202501070124981
+      spriteID: 92dfcce490b62114697042cbd7eecc88
+      internalID: 615788111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SakuraTreesPale_1
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 16
+        width: 113
+        height: 137
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 108e3c665b6997846922f7364e59c243
+      internalID: -1641442798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SakuraTreesPale_2
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 16
+        width: 132
+        height: 139
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 217de0d534c12bd47b5ee4a69b0ab0fe
+      internalID: -1944963965
       vertices: []
       indices: 
       edges: []
@@ -151,7 +201,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9ce731867e6eadc47a757c626dc3b900
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Torii gate_0: 2778202501070124981
+      SakuraTreesPale_0: 615788111
+      SakuraTreesPale_1: -1641442798
+      SakuraTreesPale_2: -1944963965
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

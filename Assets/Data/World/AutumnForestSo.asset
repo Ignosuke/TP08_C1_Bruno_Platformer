@@ -15,3 +15,4 @@ MonoBehaviour:
   lightColor: {r: 1, g: 0.85, b: 0.75, a: 1}
   lightIntensity: 0.85
   lightFadeTime: 1
+  parallaxZone: 1

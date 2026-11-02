@@ -7,8 +7,10 @@ public class AreaSo : ScriptableObject
     [SerializeField] private Color lightColor = Color.white;    // Tinte de la luz global
     [SerializeField] private float lightIntensity = 1f;
     [SerializeField] private float lightFadeTime = 1f;          // Segundos para pasar al tinte de esta area
+    [SerializeField] private ParallaxZone parallaxZone;         // Que fondo se ve en esta area
 
     public Color GetLightColor() => lightColor;
     public float GetLightIntensity() => lightIntensity;
     public float GetLightFadeTime() => lightFadeTime;
+    public ParallaxZone GetParallaxZone() => parallaxZone;
 }

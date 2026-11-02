@@ -78,7 +78,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -132,67 +132,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Trees_0
+      name: Trees_2_0
       rect:
         serializedVersion: 2
-        x: 20
+        x: 21
         y: 0
-        width: 117
-        height: 132
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 115
+        height: 131
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2bf28c1b74b62b320800000000000000
-      internalID: 2572236292851511218
+      spriteID: 48f81e882b30b224b8ed8195038c91f8
+      internalID: 1168816305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Trees_1
+      name: Trees_2_1
       rect:
         serializedVersion: 2
-        x: 147
+        x: 148
         y: 0
-        width: 104
-        height: 99
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 102
+        height: 98
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e282d82c2bd206650800000000000000
-      internalID: 6224024930817484846
+      spriteID: a5c3af85d0ed37b4bb30ce866f8f0445
+      internalID: -769081602
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Trees_2
+      name: Trees_2_2
       rect:
         serializedVersion: 2
-        x: 261
+        x: 262
         y: 0
-        width: 132
-        height: 126
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 130
+        height: 125
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 01d412b0a00e45480800000000000000
-      internalID: -8911251428918342384
+      spriteID: c478085ef33919442a35b98c09de7b22
+      internalID: 1218309745
       vertices: []
       indices: 
       edges: []
@@ -201,7 +201,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: cd49b425eb4836a45ab9a33ec47c60ea
     internalID: 0
     vertices: []
     indices: 
@@ -211,9 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Trees_0: 2572236292851511218
-      Trees_1: 6224024930817484846
-      Trees_2: -8911251428918342384
+      Trees_2_0: 1168816305
+      Trees_2_1: -769081602
+      Trees_2_2: 1218309745
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -78,7 +78,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -132,67 +132,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Color 1_0
+      name: SakuraTrees_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 15
-        width: 152
-        height: 132
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 10
+        y: 16
+        width: 150
+        height: 130
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2e95568fd9df48870800000000000000
-      internalID: 8684344836396243426
+      spriteID: 3689f267d585bf74ea8cc4d00299a7e4
+      internalID: -1960083540
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Color 1_1
+      name: SakuraTrees_1
       rect:
         serializedVersion: 2
-        x: 176
-        y: 15
-        width: 115
+        x: 177
+        y: 16
+        width: 113
+        height: 137
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 657e1086b4c2a1f43bad71a2d7cbdbcf
+      internalID: 709557959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SakuraTrees_2
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 16
+        width: 132
         height: 139
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 07bfbdd03fb7bd6b0800000000000000
-      internalID: -5270482655067243664
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Color 1_2
-      rect:
-        serializedVersion: 2
-        x: 304
-        y: 15
-        width: 134
-        height: 141
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ffbaaa5452c70d910800000000000000
-      internalID: 1860123145628462079
+      spriteID: d70d653593842c7459052bd07ec73d30
+      internalID: 947607318
       vertices: []
       indices: 
       edges: []
@@ -201,7 +201,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c9e5b001e3f3d414eb72a9e81decfade
     internalID: 0
     vertices: []
     indices: 
@@ -211,9 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Color 1_0: 8684344836396243426
-      Color 1_1: -5270482655067243664
-      Color 1_2: 1860123145628462079
+      SakuraTrees_0: -1960083540
+      SakuraTrees_1: 709557959
+      SakuraTrees_2: 947607318
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
