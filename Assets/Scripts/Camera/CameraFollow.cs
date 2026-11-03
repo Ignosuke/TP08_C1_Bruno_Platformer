@@ -26,8 +26,6 @@ public class CameraFollow : MonoBehaviour
         halfHeight = cameraData.GetDeadZoneHeight() * 0.5f;
         smoothTime = cameraData.GetSmoothTime();
         offset = cameraData.GetOffset();
-
-        ResolveTarget();
     }
 
     private void OnEnable()
@@ -38,15 +36,6 @@ public class CameraFollow : MonoBehaviour
     private void OnDisable()
     {
         areaTracker.OnAreaChanged -= SetArea;
-    }
-
-    private void ResolveTarget()
-    {
-        if (target != null) return;
-
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        if (player != null) target = player.transform;
     }
 
     // Al cambiar de area el SmoothDamp lleva la camara a los nuevos limites, eso hace el paneo entre areas
