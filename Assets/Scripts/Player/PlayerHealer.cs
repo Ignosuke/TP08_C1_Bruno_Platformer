@@ -46,14 +46,14 @@ public class PlayerHealer : MonoBehaviour
     {
         healAction.action.performed += OnHealPerformed;
         healAction.action.Enable();
-        health.OnHurt += CancelHeal;
+        health.OnDamaged += CancelHeal;
     }
 
     private void OnDisable()
     {
         healAction.action.performed -= OnHealPerformed;
         healAction.action.Disable();
-        health.OnHurt -= CancelHeal;
+        health.OnDamaged -= CancelHeal;
         isHealing = false;
         healRequested = false;
     }
@@ -99,7 +99,7 @@ public class PlayerHealer : MonoBehaviour
         health.Heal(healAmount);
     }
 
-    private void CancelHeal()
+    private void CancelHeal(DamageInfo info)
     {
         isHealing = false;
     }

@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 803983386423952046}
   - component: {fileID: 2660118162226678325}
   - component: {fileID: 274832521623492624}
+  - component: {fileID: 7410054387909690721}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -145,6 +146,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7410054387909690721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3133649398923226528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4587f05451565744daa53e483cd6592e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationHitRelay
 --- !u!1 &4507087158210081793
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,8 +171,10 @@ GameObject:
   - component: {fileID: 4884547195650319118}
   - component: {fileID: 1210776782276118853}
   - component: {fileID: 8734632208493566517}
+  - component: {fileID: 896392920327532147}
   - component: {fileID: 2782667245408224403}
   - component: {fileID: 7500916708750134503}
+  - component: {fileID: 1442056896882286569}
   - component: {fileID: 5088062005014307678}
   - component: {fileID: 4097815284217004418}
   - component: {fileID: 6577981422973734674}
@@ -245,6 +260,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttacker
   playerData: {fileID: 11400000, guid: 7ea74dba68ebd274b9b0f0f9821f4298, type: 2}
+--- !u!114 &896392920327532147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4507087158210081793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458c253508b10c84fbce4518c10f25b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeHitbox
+  hitStopChannel: {fileID: 11400000, guid: deee590b262b54944a794f38afdb3247, type: 2}
+  cameraShakeChannel: {fileID: 11400000, guid: a709c5e0d2afe2942853547372b3d541, type: 2}
 --- !u!114 &2782667245408224403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +299,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb3054a08492db44aa8de1d0638d9d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  playerData: {fileID: 11400000, guid: 7ea74dba68ebd274b9b0f0f9821f4298, type: 2}
+--- !u!114 &1442056896882286569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4507087158210081793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c2ed17e174adc46881af5987276780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerKnockback
   playerData: {fileID: 11400000, guid: 7ea74dba68ebd274b9b0f0f9821f4298, type: 2}
 --- !u!114 &5088062005014307678
 MonoBehaviour:
@@ -297,7 +339,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawner
   playerData: {fileID: 11400000, guid: 7ea74dba68ebd274b9b0f0f9821f4298, type: 2}
-  checkpoint: {fileID: 0}
 --- !u!114 &6577981422973734674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,6 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DebugDamageKey
   damage: 2
+  knockback: 6
 --- !u!50 &1524570342585205822
 Rigidbody2D:
   serializedVersion: 5

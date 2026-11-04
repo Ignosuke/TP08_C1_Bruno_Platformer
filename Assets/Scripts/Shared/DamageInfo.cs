@@ -1,0 +1,20 @@
+using UnityEngine;
+
+// Los datos de un golpe. Viajan en TakeDamage y en OnDamaged, y cada sistema decide si el golpe le incumbe
+public readonly struct DamageInfo
+{
+    public readonly int Amount;
+    public readonly Vector2 Direction;  // Desde la fuente hacia quien recibe
+    public readonly int SourceLayer;
+    public readonly float Knockback;    // Fuerza del empujon, 0 no empuja
+
+    public DamageInfo(int amount, Vector2 direction, int sourceLayer, float knockback)
+    {
+        Amount = amount;
+        Direction = direction;
+        SourceLayer = sourceLayer;
+        Knockback = knockback;
+    }
+
+    public bool IsFrom(LayerMask mask) => mask.Contains(SourceLayer);
+}

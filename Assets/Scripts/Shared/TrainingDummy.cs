@@ -26,10 +26,10 @@ public class TrainingDummy : MonoBehaviour, IDamageable
         if (flashCounter <= 0f) spriteRenderer.color = baseColor;
     }
 
-    public bool TakeDamage(int amount, Vector2 hitDirection)
+    public bool TakeDamage(DamageInfo info)
     {
-        totalDamage += amount;
-        Debug.Log(name + " recibio " + amount + " de danio (total " + totalDamage + ")");
+        totalDamage += info.Amount;
+        Debug.Log(name + " took " + info.Amount + " damage (total " + totalDamage + ")");
 
         spriteRenderer.color = flashColor;
         flashCounter = flashTime;

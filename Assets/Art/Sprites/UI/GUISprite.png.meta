@@ -807,6 +807,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: GUISprite_EnemyBarFrame
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 164
+        width: 64
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92e558be1b5c2494280022bf8fc17b43
+      internalID: -421229402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GUISprite_EnemyBarFill
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 182
+        width: 58
+        height: 3
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc43552c09367094fb939c6db5ce4731
+      internalID: -1960854541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -846,6 +890,8 @@ TextureImporter:
       GUISprite_9: 2350947443652067680
       GUISprite_ChargeEmpty: 1568158840
       GUISprite_ChargeFull: 121626215
+      GUISprite_EnemyBarFill: -1960854541
+      GUISprite_EnemyBarFrame: -421229402
       GUISprite_HeartEmpty: -1176751490
       GUISprite_HeartFull: -981252376
       GUISprite_HeartHalf: -808391055

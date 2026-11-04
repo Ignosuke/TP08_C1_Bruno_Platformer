@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// El combo de tres golpes en el piso y el ataque aereo. El golpe pega cuando la animacion llega a su frame,
+// con el Animation Event que el builder pone en cada clip de ataque
 public class PlayerAttacker : MonoBehaviour
 {
     [SerializeField] private PlayerSo playerData;
@@ -12,24 +14,27 @@ public class PlayerAttacker : MonoBehaviour
     private float[] comboDuration;
     private int airAttackDamage;
     private float airAttackDuration;
-    private float attackHitDelay;
     private float comboWindow;
     private float attackBufferTime;
     private Vector2 hitboxOffset;
     private Vector2 hitboxSize;
     private LayerMask hitLayer;
+    private float[] comboKnockback;
+    private float[] comboHitStop;
+    private float airAttackKnockback;
+    private float airAttackHitStop;
 
     private float bufferCounter;
     private float attackCounter;
-    private float hitCounter;
     private float comboCounter;
 
-    private Rigidbody2D rb;
     private PlayerGroundChecker groundChecker;
     private PlayerMover mover;
     private PlayerDasher dasher;
     private PlayerDefender defender;
     private PlayerHealer healer;
+    private MeleeHitbox hitbox;
+    private AnimationHitRelay hitRelay;
 
     private bool attackRequested;
     private bool isAttacking;
@@ -37,10 +42,11 @@ public class PlayerAttacker : MonoBehaviour
     private bool hitChecked;
     private int comboStep;              // 0, 1 o 2 segun el golpe del combo
     private int currentDamage;
+    private float currentKnockback;
+    private float currentHitStop;
 
     public event Action<int> OnAttacked;   // Manda 1, 2 o 3
     public event Action OnAirAttacked;
-    public event Action OnHit;
 
     private void Awake()
     {
@@ -49,31 +55,39 @@ public class PlayerAttacker : MonoBehaviour
         comboDuration = playerData.GetComboDuration();
         airAttackDamage = playerData.GetAirAttackDamage();
         airAttackDuration = playerData.GetAirAttackDuration();
-        attackHitDelay = playerData.GetAttackHitDelay();
         comboWindow = playerData.GetComboWindow();
         attackBufferTime = playerData.GetAttackBufferTime();
         hitboxOffset = playerData.GetHitboxOffset();
         hitboxSize = playerData.GetHitboxSize();
         hitLayer = playerData.GetHitLayer();
+        comboKnockback = playerData.GetComboKnockback();
+        comboHitStop = playerData.GetComboHitStop();
+        airAttackKnockback = playerData.GetAirAttackKnockback();
+        airAttackHitStop = playerData.GetAirAttackHitStop();
 
-        rb = GetComponent<Rigidbody2D>();
         groundChecker = GetComponentInChildren<PlayerGroundChecker>();
         mover = GetComponent<PlayerMover>();
         dasher = GetComponent<PlayerDasher>();
         defender = GetComponent<PlayerDefender>();
         healer = GetComponent<PlayerHealer>();
+        hitbox = GetComponent<MeleeHitbox>();
+        hitRelay = GetComponentInChildren<AnimationHitRelay>();   // En Visual, junto al Animator
     }
 
     private void OnEnable()
     {
         attackAction.action.performed += OnAttackPerformed;
         attackAction.action.Enable();
+        hitRelay.OnHitFrame += CheckHitbox;
+        groundChecker.OnLanded += EndAirAttack;
     }
 
     private void OnDisable()
     {
         attackAction.action.performed -= OnAttackPerformed;
         attackAction.action.Disable();
+        hitRelay.OnHitFrame -= CheckHitbox;
+        groundChecker.OnLanded -= EndAirAttack;
         isAttacking = false;
         attackRequested = false;
     }
@@ -87,10 +101,14 @@ public class PlayerAttacker : MonoBehaviour
     {
         if (comboCounter > 0f) comboCounter -= Time.deltaTime;
 
-        // El dash cancela el golpe
+        // El dash cancela el golpe, la animacion cambia y el evento del golpe ya no llega
         if (isAttacking && dasher.GetIsDashing()) isAttacking = false;
 
-        if (isAttacking) UpdateAttack();
+        if (isAttacking)
+        {
+            attackCounter -= Time.deltaTime;
+            if (attackCounter <= 0f) EndAttack();
+        }
 
         // Igual que el salto, el buffer guarda el click para encadenar el siguiente golpe al terminar este
         if (attackRequested)
@@ -107,33 +125,19 @@ public class PlayerAttacker : MonoBehaviour
             StartAttack();
     }
 
-    private void UpdateAttack()
-    {
-        hitCounter -= Time.deltaTime;
-        attackCounter -= Time.deltaTime;
-
-        // El golpe pega una sola vez, un ratito despues de empezar
-        if (!hitChecked && hitCounter <= 0f)
-        {
-            hitChecked = true;
-            CheckHitbox();
-        }
-
-        if (attackCounter <= 0f) EndAttack();
-    }
-
     private void StartAttack()
     {
         bufferCounter = 0f;
         isAttacking = true;
         hitChecked = false;
-        hitCounter = attackHitDelay;
 
         if (!groundChecker.GetIsGrounded())
         {
             isAirAttack = true;
             attackCounter = airAttackDuration;
             currentDamage = airAttackDamage;
+            currentKnockback = airAttackKnockback;
+            currentHitStop = airAttackHitStop;
             OnAirAttacked?.Invoke();
             return;
         }
@@ -149,6 +153,8 @@ public class PlayerAttacker : MonoBehaviour
         comboCounter = 0f;
         attackCounter = comboDuration[comboStep];
         currentDamage = comboDamage[comboStep];
+        currentKnockback = comboKnockback[comboStep];
+        currentHitStop = comboHitStop[comboStep];
         OnAttacked?.Invoke(comboStep + 1);
     }
 
@@ -161,31 +167,19 @@ public class PlayerAttacker : MonoBehaviour
         comboCounter = (isLastStep || isAirAttack) ? 0f : comboWindow;
     }
 
+    // Al tocar el piso el ataque aereo termina enseguida, asi PlayerAnimator vuelve a Idle o Run
+    private void EndAirAttack()
+    {
+        if (isAttacking && isAirAttack) EndAttack();
+    }
+
+    // Lo llama el Animation Event. Pega una sola vez y solo si el golpe sigue en curso
     private void CheckHitbox()
     {
-        int facing = mover.GetFacing();
-        Collider2D[] hits = Physics2D.OverlapBoxAll(GetHitboxCenter(), hitboxSize, 0f, hitLayer);
+        if (!isAttacking || hitChecked) return;
 
-        foreach (Collider2D hit in hits)
-        {
-            if (hit.attachedRigidbody == rb) continue;   // No pegarse a uno mismo
-
-            IDamageable damageable = hit.GetComponent<IDamageable>();
-            if (damageable == null) continue;
-
-            damageable.TakeDamage(currentDamage, new Vector2(facing, 0f));
-            OnHit?.Invoke();
-        }
-    }
-
-    public Vector2 GetHitboxCenter()
-    {
-        return (Vector2)transform.position + new Vector2(hitboxOffset.x * mover.GetFacing(), hitboxOffset.y);
-    }
-
-    public Vector2 GetHitboxSize()
-    {
-        return hitboxSize;
+        hitChecked = true;
+        hitbox.Hit(currentDamage, currentKnockback, hitboxOffset, hitboxSize, hitLayer, mover.GetFacing(), currentHitStop);
     }
 
     public bool GetIsAttacking()
@@ -197,15 +191,5 @@ public class PlayerAttacker : MonoBehaviour
     public bool GetIsComboWindowOpen()
     {
         return !isAttacking && comboCounter > 0f;
-    }
-
-    // La hitbox depende de hacia donde mira el mover, por eso solo se dibuja en Play.
-    // Si se selecciona el prefab en Play, esa copia no corrio Awake y el mover es null
-    private void OnDrawGizmosSelected()
-    {
-        if (!Application.isPlaying || mover == null) return;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(GetHitboxCenter(), GetHitboxSize());
     }
 }

@@ -97,8 +97,9 @@ public class PlayerAnimator : MonoBehaviour
     {
         if (Mathf.Abs(rb.linearVelocity.x) > MoveThreshold) return RunState;
 
-        // En la ventana del combo se queda en el ultimo frame del golpe, asi el cuerpo no salta a Idle y vuelve
-        if (attacker.GetIsComboWindowOpen() && currentState == attackState) return attackState;
+        // En la ventana del combo se queda en el ultimo frame del golpe, asi el cuerpo no salta a Idle y vuelve.
+        // El ataque aereo nunca se sostiene en el piso
+        if (attacker.GetIsComboWindowOpen() && currentState == attackState && attackState != AirAttackState) return attackState;
 
         return IdleState;
     }

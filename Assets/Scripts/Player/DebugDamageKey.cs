@@ -8,6 +8,8 @@ public class DebugDamageKey : MonoBehaviour
 {
     [Tooltip("In half hearts, 2 = 1 heart")]
     [SerializeField] private int damage = 2;
+    [Tooltip("Knockback strength of the test hit, 0 = no push")]
+    [SerializeField] private float knockback = 6f;
 
     private PlayerHealth health;
     private PlayerMover mover;
@@ -23,6 +25,6 @@ public class DebugDamageKey : MonoBehaviour
         if (Keyboard.current == null || !Keyboard.current.hKey.wasPressedThisFrame) return;
 
         // El golpe viaja hacia el jugador, contrario a donde mira
-        health.TakeDamage(damage, new Vector2(-mover.GetFacing(), 0f));
+        health.TakeDamage(new DamageInfo(damage, new Vector2(-mover.GetFacing(), 0f), gameObject.layer, knockback));
     }
 }

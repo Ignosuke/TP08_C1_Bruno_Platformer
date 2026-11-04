@@ -1,90 +1,59 @@
 using System;
 using UnityEngine;
 
-// La vida del jugador. Recibe los golpes, avisa cuando duele y cuando muere.
+// La vida del jugador. Suma a Health el bloqueo y el parry de frente y la reaparicion al morir.
 // La reaparicion la hace PlayerRespawner, que despues llama a Revive
-public class PlayerHealth : MonoBehaviour, IDamageable
+public class PlayerHealth : Health
 {
     [SerializeField] private PlayerSo playerData;
 
-    private float invulnerableTime;
-    private float hurtDuration;
-    private float blockDamageMultiplier;
-
-    private float invulnerableCounter;
-    private float hurtCounter;
-
     private PlayerMover mover;
     private PlayerDefender defender;
-    private ResourcePool health;
+    private PlayerRespawner respawner;
 
-    public event Action<int, int> OnHealthChanged;   // Manda la vida actual y la maxima
-    public event Action OnHurt;
-    public event Action OnDied;
-    public event Action OnRespawned;                 // Para las monedas y los enemigos de las historias 004 y 006
+    public event Action OnRespawned;                 // Para la camara, los enemigos y las monedas de la historia 006
 
-    private void Awake()
+    public override int MaxHealth => playerData.GetMaxHealth();
+    protected override float InvulnerableTime => playerData.GetInvulnerableTime();
+    protected override float HurtDuration => playerData.GetHurtDuration();
+    protected override LayerMask DamageLayers => playerData.GetDamageLayers();
+
+    protected override void Awake()
     {
-        invulnerableTime = playerData.GetInvulnerableTime();
-        hurtDuration = playerData.GetHurtDuration();
-        blockDamageMultiplier = playerData.GetBlockDamageMultiplier();
-
+        base.Awake();
         mover = GetComponent<PlayerMover>();
         defender = GetComponent<PlayerDefender>();
-        health = new ResourcePool(playerData.GetMaxHealth());
+        respawner = GetComponent<PlayerRespawner>();
     }
 
-    private void Update()
+    // Parry perfecto, no recibe nada y el atacante queda aturdido (los proyectiles ignoran el resultado)
+    protected override bool IsParried(DamageInfo info)
     {
-        if (invulnerableCounter > 0f) invulnerableCounter -= Time.deltaTime;
-        if (hurtCounter > 0f) hurtCounter -= Time.deltaTime;
+        return GetIsBlocking(info) && defender.GetIsParrying();
     }
 
-    public bool TakeDamage(int amount, Vector2 hitDirection)
+    // Bloqueo fuera de la ventana, redondea para arriba asi un bloqueo nunca saca 0
+    protected override int ModifyDamage(DamageInfo info)
     {
-        if (health.GetIsEmpty() || invulnerableCounter > 0f) return false;
-
-        // Solo defiende si mira hacia el golpe, de espaldas recibe todo
-        bool isFacingHit = hitDirection.x * mover.GetFacing() < 0f;
-        if (defender.GetIsDefending() && isFacingHit)
-        {
-            // Parry perfecto, no recibe nada y el atacante queda aturdido (los proyectiles ignoran el resultado)
-            if (defender.GetIsParrying()) return true;
-
-            // Bloqueo fuera de la ventana, redondea para arriba asi un bloqueo nunca saca 0
-            amount = Mathf.CeilToInt(amount * blockDamageMultiplier);
-        }
-
-        health.Remove(amount);
-        invulnerableCounter = invulnerableTime;
-        hurtCounter = hurtDuration;
-
-        OnHealthChanged?.Invoke(health.GetCurrent(), health.GetMax());
-        OnHurt?.Invoke();
-
-        if (health.GetIsEmpty()) OnDied?.Invoke();
-        return false;
+        if (!GetIsBlocking(info)) return info.Amount;
+        return Mathf.CeilToInt(info.Amount * playerData.GetBlockDamageMultiplier());
     }
 
-    public void Heal(int amount)
+    protected override void Die()
     {
-        if (health.Add(amount) > 0) OnHealthChanged?.Invoke(health.GetCurrent(), health.GetMax());
+        respawner.StartRespawn();
     }
 
     // Vuelve con la vida llena, lo llama PlayerRespawner despues de mover al jugador
     public void Revive()
     {
-        health.Refill();
-        invulnerableCounter = 0f;
-        hurtCounter = 0f;
-
-        OnHealthChanged?.Invoke(health.GetCurrent(), health.GetMax());
+        Refill();
         OnRespawned?.Invoke();
     }
 
-    public int GetCurrent() => health.GetCurrent();
-    public int GetMax() => health.GetMax();
-    public bool GetIsFull() => health.GetIsFull();
-    public bool GetIsDead() => health.GetIsEmpty();
-    public bool GetIsHurt() => hurtCounter > 0f;
+    // Solo defiende si mira hacia el golpe, de espaldas recibe todo. PlayerKnockback lo usa para empujar menos
+    public bool GetIsBlocking(DamageInfo info)
+    {
+        return defender.GetIsDefending() && info.Direction.x * mover.GetFacing() < 0f;
+    }
 }

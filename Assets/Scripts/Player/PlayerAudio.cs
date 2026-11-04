@@ -14,6 +14,7 @@ public class PlayerAudio : MonoBehaviour
     private PlayerDefender defender;
     private PlayerHealth health;
     private PlayerHealer healer;
+    private MeleeHitbox hitbox;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class PlayerAudio : MonoBehaviour
         defender = GetComponent<PlayerDefender>();
         health = GetComponent<PlayerHealth>();
         healer = GetComponent<PlayerHealer>();
+        hitbox = GetComponent<MeleeHitbox>();
     }
 
     private void OnEnable()
@@ -34,9 +36,9 @@ public class PlayerAudio : MonoBehaviour
         dasher.OnDashed += PlayDash;
         attacker.OnAttacked += PlayAttack;
         attacker.OnAirAttacked += PlayAirAttack;
-        attacker.OnHit += PlayHit;
+        hitbox.OnHit += PlayHit;
         defender.OnDefendStarted += PlayDefend;
-        health.OnHurt += PlayHurt;
+        health.OnDamaged += PlayHurt;
         healer.OnHealStarted += PlayHeal;
     }
 
@@ -47,9 +49,9 @@ public class PlayerAudio : MonoBehaviour
         dasher.OnDashed -= PlayDash;
         attacker.OnAttacked -= PlayAttack;
         attacker.OnAirAttacked -= PlayAirAttack;
-        attacker.OnHit -= PlayHit;
+        hitbox.OnHit -= PlayHit;
         defender.OnDefendStarted -= PlayDefend;
-        health.OnHurt -= PlayHurt;
+        health.OnDamaged -= PlayHurt;
         healer.OnHealStarted -= PlayHeal;
     }
 
@@ -60,7 +62,7 @@ public class PlayerAudio : MonoBehaviour
     private void PlayAirAttack() => Play(playerData.GetAirAttackClip());
     private void PlayHit() => Play(playerData.GetHitClip());
     private void PlayDefend() => Play(playerData.GetDefendClip());
-    private void PlayHurt() => Play(playerData.GetHurtClip());
+    private void PlayHurt(DamageInfo info) => Play(playerData.GetHurtClip());
     private void PlayHeal() => Play(playerData.GetHealClip());
 
     // PlayOneShot permite que se pisen varios sonidos sin cortarse

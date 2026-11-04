@@ -45,7 +45,8 @@ MonoBehaviour:
   - 0.4
   airAttackDamage: 1
   airAttackDuration: 0.3
-  attackHitDelay: 0.08
+  comboHitFrames: 050000000400000003000000
+  airAttackHitFrame: 3
   comboWindow: 0.2
   attackBufferTime: 0.18
   hitboxOffset: {x: 0.9, y: 0}
@@ -53,13 +54,30 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 4294967295
+  comboKnockback:
+  - 1
+  - 1
+  - 2.5
+  airAttackKnockback: 1.5
+  comboHitStop:
+  - 0.04
+  - 0.04
+  - 0.06
+  airAttackHitStop: 0.04
   parryWindow: 0.15
   defendCooldown: 0.25
+  blockDamageMultiplier: 0.5
   maxHealth: 8
+  damageLayers:
+    serializedVersion: 2
+    m_Bits: 512
   invulnerableTime: 0.6
   hurtDuration: 0.33
   deathDuration: 0.83
   respawnDelay: 0.6
+  knockbackDuration: 0.18
+  knockbackUpward: 0.35
+  blockKnockbackMultiplier: 0.5
   healCharges: 3
   healAmount: 2
   healDuration: 1.25

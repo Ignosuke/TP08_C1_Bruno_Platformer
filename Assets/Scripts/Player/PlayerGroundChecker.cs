@@ -42,7 +42,7 @@ public class PlayerGroundChecker : MonoBehaviour
             OnLeftGround?.Invoke();
     }
 
-    // Tres rayos: centro y ambos extremos, para no perder el salto parado en el borde de una plataforma
+    // Tres rayos, centro y ambos extremos, para no perder el salto parado en el borde de una plataforma
     private void CheckGround()
     {
         float halfWidth = feetWidth * 0.5f;

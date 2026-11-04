@@ -1,12 +1,12 @@
 using UnityEngine;
 
-// Al morir apaga los controles, espera la animacion de muerte y lleva al jugador al checkpoint con todo lleno
+// Al morir (PlayerHealth llama a StartRespawn) apaga los controles, espera la animacion de muerte y lleva al jugador al checkpoint tocado (o al inicio) con todo lleno
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerRespawner : MonoBehaviour
 {
     [SerializeField] private PlayerSo playerData;
-    [Tooltip("Where the player comes back after dying. Empty means the place where the scene started")]
-    [SerializeField] private Checkpoint checkpoint;
+
+    private Checkpoint checkpoint;      // Lo pone el Checkpoint al tocarlo, hasta entonces vuelve al inicio
 
     private float respawnTime;
     private float fallGravity;
@@ -38,16 +38,6 @@ public class PlayerRespawner : MonoBehaviour
         startPosition = transform.position;
     }
 
-    private void OnEnable()
-    {
-        health.OnDied += Die;
-    }
-
-    private void OnDisable()
-    {
-        health.OnDied -= Die;
-    }
-
     private void Update()
     {
         if (!isDead) return;
@@ -56,7 +46,14 @@ public class PlayerRespawner : MonoBehaviour
         if (respawnCounter <= 0f) Respawn();
     }
 
-    private void Die()
+    // Lo llama el Checkpoint cuando el jugador lo toca
+    public void SetCheckpoint(Checkpoint value)
+    {
+        checkpoint = value;
+    }
+
+    // Lo llama PlayerHealth al morir
+    public void StartRespawn()
     {
         isDead = true;
         respawnCounter = respawnTime;

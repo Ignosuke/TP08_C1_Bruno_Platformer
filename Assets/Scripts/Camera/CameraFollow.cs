@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// Sigue al jugador con zona muerta y limites por area. Lleva su propia posicion de seguimiento
+// y le suma encima el desvio de CameraShake, asi el temblor no altera el seguimiento ni los limites
 [RequireComponent(typeof(Camera))]
 public class CameraFollow : MonoBehaviour
 {
@@ -7,6 +9,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private AreaTracker areaTracker;   // Los limites son los del area donde esta el jugador
     [SerializeField] private PlayerHealth playerHealth; // Al reaparecer la camara salta al checkpoint
+    [SerializeField] private CameraShake cameraShake;
 
     private float halfWidth;
     private float halfHeight;
@@ -18,6 +21,7 @@ public class CameraFollow : MonoBehaviour
     private bool hasBounds;
 
     private Vector3 smoothVelocity;
+    private Vector3 followPosition;     // Donde estaria la camara sin temblor
 
     private void Awake()
     {
@@ -27,6 +31,7 @@ public class CameraFollow : MonoBehaviour
         halfHeight = cameraData.GetDeadZoneHeight() * 0.5f;
         smoothTime = cameraData.GetSmoothTime();
         offset = cameraData.GetOffset();
+        followPosition = transform.position;
     }
 
     private void OnEnable()
@@ -62,8 +67,9 @@ public class CameraFollow : MonoBehaviour
 
     private void SnapToTarget()
     {
-        transform.position = ClampToBounds(new Vector3(target.position.x + offset.x, target.position.y + offset.y, transform.position.z));
+        followPosition = ClampToBounds(new Vector3(target.position.x + offset.x, target.position.y + offset.y, followPosition.z));
         smoothVelocity = Vector3.zero;
+        ApplyPosition();
     }
 
     // En LateUpdate para asegurar que el jugador ya termino de moverse este frame
@@ -73,8 +79,13 @@ public class CameraFollow : MonoBehaviour
 
         Vector3 desired = ClampToBounds(ResolveDesiredPosition());
 
-        transform.position = Vector3.SmoothDamp(
-            transform.position, desired, ref smoothVelocity, smoothTime);
+        followPosition = Vector3.SmoothDamp(followPosition, desired, ref smoothVelocity, smoothTime);
+        ApplyPosition();
+    }
+
+    private void ApplyPosition()
+    {
+        transform.position = followPosition + cameraShake.GetOffset();
     }
 
     // Mientras el jugador este dentro del rectangulo, el destino es la posicion actual y no se mueve
@@ -92,12 +103,12 @@ public class CameraFollow : MonoBehaviour
         if (Mathf.Abs(delta.y) > halfHeight)
             y = target.position.y - Mathf.Sign(delta.y) * halfHeight;
 
-        return new Vector3(x + offset.x, y + offset.y, transform.position.z);
+        return new Vector3(x + offset.x, y + offset.y, followPosition.z);
     }
 
     private Vector2 GetDeadZoneCenter()
     {
-        return (Vector2)transform.position - offset;
+        return (Vector2)followPosition - offset;
     }
 
     private Vector3 ClampToBounds(Vector3 position)

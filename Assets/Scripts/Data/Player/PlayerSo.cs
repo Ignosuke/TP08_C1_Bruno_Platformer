@@ -44,12 +44,22 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private float[] comboDuration = { 0.25f, 0.25f, 0.4f };
     [SerializeField] private int airAttackDamage = 1;
     [SerializeField] private float airAttackDuration = 0.3f;
-    [SerializeField] private float attackHitDelay = 0.08f;  // Tiempo desde que arranca el golpe hasta que pega
+    [Tooltip("Sheet frame (1-based) where each combo hit lands. The builder turns it into an Animation Event")]
+    [SerializeField] private int[] comboHitFrames = { 5, 4, 3 };
+    [SerializeField] private int airAttackHitFrame = 3;
     [SerializeField] private float comboWindow = 0.3f;      // Tiempo despues de un golpe para encadenar el siguiente
     [SerializeField] private float attackBufferTime = 0.2f;
     [SerializeField] private Vector2 hitboxOffset = new Vector2(1.1f, 0f); // Mirando a la derecha
     [SerializeField] private Vector2 hitboxSize = new Vector2(1.6f, 1.3f);
     [SerializeField] private LayerMask hitLayer = ~0;
+
+    [Header("Attack Feel")]
+    [Tooltip("Push given to the enemy by each combo hit. Small on 1 and 2 so the next hit still connects")]
+    [SerializeField] private float[] comboKnockback = { 1f, 1f, 2.5f };
+    [SerializeField] private float airAttackKnockback = 1.5f;
+    [Tooltip("Game freeze in real seconds when each combo hit lands, 0 = none")]
+    [SerializeField] private float[] comboHitStop = { 0.04f, 0.04f, 0.06f };
+    [SerializeField] private float airAttackHitStop = 0.04f;
 
     [Header("Defend")]
     [SerializeField] private float parryWindow = 0.15f;     // Primeros segundos de la defensa que cuentan como parry
@@ -58,10 +68,19 @@ public class PlayerSo : ScriptableObject
 
     [Header("Health")]
     [SerializeField] private int maxHealth = 8;             // En medios corazones, 8 = 4 corazones
+    [SerializeField] private LayerMask damageLayers;        // Capas que lastiman al tocarlas, como el cuerpo de los demonios
     [SerializeField] private float invulnerableTime = 0.6f; // Despues de un golpe no recibe dano, asi un contacto no saca todo
     [SerializeField] private float hurtDuration = 0.33f;    // Lo que dura la animacion Hurt (4 frames)
     [SerializeField] private float deathDuration = 0.83f;   // Lo que dura la animacion Death (10 frames)
     [SerializeField] private float respawnDelay = 0.6f;     // Tiempo en el suelo despues de la animacion antes de reaparecer
+
+    [Header("Knockback")]
+    [Tooltip("Seconds without movement control after being pushed")]
+    [SerializeField] private float knockbackDuration = 0.18f;
+    [Tooltip("Upward part of the push, as a fraction of the hit strength")]
+    [SerializeField] private float knockbackUpward = 0.35f;
+    [Tooltip("Push kept when blocking, 0.5 = half")]
+    [SerializeField] private float blockKnockbackMultiplier = 0.5f;
 
     [Header("Heal")]
     [SerializeField] private int healCharges = 3;
@@ -112,22 +131,33 @@ public class PlayerSo : ScriptableObject
     public float[] GetComboDuration() => comboDuration;
     public int GetAirAttackDamage() => airAttackDamage;
     public float GetAirAttackDuration() => airAttackDuration;
-    public float GetAttackHitDelay() => attackHitDelay;
+    public int[] GetComboHitFrames() => comboHitFrames;
+    public int GetAirAttackHitFrame() => airAttackHitFrame;
     public float GetComboWindow() => comboWindow;
     public float GetAttackBufferTime() => attackBufferTime;
     public Vector2 GetHitboxOffset() => hitboxOffset;
     public Vector2 GetHitboxSize() => hitboxSize;
     public LayerMask GetHitLayer() => hitLayer;
 
+    public float[] GetComboKnockback() => comboKnockback;
+    public float GetAirAttackKnockback() => airAttackKnockback;
+    public float[] GetComboHitStop() => comboHitStop;
+    public float GetAirAttackHitStop() => airAttackHitStop;
+
     public float GetParryWindow() => parryWindow;
     public float GetDefendCooldown() => defendCooldown;
     public float GetBlockDamageMultiplier() => blockDamageMultiplier;
 
     public int GetMaxHealth() => maxHealth;
+    public LayerMask GetDamageLayers() => damageLayers;
     public float GetInvulnerableTime() => invulnerableTime;
     public float GetHurtDuration() => hurtDuration;
     public float GetDeathDuration() => deathDuration;
     public float GetRespawnDelay() => respawnDelay;
+
+    public float GetKnockbackDuration() => knockbackDuration;
+    public float GetKnockbackUpward() => knockbackUpward;
+    public float GetBlockKnockbackMultiplier() => blockKnockbackMultiplier;
 
     public int GetHealCharges() => healCharges;
     public int GetHealAmount() => healAmount;
