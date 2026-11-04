@@ -7,14 +7,17 @@ public class AttackAnimState : AnimState
 
     public AttackAnimState(Animator animator) : base(animator, "Attack1") { }
 
-    public void SetComboStep(int step)
+    // stepStartTime mayor a 0 solo en el contraataque del parry
+    public void SetComboStep(int step, float stepStartTime)
     {
         stateName = "Attack" + step;
+        startTime = stepStartTime;
     }
 
     public void SetAirAttack()
     {
         stateName = AirAttackName;
+        startTime = 0f;
     }
 
     public bool GetIsAirAttack() => stateName == AirAttackName;

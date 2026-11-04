@@ -1,43 +1,40 @@
 fileFormatVersion: 2
-guid: cdbaedf24c3adef44a57c15d77fbe5db
+guid: e1226b4f016daf743a8f49c670e82a3f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1675591081817592477
-    second: WALK_0
+      213: 8886490851947454144
+    second: ATTACK 1_0
   - first:
-      213: 8567217733156871805
-    second: WALK_1
+      213: 6548489276043825817
+    second: ATTACK 1_1
   - first:
-      213: -844607794755927498
-    second: WALK_2
+      213: 4970056502602508726
+    second: ATTACK 1_2
   - first:
-      213: 8281386150497923764
-    second: WALK_3
+      213: 1935231433567745852
+    second: ATTACK 1_3
   - first:
-      213: 1733609291106537979
-    second: WALK_4
+      213: 8810267081325647525
+    second: ATTACK 1_4
   - first:
-      213: -6466037411978660262
-    second: WALK_5
+      213: 4172772526038875549
+    second: ATTACK 1_5
   - first:
-      213: 4313088863760870316
-    second: WALK_6
+      213: -9022913262071093832
+    second: ATTACK 1_6
   - first:
-      213: 110470969849003857
-    second: WALK_7
+      213: 4338618358304452631
+    second: ATTACK 1_7
   - first:
-      213: 8543948204784495141
-    second: WALK_8
+      213: -4357318665219863095
+    second: ATTACK 1_8
   - first:
-      213: 1185585584393584564
-    second: WALK_9
+      213: 5460312360583598288
+    second: ATTACK 1_9
   - first:
-      213: 6577857483261853295
-    second: WALK_10
-  - first:
-      213: -3272854615633135238
-    second: WALK_11
+      213: -8059566275082465041
+    second: ATTACK 1_10
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -70,7 +67,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -84,7 +81,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,10 +102,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -159,265 +156,243 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WALK_0
+      name: ExecutionerAttack1_0
       rect:
         serializedVersion: 2
-        x: 36
-        y: 15
-        width: 61
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d92dc841635e04710800000000000000
-      internalID: 1675591081817592477
+      spriteID: e8296bd417a93f64b99675016d967392
+      internalID: 1597437014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK_1
+      name: ExecutionerAttack1_1
       rect:
         serializedVersion: 2
-        x: 166
-        y: 15
-        width: 61
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 130
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d7e1e32232fd4e670800000000000000
-      internalID: 8567217733156871805
+      spriteID: 7c8368f7807173c44b36d7959cddcdeb
+      internalID: -2039428818
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK_2
+      name: ExecutionerAttack1_2
       rect:
         serializedVersion: 2
-        x: 296
-        y: 15
-        width: 61
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 260
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6320c038fa95744f0800000000000000
-      internalID: -844607794755927498
+      spriteID: ffa743d89d30b0f499bb720a9c40a314
+      internalID: -151290442
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK_3
+      name: ExecutionerAttack1_3
       rect:
         serializedVersion: 2
-        x: 426
-        y: 15
-        width: 61
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 390
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4b2b444c3d46de270800000000000000
-      internalID: 8281386150497923764
+      spriteID: 9089ec7abf37d65458e7f91a4f069f12
+      internalID: 371357923
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK_4
+      name: ExecutionerAttack1_4
       rect:
         serializedVersion: 2
-        x: 556
-        y: 15
-        width: 61
-        height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 520
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bf1d8b717740f0810800000000000000
-      internalID: 1733609291106537979
+      spriteID: 47d2dc91ae70da64a95b6ff7f8e68c28
+      internalID: -1331372109
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK_5
+      name: ExecutionerAttack1_5
       rect:
         serializedVersion: 2
-        x: 686
-        y: 15
-        width: 61
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 650
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a5630aa7b350446a0800000000000000
-      internalID: -6466037411978660262
+      spriteID: c5dc476b7ebd5b34a8462528c646bd43
+      internalID: -1806954003
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK_6
+      name: ExecutionerAttack1_6
       rect:
         serializedVersion: 2
-        x: 816
-        y: 15
-        width: 61
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 780
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cabe829487b2bdb30800000000000000
-      internalID: 4313088863760870316
+      spriteID: 10938ff6b9235144090f942d292fd0a5
+      internalID: 499550372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK_7
+      name: ExecutionerAttack1_7
       rect:
         serializedVersion: 2
-        x: 946
-        y: 15
-        width: 61
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 910
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 15fb7d303c8788100800000000000000
-      internalID: 110470969849003857
+      spriteID: 0c99d9112efb73843a93a91bc5019376
+      internalID: 1882095257
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK_8
+      name: ExecutionerAttack1_8
       rect:
         serializedVersion: 2
-        x: 1076
-        y: 15
-        width: 61
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1040
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 52a248ddf93329670800000000000000
-      internalID: 8543948204784495141
+      spriteID: 3533c9eb43bc0984493d113314106260
+      internalID: -1270585130
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK_9
+      name: ExecutionerAttack1_9
       rect:
         serializedVersion: 2
-        x: 1206
-        y: 15
-        width: 61
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1170
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4bf7a98becb047010800000000000000
-      internalID: 1185585584393584564
+      spriteID: e0b807148b5014149a4d408688c4ea62
+      internalID: -597228901
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK_10
+      name: ExecutionerAttack1_10
       rect:
         serializedVersion: 2
-        x: 1336
-        y: 15
-        width: 61
-        height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1300
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f6eb7f0b78e394b50800000000000000
-      internalID: 6577857483261853295
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WALK_11
-      rect:
-        serializedVersion: 2
-        x: 1466
-        y: 15
-        width: 61
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a7970b1411c7492d0800000000000000
-      internalID: -3272854615633135238
+      spriteID: 16fc3b92a59158a4b924f839da5b03ac
+      internalID: 246143037
       vertices: []
       indices: 
       edges: []
@@ -426,7 +401,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: fcd24e1f372a8994c98a27d7987b7429
     internalID: 0
     vertices: []
     indices: 
@@ -436,18 +411,17 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WALK_0: 1675591081817592477
-      WALK_1: 8567217733156871805
-      WALK_10: 6577857483261853295
-      WALK_11: -3272854615633135238
-      WALK_2: -844607794755927498
-      WALK_3: 8281386150497923764
-      WALK_4: 1733609291106537979
-      WALK_5: -6466037411978660262
-      WALK_6: 4313088863760870316
-      WALK_7: 110470969849003857
-      WALK_8: 8543948204784495141
-      WALK_9: 1185585584393584564
+      ExecutionerAttack1_0: 1597437014
+      ExecutionerAttack1_1: -2039428818
+      ExecutionerAttack1_10: 246143037
+      ExecutionerAttack1_2: -151290442
+      ExecutionerAttack1_3: 371357923
+      ExecutionerAttack1_4: -1331372109
+      ExecutionerAttack1_5: -1806954003
+      ExecutionerAttack1_6: 499550372
+      ExecutionerAttack1_7: 1882095257
+      ExecutionerAttack1_8: -1270585130
+      ExecutionerAttack1_9: -597228901
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

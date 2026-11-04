@@ -94,7 +94,8 @@ public class PlayerDefender : MonoBehaviour
         OnDefendStarted?.Invoke();
     }
 
-    private void StopDefend()
+    // Tambien lo llama PlayerAttacker en el contraataque del parry
+    public void StopDefend()
     {
         isDefending = false;
         cooldownCounter = defendCooldown;

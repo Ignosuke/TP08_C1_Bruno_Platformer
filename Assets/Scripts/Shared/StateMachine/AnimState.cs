@@ -1,9 +1,10 @@
 using UnityEngine;
 
-// Estado que al entrar reproduce desde cero el estado del Animator con su mismo nombre
+// Estado que al entrar reproduce el estado del Animator con su mismo nombre, desde cero salvo que un hijo cambie startTime
 public class AnimState : State
 {
     protected string stateName;
+    protected float startTime;          // Fraccion del clip donde arranca, 0 = el principio
 
     private readonly Animator animator;
 
@@ -15,7 +16,13 @@ public class AnimState : State
 
     public override void Enter()
     {
-        animator.Play(stateName, 0, 0f);
+        animator.Play(stateName, 0, startTime);
+    }
+
+    // Cambia el clip que va a reproducir la proxima vez que entre
+    public void SetStateName(string newStateName)
+    {
+        stateName = newStateName;
     }
 
     public bool GetIsFinished()

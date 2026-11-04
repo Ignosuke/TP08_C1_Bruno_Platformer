@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 // Base de los ataques de los enemigos. Lleva el ciclo, arranca, pega en el frame del Animation Event, termina y espera.
-// Cada hijo decide cuando el jugador esta a tiro y que hace el golpe
+// Los ataques del EnemySo se turnan en orden. Cada hijo decide cuando el jugador esta a tiro y que hace el golpe
 [RequireComponent(typeof(EnemySight))]
 public abstract class EnemyAttack : MonoBehaviour
 {
@@ -12,6 +12,8 @@ public abstract class EnemyAttack : MonoBehaviour
     protected EnemyMover mover;
     private AnimationHitRelay hitRelay;
 
+    private EnemyAttackData currentAttack;
+    private int nextAttackIndex;
     private float attackCounter;
     private float cooldownCounter;
     private bool isAttacking;
@@ -65,7 +67,9 @@ public abstract class EnemyAttack : MonoBehaviour
         isAttacking = true;
         hitDone = false;
         isCommitted = false;
-        attackCounter = enemyData.GetAttackDuration();
+        currentAttack = enemyData.GetAttack(nextAttackIndex);
+        nextAttackIndex = (nextAttackIndex + 1) % enemyData.GetAttackCount();
+        attackCounter = currentAttack.GetDuration();
         OnAttackStarted?.Invoke();
     }
 
@@ -83,6 +87,7 @@ public abstract class EnemyAttack : MonoBehaviour
         isAttacking = false;
         isCommitted = false;
         cooldownCounter = 0f;
+        nextAttackIndex = 0;
     }
 
     // Desde aca el golpe sale seguro, recibe dano pero no se corta, no se queja y no lo empujan
@@ -101,13 +106,14 @@ public abstract class EnemyAttack : MonoBehaviour
         PerformHit();
     }
 
-    // El jugador hizo parry perfecto, el ataque se corta y EnemyBrain lo aturde
+    // El jugador hizo parry perfecto, el ataque se corta y EnemyBrain lo aturde despues del choque
     protected void Parried()
     {
         Cancel();
         OnParried?.Invoke();
     }
 
+    public EnemyAttackData GetCurrentAttack() => currentAttack;
     public bool GetIsAttacking() => isAttacking;
     public bool GetIsArmored() => isAttacking && isCommitted;
 }

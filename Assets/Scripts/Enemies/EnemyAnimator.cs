@@ -41,7 +41,7 @@ public class EnemyAnimator : MonoBehaviour
 
         fsm.AddAnyTransition(death, () => health.GetIsDead());
         fsm.AddAnyTransition(hurtState, () => health.GetIsHurt() || brain.GetIsStunned());
-        fsm.AddAnyTransition(attackState, () => attack.GetIsAttacking());
+        fsm.AddAnyTransition(attackState, () => attack.GetIsAttacking() || brain.GetIsRecoiling());   // En el choque sostiene el golpe
         fsm.AddAnyTransition(walk, () => IsMoving());
         fsm.AddAnyTransition(idle, () => !IsMoving());
     }
@@ -82,8 +82,10 @@ public class EnemyAnimator : MonoBehaviour
         if (HasAnimator()) fsm.ChangeState(hurtState);
     }
 
+    // Cada ataque tiene su clip (Attack, Attack1, Attack2), se elige antes de entrar
     private void PlayAttack()
     {
+        attackState.SetStateName(attack.GetCurrentAttack().GetStateName());
         if (HasAnimator()) fsm.ChangeState(attackState);
     }
 

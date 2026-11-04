@@ -68,7 +68,7 @@ public abstract class EnemyMover : MonoBehaviour
         return Physics2D.Raycast(frontCheck.position, Vector2.down, enemyData.GetEdgeCheckDistance(), enemyData.GetGroundLayer());
     }
 
-    private bool HasWallAhead()
+    protected bool HasWallAhead()
     {
         return Physics2D.Raycast(frontCheck.position, Vector2.right * direction, enemyData.GetWallCheckDistance(), enemyData.GetGroundLayer());
     }

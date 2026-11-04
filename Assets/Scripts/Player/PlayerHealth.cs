@@ -12,6 +12,7 @@ public class PlayerHealth : Health
     private PlayerRespawner respawner;
 
     public event Action OnRespawned;                 // Para la camara, los enemigos y las monedas de la historia 006
+    public event Action<DamageInfo> OnParried;       // Parry perfecto, PlayerAttacker contraataca si fue cuerpo a cuerpo
 
     public override int MaxHealth => playerData.GetMaxHealth();
     protected override float InvulnerableTime => playerData.GetInvulnerableTime();
@@ -29,7 +30,9 @@ public class PlayerHealth : Health
     // Parry perfecto, no recibe nada y el atacante queda aturdido (los proyectiles ignoran el resultado)
     protected override bool IsParried(DamageInfo info)
     {
-        return GetIsBlocking(info) && defender.GetIsParrying();
+        bool parried = GetIsBlocking(info) && defender.GetIsParrying();
+        if (parried) OnParried?.Invoke(info);
+        return parried;
     }
 
     // Bloqueo fuera de la ventana, redondea para arriba asi un bloqueo nunca saca 0

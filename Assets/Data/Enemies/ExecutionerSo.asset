@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ae5800eb5697e4f97d8802127d9638, type: 3}
+  m_Name: ExecutionerSo
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySo
+  maxHealth: 10
+  invulnerableTime: 0.15
+  hurtDuration: 0.5
+  deathDuration: 1.1
+  corpseTime: 0.4
+  damageLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  moveSpeed: 1
+  chaseSpeed: 1.6
+  edgeCheckDistance: 0.6
+  wallCheckDistance: 0.2
+  turnPauseDuration: 0.9
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  detectionRange: 7
+  verticalTolerance: 1.2
+  attackRange: 2
+  attackCooldown: 1.5
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 65
+  stunDuration: 1.5
+  attacks:
+  - stateName: Attack1
+    damage: 4
+    hitFrame: 8
+    commitFrame: 5
+    duration: 1.4
+    hitboxOffset: {x: 1.3, y: 1}
+    hitboxSize: {x: 2, y: 1.8}
+    knockback: 10
+    hitStop: 0.1
+    shakeMagnitude: 0.2
+    shakeDuration: 0.3
+  - stateName: Attack2
+    damage: 2
+    hitFrame: 3
+    commitFrame: 2
+    duration: 1.2
+    hitboxOffset: {x: 1.3, y: 0.9}
+    hitboxSize: {x: 2, y: 1.8}
+    knockback: 10
+    hitStop: 0.1
+    shakeMagnitude: 0
+    shakeDuration: 0
+  contactDamage: 1
+  contactKnockback: 5
+  spriteFacesLeft: 1
+  attackClip: {fileID: 0}
+  hurtClip: {fileID: 0}
+  deathClip: {fileID: 0}

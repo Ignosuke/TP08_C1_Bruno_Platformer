@@ -23,8 +23,8 @@ public class PatrolChaseMover : EnemyMover
         float distance = sight.GetPlayerDistanceX();
         FaceTowards(distance);
 
-        // Se frena al alcance del ataque o en un borde, asi no se tira persiguiendo
-        if (Mathf.Abs(distance) <= enemyData.GetAttackRange() || IsBlocked())
+        // Se frena al alcance del ataque o contra una pared. Los bordes los baja, el nivel no tiene pozos
+        if (Mathf.Abs(distance) <= enemyData.GetAttackRange() || HasWallAhead())
             Stop();
         else
             Move(enemyData.GetChaseSpeed());

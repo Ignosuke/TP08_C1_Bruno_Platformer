@@ -30,22 +30,24 @@ MonoBehaviour:
     m_Bits: 128
   detectionRange: 6
   verticalTolerance: 1.2
-  damage: 2
   attackRange: 1.8
-  attackHitFrame: 9
-  attackCommitFrame: 6
-  attackDuration: 1.2
   attackCooldown: 1
-  hitboxOffset: {x: 1.4, y: 0.5}
-  hitboxSize: {x: 1.8, y: 1}
   targetLayer:
     serializedVersion: 2
     m_Bits: 65
   stunDuration: 1.5
-  attackKnockback: 8
-  attackHitStop: 0.08
-  attackShakeMagnitude: 0.15
-  attackShakeDuration: 0.25
+  attacks:
+  - stateName: Attack
+    damage: 2
+    hitFrame: 9
+    commitFrame: 6
+    duration: 1.2
+    hitboxOffset: {x: 1.4, y: 0.5}
+    hitboxSize: {x: 1.8, y: 1}
+    knockback: 8
+    hitStop: 0.08
+    shakeMagnitude: 0.15
+    shakeDuration: 0.25
   contactDamage: 1
   contactKnockback: 5
   spriteFacesLeft: 1

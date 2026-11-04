@@ -8,6 +8,8 @@ public class PlayerAttacker : MonoBehaviour
 {
     [SerializeField] private PlayerSo playerData;
 
+    private const string CounterClipName = "PlayerAttack1";    // El clip que arma PlayerAnimatorBuilder para Attack1
+
     private InputActionReference attackAction;
 
     private int[] comboDamage;
@@ -23,6 +25,8 @@ public class PlayerAttacker : MonoBehaviour
     private float[] comboHitStop;
     private float airAttackKnockback;
     private float airAttackHitStop;
+    private float parryHitStop;
+    private float counterStartTime;     // Fraccion de Attack1 donde arranca el contraataque
 
     private float bufferCounter;
     private float attackCounter;
@@ -33,6 +37,7 @@ public class PlayerAttacker : MonoBehaviour
     private PlayerDasher dasher;
     private PlayerDefender defender;
     private PlayerHealer healer;
+    private PlayerHealth health;
     private MeleeHitbox hitbox;
     private AnimationHitRelay hitRelay;
 
@@ -44,6 +49,7 @@ public class PlayerAttacker : MonoBehaviour
     private int currentDamage;
     private float currentKnockback;
     private float currentHitStop;
+    private float startTime;            // Fraccion del clip donde arranco este golpe, 0 salvo en el contraataque
 
     public event Action<int> OnAttacked;   // Manda 1, 2 o 3
     public event Action OnAirAttacked;
@@ -70,8 +76,29 @@ public class PlayerAttacker : MonoBehaviour
         dasher = GetComponent<PlayerDasher>();
         defender = GetComponent<PlayerDefender>();
         healer = GetComponent<PlayerHealer>();
+        health = GetComponent<PlayerHealth>();
         hitbox = GetComponent<MeleeHitbox>();
         hitRelay = GetComponentInChildren<AnimationHitRelay>();   // En Visual, junto al Animator
+
+        parryHitStop = playerData.GetParryHitStop();
+        counterStartTime = FindCounterStartTime(hitRelay.GetComponent<Animator>(), playerData.GetCounterStartFrame());
+    }
+
+    // Pasa el frame del PlayerSo a fraccion del clip. Los frames salen del clip porque el builder pone fps = frames / duracion.
+    // Sin Animator o sin el clip arranca desde el principio
+    private static float FindCounterStartTime(Animator animator, int frame)
+    {
+        if (animator == null || animator.runtimeAnimatorController == null) return 0f;
+
+        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name != CounterClipName) continue;
+
+            float frameCount = Mathf.Round(clip.length * clip.frameRate);
+            if (frameCount <= 0f) return 0f;
+            return Mathf.Clamp(frame - 1, 0f, frameCount - 1f) / frameCount;
+        }
+        return 0f;
     }
 
     private void OnEnable()
@@ -80,6 +107,7 @@ public class PlayerAttacker : MonoBehaviour
         attackAction.action.Enable();
         hitRelay.OnHitFrame += CheckHitbox;
         groundChecker.OnLanded += EndAirAttack;
+        health.OnParried += Counter;
     }
 
     private void OnDisable()
@@ -88,6 +116,7 @@ public class PlayerAttacker : MonoBehaviour
         attackAction.action.Disable();
         hitRelay.OnHitFrame -= CheckHitbox;
         groundChecker.OnLanded -= EndAirAttack;
+        health.OnParried -= Counter;
         isAttacking = false;
         attackRequested = false;
     }
@@ -122,14 +151,16 @@ public class PlayerAttacker : MonoBehaviour
         }
 
         if (bufferCounter > 0f && !isAttacking && !dasher.GetIsDashing() && !defender.GetIsDefending() && !healer.GetIsHealing())
-            StartAttack();
+            StartAttack(0f);
     }
 
-    private void StartAttack()
+    // groundStartTime es la fraccion del clip donde arranca, el golpe dura solo lo que le queda al clip
+    private void StartAttack(float groundStartTime)
     {
         bufferCounter = 0f;
         isAttacking = true;
         hitChecked = false;
+        startTime = 0f;
 
         if (!groundChecker.GetIsGrounded())
         {
@@ -151,11 +182,25 @@ public class PlayerAttacker : MonoBehaviour
             comboStep = 0;
 
         comboCounter = 0f;
-        attackCounter = comboDuration[comboStep];
+        startTime = groundStartTime;
+        attackCounter = comboDuration[comboStep] * (1f - startTime);
         currentDamage = comboDamage[comboStep];
         currentKnockback = comboKnockback[comboStep];
         currentHitStop = comboHitStop[comboStep];
         OnAttacked?.Invoke(comboStep + 1);
+    }
+
+    // Parry perfecto a un golpe cuerpo a cuerpo. Congela el choque y se ve el primer golpe del combo desde el tajo, pero no pega.
+    // El aturdido lo pone el enemigo. Ya mira al atacante porque el parry solo vale de frente
+    private void Counter(DamageInfo info)
+    {
+        if (!info.IsMelee) return;
+
+        hitbox.RaiseHitStop(parryHitStop);
+        defender.StopDefend();
+        comboCounter = 0f;      // Sin ventana de combo arranca en Attack1
+        StartAttack(counterStartTime);
+        hitChecked = true;      // Asi el HitFrame de este golpe no hace nada
     }
 
     private void EndAttack()
@@ -186,6 +231,8 @@ public class PlayerAttacker : MonoBehaviour
     {
         return isAttacking;
     }
+
+    public float GetStartTime() => startTime;
 
     // Termino el golpe pero todavia se puede encadenar el siguiente
     public bool GetIsComboWindowOpen()

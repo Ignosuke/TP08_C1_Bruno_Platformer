@@ -149,7 +149,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void PlayAttack(int step)
     {
-        attack.SetComboStep(step);
+        attack.SetComboStep(step, attacker.GetStartTime());
         if (HasAnimator()) fsm.ChangeState(attack);
     }
 

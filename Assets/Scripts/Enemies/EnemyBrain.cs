@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-// Coordina al enemigo. Arranca el ataque cuando puede, lo aturde si le hacen parry,
+// Coordina al enemigo. Arranca el ataque cuando puede, lo aturde si le hacen parry (despues del choque),
 // lo da vuelta hacia quien le pega y lo devuelve a su lugar cuando el jugador reaparece
 [RequireComponent(typeof(EnemyHealth), typeof(EnemySight))]
 public class EnemyBrain : MonoBehaviour
@@ -17,6 +17,7 @@ public class EnemyBrain : MonoBehaviour
 
     private Vector3 spawnPosition;
     private float stunCounter;
+    private float recoilCounter;        // Choque del parry, sostiene el golpe antes de aturdirse
 
     public event Action OnStunned;                     // Para el indicador de aturdido (estrellitas)
 
@@ -56,8 +57,13 @@ public class EnemyBrain : MonoBehaviour
     private void Update()
     {
         if (stunCounter > 0f) stunCounter -= Time.deltaTime;
+        if (recoilCounter > 0f)
+        {
+            recoilCounter -= Time.deltaTime;
+            if (recoilCounter <= 0f) StartStun();
+        }
 
-        bool isBusy = health.GetIsDead() || health.GetIsHurt() || GetIsStunned();
+        bool isBusy = health.GetIsDead() || health.GetIsHurt() || GetIsStunned() || GetIsRecoiling();
         if (!isBusy && attack.CanStart())
         {
             mover.FaceTowards(sight.GetPlayerDistanceX());
@@ -76,8 +82,19 @@ public class EnemyBrain : MonoBehaviour
         mover.SetDirection(info.Direction.x > 0f ? -1 : 1);
     }
 
+    // En tiempo escalado, asi espera al hitstop del parry. Con 0 se aturde enseguida
     private void Stun()
     {
+        recoilCounter = enemyData.GetParryRecoilTime();
+        if (recoilCounter <= 0f) StartStun();
+    }
+
+    // El aturdido se cuenta desde aca. Muerto no se aturde
+    private void StartStun()
+    {
+        recoilCounter = 0f;
+        if (health.GetIsDead()) return;
+
         stunCounter = enemyData.GetStunDuration();
         OnStunned?.Invoke();
     }
@@ -89,6 +106,7 @@ public class EnemyBrain : MonoBehaviour
 
         transform.position = spawnPosition;
         stunCounter = 0f;
+        recoilCounter = 0f;
         health.ResetHealth();
         attack.ResetAttack();
         mover.ResetMover();
@@ -98,4 +116,5 @@ public class EnemyBrain : MonoBehaviour
     }
 
     public bool GetIsStunned() => stunCounter > 0f;
+    public bool GetIsRecoiling() => recoilCounter > 0f;
 }

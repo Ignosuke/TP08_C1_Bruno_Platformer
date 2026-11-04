@@ -65,6 +65,10 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private float parryWindow = 0.15f;     // Primeros segundos de la defensa que cuentan como parry
     [SerializeField] private float defendCooldown = 0.25f;  // Para que no se pueda spamear el parry
     [SerializeField] private float blockDamageMultiplier = 0.5f;    // Dano que entra al bloquear fuera del parry, redondeado para arriba
+    [Tooltip("Game freeze in real seconds on a perfect parry, the clash")]
+    [SerializeField] private float parryHitStop = 0.1f;
+    [Tooltip("Attack1 sheet frame (1-based) where the parry counter starts, 5 = the slash")]
+    [SerializeField] private int counterStartFrame = 5;
 
     [Header("Health")]
     [SerializeField] private int maxHealth = 8;             // En medios corazones, 8 = 4 corazones
@@ -147,6 +151,8 @@ public class PlayerSo : ScriptableObject
     public float GetParryWindow() => parryWindow;
     public float GetDefendCooldown() => defendCooldown;
     public float GetBlockDamageMultiplier() => blockDamageMultiplier;
+    public float GetParryHitStop() => parryHitStop;
+    public int GetCounterStartFrame() => counterStartFrame;
 
     public int GetMaxHealth() => maxHealth;
     public LayerMask GetDamageLayers() => damageLayers;

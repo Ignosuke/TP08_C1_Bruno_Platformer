@@ -29,15 +29,14 @@ public class MeleeHitbox : MonoBehaviour
     }
 
     // offset es mirando a la derecha y facing es 1 o -1. Devuelve true si algun objetivo hizo parry perfecto.
-    // El hitstop y el temblor salen una sola vez y solo si golpeo algo. Sin temblor no se pasan sus valores
-    public bool Hit(int damage, float knockback, Vector2 offset, Vector2 size, LayerMask mask, int facing,
-        float hitStop, float shakeMagnitude = 0f, float shakeDuration = 0f)
+    // El hitstop sale una sola vez y solo si golpeo algo
+    public bool Hit(int damage, float knockback, Vector2 offset, Vector2 size, LayerMask mask, int facing, float hitStop)
     {
         lastCenter = (Vector2)transform.position + new Vector2(offset.x * facing, offset.y);
         lastSize = size;
         gizmoCounter = GizmoTime;
 
-        DamageInfo info = new DamageInfo(damage, new Vector2(facing, 0f), gameObject.layer, knockback);
+        DamageInfo info = new DamageInfo(damage, new Vector2(facing, 0f), gameObject.layer, knockback, true);
         bool parried = false;
         bool landed = false;
 
@@ -53,12 +52,20 @@ public class MeleeHitbox : MonoBehaviour
             OnHit?.Invoke();
         }
 
-        if (landed)
-        {
-            hitStopChannel.Raise(hitStop);
-            cameraShakeChannel.Raise(shakeMagnitude, shakeDuration);
-        }
+        if (landed) hitStopChannel.Raise(hitStop);
         return parried;
+    }
+
+    // Hitstop sin golpe, el jugador lo usa para el choque del parry
+    public void RaiseHitStop(float duration)
+    {
+        hitStopChannel.Raise(duration);
+    }
+
+    // Temblor de camara aparte del golpe, asi un ataque pesado tiembla aunque no pegue. El jugador no lo usa
+    public void Shake(float magnitude, float duration)
+    {
+        cameraShakeChannel.Raise(magnitude, duration);
     }
 
     private void OnDrawGizmos()

@@ -1,43 +1,40 @@
 fileFormatVersion: 2
-guid: 4abcb55bf3e94734ebf7eff9ddc6d7ad
+guid: 4a819d8fd6480dd43a66caca89d336c9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 815424164945274260
-    second: IDLE_0
+      213: -1745646317731160461
+    second: DEATH_0
   - first:
-      213: -270785710348516584
-    second: IDLE_1
+      213: -1962882971833571424
+    second: DEATH_1
   - first:
-      213: 8443794771774750484
-    second: IDLE_2
+      213: 7163519229324203079
+    second: DEATH_2
   - first:
-      213: 1777182293076053196
-    second: IDLE_3
+      213: -2824850348822682002
+    second: DEATH_3
   - first:
-      213: 6114163804962241700
-    second: IDLE_4
+      213: -4395442915117589123
+    second: DEATH_4
   - first:
-      213: -7154528564402915179
-    second: IDLE_5
+      213: 7527047216810660112
+    second: DEATH_5
   - first:
-      213: -8112586356116296526
-    second: IDLE_6
+      213: -6116082883535636463
+    second: DEATH_6
   - first:
-      213: 6124698253077029035
-    second: IDLE_7
+      213: -5775218795824829258
+    second: DEATH_7
   - first:
-      213: 900705793506851975
-    second: IDLE_8
+      213: -5608201998214337042
+    second: DEATH_8
   - first:
-      213: -705124532602476047
-    second: IDLE_9
+      213: 6576388434661106147
+    second: DEATH_9
   - first:
-      213: 5163444025004545101
-    second: IDLE_10
-  - first:
-      213: -7116078867445553742
-    second: IDLE_11
+      213: -1154471196408308341
+    second: DEATH_10
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -70,7 +67,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -84,7 +81,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,10 +102,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -159,265 +156,243 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IDLE_0
+      name: ExecutionerDeath_0
       rect:
         serializedVersion: 2
-        x: 37
-        y: 15
-        width: 61
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 49525dc25f7f05b00800000000000000
-      internalID: 815424164945274260
+      spriteID: 6bd0b1768480d064aaf5e183e65bc109
+      internalID: 291283242
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IDLE_1
+      name: ExecutionerDeath_1
       rect:
         serializedVersion: 2
-        x: 167
-        y: 15
-        width: 61
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 130
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 813cc64c4d9fd3cf0800000000000000
-      internalID: -270785710348516584
+      spriteID: ad24821293677254099138faaaab7336
+      internalID: -232034279
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IDLE_2
+      name: ExecutionerDeath_2
       rect:
         serializedVersion: 2
-        x: 296
-        y: 15
-        width: 61
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 260
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 41f3fe79b926e2570800000000000000
-      internalID: 8443794771774750484
+      spriteID: 2f049ee53f3fbb944bcd90a2ac4c7c75
+      internalID: -303712425
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IDLE_3
+      name: ExecutionerDeath_3
       rect:
         serializedVersion: 2
-        x: 426
-        y: 15
-        width: 61
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 390
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ccc89ef21e1d9a810800000000000000
-      internalID: 1777182293076053196
+      spriteID: bb0af2fa24eedde4387fd942b1eb8237
+      internalID: 200105929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IDLE_4
+      name: ExecutionerDeath_4
       rect:
         serializedVersion: 2
-        x: 556
-        y: 15
-        width: 61
-        height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 520
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4ac335d169fd9d450800000000000000
-      internalID: 6114163804962241700
+      spriteID: 40ccf3d1299103b41b2f2ae3b37b3566
+      internalID: 686642408
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IDLE_5
+      name: ExecutionerDeath_5
       rect:
         serializedVersion: 2
-        x: 685
-        y: 15
-        width: 61
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 650
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 598f06f4d2206bc90800000000000000
-      internalID: -7154528564402915179
+      spriteID: b495e913963ec67468028f0cc662dbfb
+      internalID: -1080624348
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IDLE_6
+      name: ExecutionerDeath_6
       rect:
         serializedVersion: 2
-        x: 815
-        y: 15
-        width: 61
-        height: 53
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 780
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2bce10201bd4a6f80800000000000000
-      internalID: -8112586356116296526
+      spriteID: e33d9f867b19e7c44a22d3fb7f7e2180
+      internalID: -455430062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IDLE_7
+      name: ExecutionerDeath_7
       rect:
         serializedVersion: 2
-        x: 945
-        y: 15
-        width: 61
-        height: 53
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 910
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ba0ac137c9c4ff450800000000000000
-      internalID: 6124698253077029035
+      spriteID: 181820acc3a9dc54ebaadd76f9bd9f98
+      internalID: -1797087112
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IDLE_8
+      name: ExecutionerDeath_8
       rect:
         serializedVersion: 2
-        x: 1075
-        y: 15
-        width: 61
-        height: 53
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1040
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 78cbc15a523ff7c00800000000000000
-      internalID: 900705793506851975
+      spriteID: 8043fecf14a84064fbdb4316522172f1
+      internalID: -481210617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IDLE_9
+      name: ExecutionerDeath_9
       rect:
         serializedVersion: 2
-        x: 1205
-        y: 15
-        width: 61
-        height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1170
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1f9e0d739f4e636f0800000000000000
-      internalID: -705124532602476047
+      spriteID: 1559304f4d5582d4296cecacbe5d72e1
+      internalID: 1640969488
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IDLE_10
+      name: ExecutionerDeath_10
       rect:
         serializedVersion: 2
-        x: 1335
-        y: 15
-        width: 61
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1300
+        y: 0
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17391305}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d445200dbfc38a740800000000000000
-      internalID: 5163444025004545101
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IDLE_11
-      rect:
-        serializedVersion: 2
-        x: 1466
-        y: 15
-        width: 61
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2b56e3009fb9e3d90800000000000000
-      internalID: -7116078867445553742
+      spriteID: 8f3c644729849a644895c4fad1fca408
+      internalID: 668956499
       vertices: []
       indices: 
       edges: []
@@ -426,7 +401,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4a9eb838249e6c4408f4ad990063aa76
     internalID: 0
     vertices: []
     indices: 
@@ -436,18 +411,17 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IDLE_0: 815424164945274260
-      IDLE_1: -270785710348516584
-      IDLE_10: 5163444025004545101
-      IDLE_11: -7116078867445553742
-      IDLE_2: 8443794771774750484
-      IDLE_3: 1777182293076053196
-      IDLE_4: 6114163804962241700
-      IDLE_5: -7154528564402915179
-      IDLE_6: -8112586356116296526
-      IDLE_7: 6124698253077029035
-      IDLE_8: 900705793506851975
-      IDLE_9: -705124532602476047
+      ExecutionerDeath_0: 291283242
+      ExecutionerDeath_1: -232034279
+      ExecutionerDeath_10: 668956499
+      ExecutionerDeath_2: -303712425
+      ExecutionerDeath_3: 200105929
+      ExecutionerDeath_4: 686642408
+      ExecutionerDeath_5: -1080624348
+      ExecutionerDeath_6: -455430062
+      ExecutionerDeath_7: -1797087112
+      ExecutionerDeath_8: -481210617
+      ExecutionerDeath_9: 1640969488
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

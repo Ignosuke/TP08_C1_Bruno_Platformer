@@ -19,9 +19,10 @@ public class MeleeAttack : EnemyAttack
 
     protected override void PerformHit()
     {
-        bool parried = hitbox.Hit(enemyData.GetDamage(), enemyData.GetAttackKnockback(), enemyData.GetHitboxOffset(),
-            enemyData.GetHitboxSize(), enemyData.GetTargetLayer(), mover.GetDirection(),
-            enemyData.GetAttackHitStop(), enemyData.GetAttackShakeMagnitude(), enemyData.GetAttackShakeDuration());
+        EnemyAttackData current = GetCurrentAttack();
+        bool parried = hitbox.Hit(current.GetDamage(), current.GetKnockback(), current.GetHitboxOffset(), current.GetHitboxSize(),
+            enemyData.GetTargetLayer(), mover.GetDirection(), current.GetHitStop());
+        hitbox.Shake(current.GetShakeMagnitude(), current.GetShakeDuration());   // Pegue o no, el golpe pesado se siente
         if (parried) Parried();
     }
 }
