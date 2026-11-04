@@ -1,25 +1,13 @@
 using UnityEngine;
 
-// Elige que animacion se ve segun el estado de los demas componentes y la reproduce con Play.
+// Arma la FSM de animaciones del jugador y la actualiza cada frame.
+// Los demas componentes manejan el juego, aca solo se elige que animacion se ve.
 // El Animator Controller no tiene transiciones, solo los estados con estos mismos nombres.
 // Sin Animator o sin controller asignado no hace nada.
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Transform visualRoot;      // Se da vuelta segun hacia donde mira
-
-    private const string IdleState = "Idle";
-    private const string RunState = "Run";
-    private const string DefendState = "Defend";
-    private const string JumpStartState = "JumpStart";
-    private const string JumpRiseState = "JumpRise";
-    private const string JumpApexState = "JumpApex";
-    private const string JumpFallState = "JumpFall";
-    private const string DashState = "Dash";
-    private const string AirAttackState = "AirAttack";
-    private const string HurtState = "Hurt";
-    private const string DeathState = "Death";
-    private const string HealingState = "Healing";
 
     private const float MoveThreshold = 0.1f;       // Velocidad minima para correr / para considerar que sube
     private const float ApexThreshold = 1f;         // Debajo de esta velocidad de subida empieza el punto alto
@@ -34,8 +22,11 @@ public class PlayerAnimator : MonoBehaviour
     private PlayerHealth health;
     private PlayerHealer healer;
 
-    private string currentState;
-    private string attackState;         // Que ataque mostrar mientras dura el golpe
+    private StateMachine fsm;
+    private AnimState idle;
+    private AnimState jumpStart;
+    private AnimState dash;
+    private AttackAnimState attack;
 
     private void Awake()
     {
@@ -48,6 +39,55 @@ public class PlayerAnimator : MonoBehaviour
         defender = GetComponent<PlayerDefender>();
         health = GetComponent<PlayerHealth>();
         healer = GetComponent<PlayerHealer>();
+
+        BuildStateMachine();
+    }
+
+    private void BuildStateMachine()
+    {
+        fsm = new StateMachine();
+
+        idle = new AnimState(animator, "Idle");
+        jumpStart = new AnimState(animator, "JumpStart");
+        dash = new AnimState(animator, "Dash");
+        attack = new AttackAnimState(animator);
+        AnimState run = new AnimState(animator, "Run");
+        AnimState jumpRise = new AnimState(animator, "JumpRise");
+        AnimState jumpApex = new AnimState(animator, "JumpApex");
+        AnimState jumpFall = new AnimState(animator, "JumpFall");
+        AnimState defend = new AnimState(animator, "Defend");
+        AnimState hurt = new AnimState(animator, "Hurt");
+        AnimState death = new AnimState(animator, "Death");
+        AnimState healing = new AnimState(animator, "Healing");
+
+        // Globales, el orden es la prioridad, muerte, dano, curacion, dash, ataque y defensa
+        fsm.AddAnyTransition(death, () => health.GetIsDead());
+        fsm.AddAnyTransition(hurt, () => health.GetIsHurt());
+        fsm.AddAnyTransition(healing, () => healer.GetIsHealing());
+        fsm.AddAnyTransition(dash, () => dasher.GetIsDashing());
+        fsm.AddAnyTransition(attack, () => attacker.GetIsAttacking());
+        fsm.AddAnyTransition(defend, () => defender.GetIsDefending());
+
+        // En la ventana del combo se queda en el ultimo frame del golpe, asi el cuerpo no salta a Idle y vuelve.
+        // El ataque aereo nunca se sostiene en el piso
+        fsm.AddTransition(attack, attack, () => IsOnGround() && !IsRunning() && attacker.GetIsComboWindowOpen() && !attack.GetIsAirAttack());
+
+        // El arranque y el punto alto se ven enteros antes de seguir
+        fsm.AddTransition(jumpStart, jumpStart, () => !IsOnGround() && !jumpStart.GetIsFinished());
+        fsm.AddTransition(jumpApex, jumpApex, () => !IsOnGround() && !jumpApex.GetIsFinished());
+
+        // Al dejar de subir pasa por el punto alto
+        fsm.AddTransition(jumpRise, jumpApex, () => !IsOnGround() && !IsRising());
+
+        // Desde cualquier estado se vuelve al suelo o al aire
+        AnimState[] allStates = { idle, run, jumpStart, jumpRise, jumpApex, jumpFall, dash, attack, defend, hurt, death, healing };
+        foreach (AnimState from in allStates)
+        {
+            fsm.AddTransition(from, run, () => IsOnGround() && IsRunning());
+            fsm.AddTransition(from, idle, () => IsOnGround() && !IsRunning());
+            fsm.AddTransition(from, jumpRise, () => IsRising());
+            fsm.AddTransition(from, jumpFall, () => !IsOnGround() && !IsRising());
+        }
     }
 
     private void OnEnable()
@@ -66,90 +106,57 @@ public class PlayerAnimator : MonoBehaviour
         attacker.OnAirAttacked -= PlayAirAttack;
     }
 
+    private void Start()
+    {
+        if (HasAnimator()) fsm.ChangeState(idle);
+    }
+
     private void Update()
     {
         visualRoot.localScale = new Vector3(mover.GetFacing(), 1f, 1f);
 
-        if (!HasAnimator()) return;
-        PlayState(ChooseState(), false);
+        if (HasAnimator()) fsm.Update();
     }
 
-    // El orden es la prioridad, muerte, dano, curacion, dash, ataque, defensa, suelo y aire
-    private string ChooseState()
+    // Al despegar el ground checker todavia marca suelo un instante, por eso tambien pide que no este subiendo
+    private bool IsOnGround()
     {
-        if (health.GetIsDead()) return DeathState;
-        if (health.GetIsHurt()) return HurtState;
-        if (healer.GetIsHealing()) return HealingState;
-        if (dasher.GetIsDashing()) return DashState;
-        if (attacker.GetIsAttacking()) return attackState;
-        if (defender.GetIsDefending()) return DefendState;
-
-        float verticalSpeed = rb.linearVelocity.y;
-
-        // Al despegar el ground checker todavia marca suelo un instante, por eso tambien pide que no este subiendo
-        if (groundChecker.GetIsGrounded() && verticalSpeed < MoveThreshold)
-            return ChooseGroundState();
-
-        return ChooseAirState(verticalSpeed);
+        return groundChecker.GetIsGrounded() && rb.linearVelocity.y < MoveThreshold;
     }
 
-    private string ChooseGroundState()
+    private bool IsRunning()
     {
-        if (Mathf.Abs(rb.linearVelocity.x) > MoveThreshold) return RunState;
-
-        // En la ventana del combo se queda en el ultimo frame del golpe, asi el cuerpo no salta a Idle y vuelve.
-        // El ataque aereo nunca se sostiene en el piso
-        if (attacker.GetIsComboWindowOpen() && currentState == attackState && attackState != AirAttackState) return attackState;
-
-        return IdleState;
+        return Mathf.Abs(rb.linearVelocity.x) > MoveThreshold;
     }
 
-    private string ChooseAirState(float verticalSpeed)
+    private bool IsRising()
     {
-        // El arranque y el punto alto se ven enteros antes de seguir
-        if ((currentState == JumpStartState || currentState == JumpApexState) && !IsCurrentFinished()) return currentState;
-        if (verticalSpeed > ApexThreshold) return JumpRiseState;
-        if (currentState == JumpRiseState) return JumpApexState;
-        return JumpFallState;
+        return rb.linearVelocity.y > ApexThreshold;
     }
 
+    // ChangeState siempre arranca de cero, asi Attack1 dos veces seguidas se ve dos veces
     private void PlayJump()
     {
         // Si salta atacando o en dash se sigue viendo esa animacion
         if (!HasAnimator() || dasher.GetIsDashing() || attacker.GetIsAttacking()) return;
-        PlayState(JumpStartState, true);
+        fsm.ChangeState(jumpStart);
     }
 
     private void PlayDash()
     {
-        if (HasAnimator()) PlayState(DashState, true);
+        if (HasAnimator()) fsm.ChangeState(dash);
     }
 
     private void PlayAttack(int step)
     {
-        attackState = "Attack" + step;
-        if (HasAnimator()) PlayState(attackState, true);
+        attack.SetComboStep(step);
+        if (HasAnimator()) fsm.ChangeState(attack);
     }
 
     private void PlayAirAttack()
     {
-        attackState = AirAttackState;
-        if (HasAnimator()) PlayState(attackState, true);
-    }
-
-    // restart = true la arranca de cero aunque ya se este viendo (ej. Attack1 dos veces seguidas)
-    private void PlayState(string state, bool restart)
-    {
-        if (state == currentState && !restart) return;
-
-        currentState = state;
-        animator.Play(state, 0, 0f);
-    }
-
-    private bool IsCurrentFinished()
-    {
-        AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
-        return info.IsName(currentState) && info.normalizedTime >= 1f;
+        attack.SetAirAttack();
+        if (HasAnimator()) fsm.ChangeState(attack);
     }
 
     private bool HasAnimator()

@@ -1,17 +1,11 @@
 using UnityEngine;
 
-// Elige que animacion se ve y la reproduce con Play, como PlayerAnimator.
+// Arma la FSM de animaciones del enemigo y la actualiza cada frame, como PlayerAnimator.
 // El Animator Controller no tiene transiciones, solo los estados con estos mismos nombres
 [RequireComponent(typeof(EnemyBrain))]
 public class EnemyAnimator : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-
-    private const string IdleState = "Idle";
-    private const string WalkState = "Walk";
-    private const string AttackState = "Attack";
-    private const string HurtState = "Hurt";
-    private const string DeathState = "Death";
 
     private const float MoveThreshold = 0.1f;          // Velocidad minima para caminar
 
@@ -20,7 +14,9 @@ public class EnemyAnimator : MonoBehaviour
     private EnemyBrain brain;
     private EnemyAttack attack;
 
-    private string currentState;
+    private StateMachine fsm;
+    private AnimState hurtState;
+    private AnimState attackState;
 
     private void Awake()
     {
@@ -28,11 +24,31 @@ public class EnemyAnimator : MonoBehaviour
         health = GetComponent<EnemyHealth>();
         brain = GetComponent<EnemyBrain>();
         attack = GetComponent<EnemyAttack>();
+
+        BuildStateMachine();
+    }
+
+    // Todas son globales porque ninguna depende del estado anterior, el orden es la prioridad
+    private void BuildStateMachine()
+    {
+        fsm = new StateMachine();
+
+        hurtState = new AnimState(animator, "Hurt");
+        attackState = new AnimState(animator, "Attack");
+        AnimState death = new AnimState(animator, "Death");
+        AnimState walk = new AnimState(animator, "Walk");
+        AnimState idle = new AnimState(animator, "Idle");
+
+        fsm.AddAnyTransition(death, () => health.GetIsDead());
+        fsm.AddAnyTransition(hurtState, () => health.GetIsHurt() || brain.GetIsStunned());
+        fsm.AddAnyTransition(attackState, () => attack.GetIsAttacking());
+        fsm.AddAnyTransition(walk, () => IsMoving());
+        fsm.AddAnyTransition(idle, () => !IsMoving());
     }
 
     private void OnEnable()
     {
-        currentState = null;   // Al volver a prenderse arranca de cero
+        fsm.ChangeState(null);   // Al volver a prenderse arranca de cero
         health.OnDamaged += PlayHurt;
         brain.OnStunned += PlayStun;
         attack.OnAttackStarted += PlayAttack;
@@ -47,42 +63,28 @@ public class EnemyAnimator : MonoBehaviour
 
     private void Update()
     {
-        if (HasAnimator()) PlayState(ChooseState(), false);
+        if (HasAnimator()) fsm.Update();
     }
 
-    // El orden es la prioridad, muerte, dano o aturdido, ataque, caminar y quieto
-    private string ChooseState()
+    private bool IsMoving()
     {
-        if (health.GetIsDead()) return DeathState;
-        if (health.GetIsHurt() || brain.GetIsStunned()) return HurtState;
-        if (attack.GetIsAttacking()) return AttackState;
-        if (Mathf.Abs(rb.linearVelocity.x) > MoveThreshold) return WalkState;
-        return IdleState;
+        return Mathf.Abs(rb.linearVelocity.x) > MoveThreshold;
     }
 
-    // Cada golpe arranca Hurt de nuevo, con el golpe que mata Update elige Death. Con el ataque comprometido sigue atacando
+    // Cada golpe arranca Hurt de nuevo, con el golpe que mata la FSM elige Death. Con el ataque comprometido sigue atacando
     private void PlayHurt(DamageInfo info)
     {
-        if (HasAnimator() && !health.GetIsDead() && !attack.GetIsArmored()) PlayState(HurtState, true);
+        if (HasAnimator() && !health.GetIsDead() && !attack.GetIsArmored()) fsm.ChangeState(hurtState);
     }
 
     private void PlayStun()
     {
-        if (HasAnimator()) PlayState(HurtState, true);
+        if (HasAnimator()) fsm.ChangeState(hurtState);
     }
 
     private void PlayAttack()
     {
-        if (HasAnimator()) PlayState(AttackState, true);
-    }
-
-    // restart = true la arranca de cero aunque ya se este viendo
-    private void PlayState(string state, bool restart)
-    {
-        if (state == currentState && !restart) return;
-
-        currentState = state;
-        animator.Play(state, 0, 0f);
+        if (HasAnimator()) fsm.ChangeState(attackState);
     }
 
     private bool HasAnimator()
