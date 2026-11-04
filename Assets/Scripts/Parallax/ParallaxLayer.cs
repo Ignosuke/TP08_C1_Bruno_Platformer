@@ -11,12 +11,15 @@ public class ParallaxLayer : MonoBehaviour
     [SerializeField] private Camera cam;
 
     private float factor;
+    private float drift;
+    private float driftOffset;      // Cuanto se corrio sola, siempre menor que un ancho del dibujo
     private SpriteRenderer spriteRenderer;
     private Vector2 spriteSize;
 
     private void Awake()
     {
         factor = parallaxData.GetLayerFactor(layerIndex);
+        drift = parallaxData.GetLayerDrift(layerIndex);
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteSize = spriteRenderer.sprite.bounds.size;
     }
@@ -33,9 +36,12 @@ public class ParallaxLayer : MonoBehaviour
         transform.localScale = new Vector3(scale, scale, 1f);
         spriteRenderer.size = new Vector2(viewWidth / scale + spriteSize.x * 2f, spriteSize.y);
 
+        // Las nubes se corren solas aunque la camara este quieta, con el mismo Repeat no se acaban nunca
+        driftOffset = Mathf.Repeat(driftOffset + drift * Time.deltaTime, tileWidth);
+
         // El dibujo se repite cada tileWidth, asi que solo importa el resto de la division y la capa nunca se aleja de la camara
         Vector3 camPosition = cam.transform.position;
-        float x = camPosition.x - Mathf.Repeat(camPosition.x * (1f - factor), tileWidth);
+        float x = camPosition.x - Mathf.Repeat(camPosition.x * (1f - factor) - driftOffset, tileWidth);
         transform.position = new Vector3(x, camPosition.y, transform.position.z);
     }
 }
