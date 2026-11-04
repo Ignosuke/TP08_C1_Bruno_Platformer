@@ -6,6 +6,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private CameraSo cameraData;
     [SerializeField] private Transform target;
     [SerializeField] private AreaTracker areaTracker;   // Los limites son los del area donde esta el jugador
+    [SerializeField] private PlayerHealth playerHealth; // Al reaparecer la camara salta al checkpoint
 
     private float halfWidth;
     private float halfHeight;
@@ -31,11 +32,13 @@ public class CameraFollow : MonoBehaviour
     private void OnEnable()
     {
         areaTracker.OnAreaChanged += SetArea;
+        playerHealth.OnRespawned += SnapAfterRespawn;
     }
 
     private void OnDisable()
     {
         areaTracker.OnAreaChanged -= SetArea;
+        playerHealth.OnRespawned -= SnapAfterRespawn;
     }
 
     // Al cambiar de area el SmoothDamp lleva la camara a los nuevos limites, eso hace el paneo entre areas
@@ -47,11 +50,20 @@ public class CameraFollow : MonoBehaviour
         hasBounds = true;
 
         // La primera vez salta directo, si no arrancaria desde donde quedo la camara en la escena
-        if (isFirstArea && target != null)
-        {
-            transform.position = ClampToBounds(new Vector3(target.position.x + offset.x, target.position.y + offset.y, transform.position.z));
-            smoothVelocity = Vector3.zero;
-        }
+        if (isFirstArea && target != null) SnapToTarget();
+    }
+
+    // Primero se actualiza el area para que los limites ya sean los del checkpoint, si no paneria por todo el mapa
+    private void SnapAfterRespawn()
+    {
+        areaTracker.Refresh();
+        SnapToTarget();
+    }
+
+    private void SnapToTarget()
+    {
+        transform.position = ClampToBounds(new Vector3(target.position.x + offset.x, target.position.y + offset.y, transform.position.z));
+        smoothVelocity = Vector3.zero;
     }
 
     // En LateUpdate para asegurar que el jugador ya termino de moverse este frame

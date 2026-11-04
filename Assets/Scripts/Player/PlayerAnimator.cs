@@ -17,6 +17,9 @@ public class PlayerAnimator : MonoBehaviour
     private const string JumpFallState = "JumpFall";
     private const string DashState = "Dash";
     private const string AirAttackState = "AirAttack";
+    private const string HurtState = "Hurt";
+    private const string DeathState = "Death";
+    private const string HealingState = "Healing";
 
     private const float MoveThreshold = 0.1f;       // Velocidad minima para correr / para considerar que sube
     private const float ApexThreshold = 1f;         // Debajo de esta velocidad de subida empieza el punto alto
@@ -28,6 +31,8 @@ public class PlayerAnimator : MonoBehaviour
     private PlayerDasher dasher;
     private PlayerAttacker attacker;
     private PlayerDefender defender;
+    private PlayerHealth health;
+    private PlayerHealer healer;
 
     private string currentState;
     private string attackState;         // Que ataque mostrar mientras dura el golpe
@@ -41,6 +46,8 @@ public class PlayerAnimator : MonoBehaviour
         dasher = GetComponent<PlayerDasher>();
         attacker = GetComponent<PlayerAttacker>();
         defender = GetComponent<PlayerDefender>();
+        health = GetComponent<PlayerHealth>();
+        healer = GetComponent<PlayerHealer>();
     }
 
     private void OnEnable()
@@ -67,9 +74,12 @@ public class PlayerAnimator : MonoBehaviour
         PlayState(ChooseState(), false);
     }
 
-    // El orden es la prioridad, dash, ataque, defensa, suelo y aire
+    // El orden es la prioridad, muerte, dano, curacion, dash, ataque, defensa, suelo y aire
     private string ChooseState()
     {
+        if (health.GetIsDead()) return DeathState;
+        if (health.GetIsHurt()) return HurtState;
+        if (healer.GetIsHealing()) return HealingState;
         if (dasher.GetIsDashing()) return DashState;
         if (attacker.GetIsAttacking()) return attackState;
         if (defender.GetIsDefending()) return DefendState;

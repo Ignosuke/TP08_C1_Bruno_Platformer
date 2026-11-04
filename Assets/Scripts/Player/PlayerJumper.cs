@@ -26,6 +26,7 @@ public class PlayerJumper : MonoBehaviour
     private PlayerGroundChecker groundChecker;
     private PlayerDasher dasher;
     private PlayerDefender defender;
+    private PlayerHealer healer;
     private Rigidbody2D rb;
 
     private bool jumpRequested;
@@ -49,6 +50,7 @@ public class PlayerJumper : MonoBehaviour
         if (groundChecker == null) groundChecker = GetComponentInChildren<PlayerGroundChecker>();
         dasher = GetComponent<PlayerDasher>();
         defender = GetComponent<PlayerDefender>();
+        healer = GetComponent<PlayerHealer>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -101,7 +103,7 @@ public class PlayerJumper : MonoBehaviour
     private void HandleJump()
     {
         if (bufferCounter <= 0f || coyoteCounter <= 0f) return;
-        if (defender.GetIsDefending()) return;
+        if (defender.GetIsDefending() || healer.GetIsHealing()) return;
 
         Jump();
     }

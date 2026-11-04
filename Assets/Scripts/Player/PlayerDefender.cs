@@ -17,6 +17,7 @@ public class PlayerDefender : MonoBehaviour
     private PlayerGroundChecker groundChecker;
     private PlayerDasher dasher;
     private PlayerAttacker attacker;
+    private PlayerHealer healer;
 
     private bool defendRequested;
     private bool isHeld;
@@ -34,6 +35,7 @@ public class PlayerDefender : MonoBehaviour
         groundChecker = GetComponentInChildren<PlayerGroundChecker>();
         dasher = GetComponent<PlayerDasher>();
         attacker = GetComponent<PlayerAttacker>();
+        healer = GetComponent<PlayerHealer>();
     }
 
     private void OnEnable()
@@ -82,7 +84,7 @@ public class PlayerDefender : MonoBehaviour
     private bool CanDefend()
     {
         return !isDefending && cooldownCounter <= 0f && groundChecker.GetIsGrounded()
-            && !dasher.GetIsDashing() && !attacker.GetIsAttacking();
+            && !dasher.GetIsDashing() && !attacker.GetIsAttacking() && !healer.GetIsHealing();
     }
 
     private void StartDefend()

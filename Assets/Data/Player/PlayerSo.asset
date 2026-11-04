@@ -17,6 +17,7 @@ MonoBehaviour:
   attackAction: {fileID: 1120369429361536294, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   dashAction: {fileID: -6317549735386072006, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   defendAction: {fileID: -7541954723995273918, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  healAction: {fileID: -2420301819414784498, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   moveSpeed: 7
   acceleration: 90
   deceleration: 120
@@ -54,6 +55,14 @@ MonoBehaviour:
     m_Bits: 4294967295
   parryWindow: 0.15
   defendCooldown: 0.25
+  maxHealth: 8
+  invulnerableTime: 0.6
+  hurtDuration: 0.33
+  deathDuration: 0.83
+  respawnDelay: 0.6
+  healCharges: 3
+  healAmount: 2
+  healDuration: 1.25
   jumpClip: {fileID: 0}
   landClip: {fileID: 0}
   dashClip: {fileID: 0}
@@ -64,3 +73,5 @@ MonoBehaviour:
   airAttackClip: {fileID: 0}
   hitClip: {fileID: 0}
   defendClip: {fileID: 0}
+  hurtClip: {fileID: 0}
+  healClip: {fileID: 0}

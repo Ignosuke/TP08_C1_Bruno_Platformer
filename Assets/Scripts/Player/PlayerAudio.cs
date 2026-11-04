@@ -12,6 +12,8 @@ public class PlayerAudio : MonoBehaviour
     private PlayerDasher dasher;
     private PlayerAttacker attacker;
     private PlayerDefender defender;
+    private PlayerHealth health;
+    private PlayerHealer healer;
 
     private void Awake()
     {
@@ -21,6 +23,8 @@ public class PlayerAudio : MonoBehaviour
         dasher = GetComponent<PlayerDasher>();
         attacker = GetComponent<PlayerAttacker>();
         defender = GetComponent<PlayerDefender>();
+        health = GetComponent<PlayerHealth>();
+        healer = GetComponent<PlayerHealer>();
     }
 
     private void OnEnable()
@@ -32,6 +36,8 @@ public class PlayerAudio : MonoBehaviour
         attacker.OnAirAttacked += PlayAirAttack;
         attacker.OnHit += PlayHit;
         defender.OnDefendStarted += PlayDefend;
+        health.OnHurt += PlayHurt;
+        healer.OnHealStarted += PlayHeal;
     }
 
     private void OnDisable()
@@ -43,6 +49,8 @@ public class PlayerAudio : MonoBehaviour
         attacker.OnAirAttacked -= PlayAirAttack;
         attacker.OnHit -= PlayHit;
         defender.OnDefendStarted -= PlayDefend;
+        health.OnHurt -= PlayHurt;
+        healer.OnHealStarted -= PlayHeal;
     }
 
     private void PlayLand() => Play(playerData.GetLandClip());
@@ -52,6 +60,8 @@ public class PlayerAudio : MonoBehaviour
     private void PlayAirAttack() => Play(playerData.GetAirAttackClip());
     private void PlayHit() => Play(playerData.GetHitClip());
     private void PlayDefend() => Play(playerData.GetDefendClip());
+    private void PlayHurt() => Play(playerData.GetHurtClip());
+    private void PlayHeal() => Play(playerData.GetHealClip());
 
     // PlayOneShot permite que se pisen varios sonidos sin cortarse
     private void Play(AudioClip clip)

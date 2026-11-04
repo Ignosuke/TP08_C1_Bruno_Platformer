@@ -29,6 +29,7 @@ public class PlayerAttacker : MonoBehaviour
     private PlayerMover mover;
     private PlayerDasher dasher;
     private PlayerDefender defender;
+    private PlayerHealer healer;
 
     private bool attackRequested;
     private bool isAttacking;
@@ -60,6 +61,7 @@ public class PlayerAttacker : MonoBehaviour
         mover = GetComponent<PlayerMover>();
         dasher = GetComponent<PlayerDasher>();
         defender = GetComponent<PlayerDefender>();
+        healer = GetComponent<PlayerHealer>();
     }
 
     private void OnEnable()
@@ -101,7 +103,7 @@ public class PlayerAttacker : MonoBehaviour
             bufferCounter -= Time.deltaTime;
         }
 
-        if (bufferCounter > 0f && !isAttacking && !dasher.GetIsDashing() && !defender.GetIsDefending())
+        if (bufferCounter > 0f && !isAttacking && !dasher.GetIsDashing() && !defender.GetIsDefending() && !healer.GetIsHealing())
             StartAttack();
     }
 

@@ -20,6 +20,7 @@ public class PlayerMover : MonoBehaviour
     private PlayerDasher dasher;
     private PlayerAttacker attacker;
     private PlayerDefender defender;
+    private PlayerHealer healer;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class PlayerMover : MonoBehaviour
         dasher = GetComponent<PlayerDasher>();
         attacker = GetComponent<PlayerAttacker>();
         defender = GetComponent<PlayerDefender>();
+        healer = GetComponent<PlayerHealer>();
     }
 
     private void OnEnable()
@@ -49,8 +51,8 @@ public class PlayerMover : MonoBehaviour
     {
         moveDir = moveAction.action.ReadValue<Vector2>();
 
-        // Mientras ataca, defiende o dashea mantiene la direccion en la que empezo
-        bool canTurn = !attacker.GetIsAttacking() && !defender.GetIsDefending() && !dasher.GetIsDashing();
+        // Mientras ataca, defiende, dashea o se cura mantiene la direccion en la que empezo
+        bool canTurn = !attacker.GetIsAttacking() && !defender.GetIsDefending() && !dasher.GetIsDashing() && !healer.GetIsHealing();
         if (canTurn && moveDir.x > 0.1f) facing = 1;
         if (canTurn && moveDir.x < -0.1f) facing = -1;
     }
@@ -62,8 +64,8 @@ public class PlayerMover : MonoBehaviour
 
         float targetSpeed = moveDir.x * moveSpeed;
 
-        // Defendiendo o atacando en el suelo se queda quieto; en el aire puede seguir moviendose
-        if (defender.GetIsDefending() || (attacker.GetIsAttacking() && groundChecker.GetIsGrounded()))
+        // Defendiendo, curandose o atacando en el suelo se queda quieto; en el aire puede seguir moviendose
+        if (defender.GetIsDefending() || healer.GetIsHealing() || (attacker.GetIsAttacking() && groundChecker.GetIsGrounded()))
             targetSpeed = 0f;
 
         // Acelera y frena de a poco para que se sienta con peso pero responda rapido

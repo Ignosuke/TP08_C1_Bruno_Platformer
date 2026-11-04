@@ -19,6 +19,7 @@ public class PlayerDasher : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerMover mover;
     private PlayerDefender defender;
+    private PlayerHealer healer;
 
     private bool dashRequested;
     private bool isDashing;
@@ -36,6 +37,7 @@ public class PlayerDasher : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         mover = GetComponent<PlayerMover>();
         defender = GetComponent<PlayerDefender>();
+        healer = GetComponent<PlayerHealer>();
     }
 
     private void OnEnable()
@@ -70,7 +72,7 @@ public class PlayerDasher : MonoBehaviour
         if (dashRequested)
         {
             dashRequested = false;
-            if (!isDashing && cooldownCounter <= 0f && !defender.GetIsDefending()) StartDash();
+            if (!isDashing && cooldownCounter <= 0f && !defender.GetIsDefending() && !healer.GetIsHealing()) StartDash();
         }
     }
 

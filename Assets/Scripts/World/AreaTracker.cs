@@ -16,8 +16,14 @@ public class AreaTracker : MonoBehaviour
         areas = GetComponentsInChildren<Area>();
     }
 
-    // Se pregunta por la posicion y no por triggers, asi volver atras sin salir del todo tambien cambia de area
     private void Update()
+    {
+        Refresh();
+    }
+
+    // Se pregunta por la posicion y no por triggers, asi volver atras sin salir del todo tambien cambia de area.
+    // Publico para que la camara lo fuerce al reaparecer, sin esperar al proximo Update
+    public void Refresh()
     {
         if (currentArea != null && currentArea.Contains(target.position)) return;
 

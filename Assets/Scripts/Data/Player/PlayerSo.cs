@@ -11,6 +11,7 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private InputActionReference attackAction;
     [SerializeField] private InputActionReference dashAction;
     [SerializeField] private InputActionReference defendAction;
+    [SerializeField] private InputActionReference healAction;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 9f;
@@ -53,6 +54,19 @@ public class PlayerSo : ScriptableObject
     [Header("Defend")]
     [SerializeField] private float parryWindow = 0.15f;     // Primeros segundos de la defensa que cuentan como parry
     [SerializeField] private float defendCooldown = 0.25f;  // Para que no se pueda spamear el parry
+    [SerializeField] private float blockDamageMultiplier = 0.5f;    // Dano que entra al bloquear fuera del parry, redondeado para arriba
+
+    [Header("Health")]
+    [SerializeField] private int maxHealth = 8;             // En medios corazones, 8 = 4 corazones
+    [SerializeField] private float invulnerableTime = 0.6f; // Despues de un golpe no recibe dano, asi un contacto no saca todo
+    [SerializeField] private float hurtDuration = 0.33f;    // Lo que dura la animacion Hurt (4 frames)
+    [SerializeField] private float deathDuration = 0.83f;   // Lo que dura la animacion Death (10 frames)
+    [SerializeField] private float respawnDelay = 0.6f;     // Tiempo en el suelo despues de la animacion antes de reaparecer
+
+    [Header("Heal")]
+    [SerializeField] private int healCharges = 3;
+    [SerializeField] private int healAmount = 2;            // En medios corazones, 2 = 1 corazon
+    [SerializeField] private float healDuration = 1.25f;    // Lo que dura la animacion Healing (15 frames), quieto todo ese tiempo
 
     [Header("Sounds")]
     [SerializeField] private AudioClip jumpClip;
@@ -62,12 +76,15 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private AudioClip airAttackClip;
     [SerializeField] private AudioClip hitClip;
     [SerializeField] private AudioClip defendClip;
+    [SerializeField] private AudioClip hurtClip;
+    [SerializeField] private AudioClip healClip;
 
     public InputActionReference GetMoveAction() => moveAction;
     public InputActionReference GetJumpAction() => jumpAction;
     public InputActionReference GetAttackAction() => attackAction;
     public InputActionReference GetDashAction() => dashAction;
     public InputActionReference GetDefendAction() => defendAction;
+    public InputActionReference GetHealAction() => healAction;
 
     public float GetMoveSpeed() => moveSpeed;
     public float GetAcceleration() => acceleration;
@@ -104,6 +121,17 @@ public class PlayerSo : ScriptableObject
 
     public float GetParryWindow() => parryWindow;
     public float GetDefendCooldown() => defendCooldown;
+    public float GetBlockDamageMultiplier() => blockDamageMultiplier;
+
+    public int GetMaxHealth() => maxHealth;
+    public float GetInvulnerableTime() => invulnerableTime;
+    public float GetHurtDuration() => hurtDuration;
+    public float GetDeathDuration() => deathDuration;
+    public float GetRespawnDelay() => respawnDelay;
+
+    public int GetHealCharges() => healCharges;
+    public int GetHealAmount() => healAmount;
+    public float GetHealDuration() => healDuration;
 
     public AudioClip GetJumpClip() => jumpClip;
     public AudioClip GetLandClip() => landClip;
@@ -112,4 +140,6 @@ public class PlayerSo : ScriptableObject
     public AudioClip GetAirAttackClip() => airAttackClip;
     public AudioClip GetHitClip() => hitClip;
     public AudioClip GetDefendClip() => defendClip;
+    public AudioClip GetHurtClip() => hurtClip;
+    public AudioClip GetHealClip() => healClip;
 }
