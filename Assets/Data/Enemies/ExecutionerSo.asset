@@ -17,9 +17,6 @@ MonoBehaviour:
   hurtDuration: 0.5
   deathDuration: 1.1
   corpseTime: 0.4
-  damageLayers:
-    serializedVersion: 2
-    m_Bits: 0
   moveSpeed: 1
   chaseSpeed: 1.6
   edgeCheckDistance: 0.6
@@ -36,6 +33,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   stunDuration: 1.5
+  parryRecoilTime: 0.05
   attacks:
   - stateName: Attack1
     damage: 4

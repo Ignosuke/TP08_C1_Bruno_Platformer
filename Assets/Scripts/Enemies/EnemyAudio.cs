@@ -15,18 +15,19 @@ public class EnemyAudio : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         health = GetComponent<EnemyHealth>();
         attack = GetComponent<EnemyAttack>();
+        if (attack == null) Debug.LogError(name + " needs an EnemyAttack component", this);
     }
 
     private void OnEnable()
     {
-        attack.OnAttacked += PlayAttack;
+        attack.OnHitFrame += PlayAttack;
         health.OnDamaged += PlayHurt;
         health.OnDied += PlayDeath;
     }
 
     private void OnDisable()
     {
-        attack.OnAttacked -= PlayAttack;
+        attack.OnHitFrame -= PlayAttack;
         health.OnDamaged -= PlayHurt;
         health.OnDied -= PlayDeath;
     }
@@ -34,7 +35,7 @@ public class EnemyAudio : MonoBehaviour
     private void PlayAttack() => Play(enemyData.GetAttackClip());
     private void PlayDeath() => Play(enemyData.GetDeathClip());
 
-    // El golpe que mata suena como muerte, no como dano
+    // El golpe que mata suena como muerte, no como daño
     private void PlayHurt(DamageInfo info)
     {
         if (!health.GetIsDead()) Play(enemyData.GetHurtClip());

@@ -17,10 +17,7 @@ public class EnemySight : MonoBehaviour
     }
 
     // Positivo si el jugador esta a la derecha
-    public float GetPlayerDistanceX()
-    {
-        return player.transform.position.x - transform.position.x;
-    }
+    public float GetPlayerDistanceX() => player.transform.position.x - transform.position.x;
 
     public PlayerHealth GetPlayer() => player;
 }

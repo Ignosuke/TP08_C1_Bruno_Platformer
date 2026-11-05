@@ -1,4 +1,4 @@
-// Todo lo que se puede golpear, el jugador, los enemigos y el muneco de prueba.
+// Todo lo que se puede golpear, el jugador, los enemigos y el muñeco de prueba.
 // Devuelve true si se paro con un parry perfecto, el atacante cuerpo a cuerpo lo usa para quedar aturdido
 public interface IDamageable
 {

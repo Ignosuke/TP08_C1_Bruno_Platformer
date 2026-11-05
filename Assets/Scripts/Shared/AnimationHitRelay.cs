@@ -9,13 +9,13 @@ public class AnimationHitRelay : MonoBehaviour
     public event Action OnHitFrame;
     public event Action OnCommitFrame;
 
-    // Lo llama el Animation Event, el nombre tiene que coincidir con el de los builders
+    // Lo llama el Animation Event, el nombre tiene que coincidir con el del evento en el clip
     public void HitFrame()
     {
         OnHitFrame?.Invoke();
     }
 
-    // Lo llama el Animation Event del punto sin retorno, el nombre tiene que coincidir con el de los builders
+    // Lo llama el Animation Event del punto sin retorno, el nombre tiene que coincidir con el del evento en el clip
     public void CommitFrame()
     {
         OnCommitFrame?.Invoke();

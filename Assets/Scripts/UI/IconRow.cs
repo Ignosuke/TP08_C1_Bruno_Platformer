@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 // Una fila de iconos llenos, a medias o vacios (corazones de vida, cargas de curacion).
 // No sabe de quien es el valor, cualquiera le pasa el actual y el maximo con Refresh
-[RequireComponent(typeof(RectTransform))]
 public class IconRow : MonoBehaviour
 {
     [SerializeField] private Sprite fullSprite;
@@ -54,10 +53,7 @@ public class IconRow : MonoBehaviour
     }
 
     // Cuantos de los puntos actuales caen en el icono i, entre 0 y pointsPerIcon
-    private int GetIconPoints(int index, int points)
-    {
-        return Mathf.Clamp(points - index * pointsPerIcon, 0, pointsPerIcon);
-    }
+    private int GetIconPoints(int index, int points) => Mathf.Clamp(points - index * pointsPerIcon, 0, pointsPerIcon);
 
     private Sprite GetSprite(int iconPoints)
     {
@@ -101,10 +97,7 @@ public class IconRow : MonoBehaviour
         }
     }
 
-    private Vector2 GetIconPosition(int index)
-    {
-        return new Vector2(index * (iconSize.x + spacing) + iconSize.x * 0.5f, 0f);
-    }
+    private Vector2 GetIconPosition(int index) => new Vector2(index * (iconSize.x + spacing) + iconSize.x * 0.5f, 0f);
 
     // Si el icono ya estaba animando se corta, asi un efecto viejo no lo deja en el estado equivocado
     private void Play(int index, IEnumerator effect)
@@ -151,7 +144,7 @@ public class IconRow : MonoBehaviour
         icon.sprite = endSprite;
     }
 
-    // Cambia al sprite nuevo y crece un poco, despues vuelve a su tamano
+    // Cambia al sprite nuevo y crece un poco, despues vuelve a su tamaño
     private IEnumerator Gain(Image icon, Sprite endSprite)
     {
         RectTransform rect = icon.rectTransform;

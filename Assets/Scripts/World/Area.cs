@@ -20,15 +20,8 @@ public class Area : MonoBehaviour
         return point.x >= bounds.min.x && point.x <= bounds.max.x && point.y >= bounds.min.y && point.y <= bounds.max.y;
     }
 
-    public Bounds GetBounds()
-    {
-        return box.bounds;
-    }
-
-    public AreaSo GetAreaData()
-    {
-        return areaData;
-    }
+    public Bounds GetBounds() => box.bounds;
+    public AreaSo GetAreaData() => areaData;
 
     // Los limites siempre visibles en la escena, para pintar los tiles adentro
     private void OnDrawGizmos()

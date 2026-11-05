@@ -28,6 +28,8 @@ public class PlayerKnockback : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<PlayerHealth>();
+
+        // Sin defensa ni curacion, apagar la defensa cortaria el bloqueo que provoco este empujon y la curacion ya se corta sola con el golpe
         controls = new Behaviour[]
         {
             GetComponent<PlayerMover>(), GetComponent<PlayerJumper>(), GetComponent<PlayerDasher>(), GetComponent<PlayerAttacker>(),

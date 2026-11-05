@@ -36,9 +36,4 @@ public class AreaTracker : MonoBehaviour
             return;
         }
     }
-
-    public Area GetCurrentArea()
-    {
-        return currentArea;
-    }
 }

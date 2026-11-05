@@ -1,4 +1,4 @@
-// Lo implementa cualquier cosa que haga dano al tocarla, como el cuerpo de un demonio o una flecha
+// Lo implementa cualquier cosa que haga daño al tocarla, como el cuerpo de un demonio o una flecha
 public interface IDamageSource
 {
     int Damage { get; }

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerDasher))]
 public class PlayerDefender : MonoBehaviour
 {
     [SerializeField] private PlayerSo playerData;
@@ -24,7 +25,6 @@ public class PlayerDefender : MonoBehaviour
     private bool isDefending;
 
     public event Action OnDefendStarted;
-    public event Action OnDefendEnded;
 
     private void Awake()
     {
@@ -94,22 +94,15 @@ public class PlayerDefender : MonoBehaviour
         OnDefendStarted?.Invoke();
     }
 
-    // Tambien lo llama PlayerAttacker en el contraataque del parry
+    // Tambien lo llama PlayerParryCounter en el contraataque del parry
     public void StopDefend()
     {
         isDefending = false;
         cooldownCounter = defendCooldown;
-        OnDefendEnded?.Invoke();
     }
 
-    public bool GetIsDefending()
-    {
-        return isDefending;
-    }
+    public bool GetIsDefending() => isDefending;
 
-    // Los enemigos (historia 004) preguntan esto al pegar, parry si es true, bloqueo si solo defiende
-    public bool GetIsParrying()
-    {
-        return isDefending && parryCounter > 0f;
-    }
+    // PlayerHealth lo pregunta al recibir un golpe, parry si es true, bloqueo si solo defiende
+    public bool GetIsParrying() => isDefending && parryCounter > 0f;
 }

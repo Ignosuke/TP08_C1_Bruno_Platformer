@@ -81,7 +81,7 @@ public class PlayerJumper : MonoBehaviour
 
     private void Update()
     {
-        if (lockCounter >= 0f) lockCounter -= Time.deltaTime;
+        if (lockCounter > 0f) lockCounter -= Time.deltaTime;
         UpdateCoyote();
         UpdateBuffer();
     }
@@ -147,7 +147,7 @@ public class PlayerJumper : MonoBehaviour
     {
         if (groundChecker.GetIsGrounded() && lockCounter <= 0f)
             coyoteCounter = coyoteTime;
-        else
+        else if (coyoteCounter > 0f)
             coyoteCounter -= Time.deltaTime;
     }
 
@@ -161,7 +161,7 @@ public class PlayerJumper : MonoBehaviour
             return;
         }
 
-        bufferCounter -= Time.deltaTime;
+        if (bufferCounter > 0f) bufferCounter -= Time.deltaTime;
     }
 
     private void ResetCounters()

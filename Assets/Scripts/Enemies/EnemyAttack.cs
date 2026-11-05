@@ -21,7 +21,7 @@ public abstract class EnemyAttack : MonoBehaviour
     private bool isCommitted;           // Paso el punto sin retorno, los golpes ya no lo cortan
 
     public event Action OnAttackStarted;
-    public event Action OnAttacked;     // En el frame del golpe, no cuando arranca
+    public event Action OnHitFrame;     // En el frame del golpe, pegue o no, no cuando arranca
     public event Action OnParried;
 
     protected virtual void Awake()
@@ -33,13 +33,13 @@ public abstract class EnemyAttack : MonoBehaviour
 
     private void OnEnable()
     {
-        hitRelay.OnHitFrame += OnHitFrame;
+        hitRelay.OnHitFrame += CheckHit;
         hitRelay.OnCommitFrame += OnCommitFrame;
     }
 
     private void OnDisable()
     {
-        hitRelay.OnHitFrame -= OnHitFrame;
+        hitRelay.OnHitFrame -= CheckHit;
         hitRelay.OnCommitFrame -= OnCommitFrame;
     }
 
@@ -90,19 +90,19 @@ public abstract class EnemyAttack : MonoBehaviour
         nextAttackIndex = 0;
     }
 
-    // Desde aca el golpe sale seguro, recibe dano pero no se corta, no se queja y no lo empujan
+    // Desde aca el golpe sale seguro, recibe daño pero no se corta, no se queja y no lo empujan
     private void OnCommitFrame()
     {
         if (isAttacking) isCommitted = true;
     }
 
     // Pega una sola vez y solo si el ataque sigue en curso
-    private void OnHitFrame()
+    private void CheckHit()
     {
         if (!isAttacking || hitDone) return;
 
         hitDone = true;
-        OnAttacked?.Invoke();
+        OnHitFrame?.Invoke();
         PerformHit();
     }
 

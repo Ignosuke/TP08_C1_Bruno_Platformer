@@ -1,7 +1,7 @@
 using UnityEngine;
 
-// La vida de un enemigo. Con cada golpe se desliza con un empujon que se va frenando, su fuerza viene del golpe.
-// Al morir espera la animacion y se apaga, no se destruye porque vuelve cuando el jugador reaparece
+// La vida de un enemigo. Al morir espera la animacion y se apaga, no se destruye porque vuelve cuando el jugador reaparece.
+// El empujon de cada golpe lo hace EnemyKnockback
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyHealth : Health
 {
@@ -9,9 +9,6 @@ public class EnemyHealth : Health
 
     private Rigidbody2D rb;
     private EnemyAttack attack;
-    private float knockbackDirection;
-    private float knockbackStrength;
-    private float knockbackCounter;
     private float deathCounter;
     private bool isDying;
 
@@ -19,48 +16,29 @@ public class EnemyHealth : Health
     protected override float InvulnerableTime => enemyData.GetInvulnerableTime();
     // Despues del punto sin retorno el golpe no lo hace quejarse, asi el ataque sigue
     protected override float HurtDuration => attack.GetIsArmored() ? 0f : enemyData.GetHurtDuration();
-    protected override LayerMask DamageLayers => enemyData.GetDamageLayers();
+    // Los enemigos no reciben golpes de contacto, solo ataques
+    protected override LayerMask DamageLayers => 0;
 
     protected override void Awake()
     {
         base.Awake();
         rb = GetComponent<Rigidbody2D>();
         attack = GetComponent<EnemyAttack>();
-        OnDamaged += Push;
+        if (attack == null) Debug.LogError(name + " needs an EnemyAttack component", this);
     }
 
     protected override void Update()
     {
         base.Update();
+        if (!isDying) return;
 
-        if (isDying)
-        {
-            deathCounter -= Time.deltaTime;
-            if (deathCounter <= 0f) gameObject.SetActive(false);
-            return;
-        }
-
-        if (knockbackCounter <= 0f) return;
-
-        knockbackCounter -= Time.deltaTime;
-        float push = knockbackStrength * Mathf.Max(0f, knockbackCounter) / enemyData.GetHurtDuration();
-        rb.linearVelocity = new Vector2(knockbackDirection * push, rb.linearVelocity.y);
-    }
-
-    // Lo empuja para donde viaja el golpe
-    private void Push(DamageInfo info)
-    {
-        if (attack.GetIsArmored()) return;    // Con el ataque comprometido no lo mueven
-
-        knockbackDirection = Mathf.Sign(info.Direction.x);
-        knockbackStrength = info.Knockback;
-        knockbackCounter = enemyData.GetHurtDuration();
+        deathCounter -= Time.deltaTime;
+        if (deathCounter <= 0f) gameObject.SetActive(false);
     }
 
     protected override void Die()
     {
         isDying = true;
-        knockbackCounter = 0f;
         deathCounter = enemyData.GetDeathDuration() + enemyData.GetCorpseTime();
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
     }
@@ -68,7 +46,6 @@ public class EnemyHealth : Health
     public void ResetHealth()
     {
         isDying = false;
-        knockbackCounter = 0f;
         Refill();
     }
 }

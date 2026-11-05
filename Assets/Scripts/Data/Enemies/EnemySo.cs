@@ -11,7 +11,6 @@ public class EnemySo : ScriptableObject
     [SerializeField] private float hurtDuration = 0.4f;         // Lo que dura la animacion Hurt
     [SerializeField] private float deathDuration = 1.25f;       // Lo que dura la animacion Death
     [SerializeField] private float corpseTime = 0.4f;           // Tiempo en el piso antes de desaparecer
-    [SerializeField] private LayerMask damageLayers;            // Capas que lo lastiman al tocarlas, por ahora ninguna
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 1.5f;            // Patrullando
@@ -55,7 +54,6 @@ public class EnemySo : ScriptableObject
     public float GetHurtDuration() => hurtDuration;
     public float GetDeathDuration() => deathDuration;
     public float GetCorpseTime() => corpseTime;
-    public LayerMask GetDamageLayers() => damageLayers;
 
     public float GetMoveSpeed() => moveSpeed;
     public float GetChaseSpeed() => chaseSpeed;

@@ -18,9 +18,9 @@ MonoBehaviour:
   dashAction: {fileID: -6317549735386072006, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   defendAction: {fileID: -7541954723995273918, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   healAction: {fileID: -2420301819414784498, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  moveSpeed: 7
-  acceleration: 90
-  deceleration: 120
+  moveSpeed: 5
+  acceleration: 75
+  deceleration: 100
   jumpForce: 18
   remainingForceOnTapJump: 0.45
   riseGravity: 5
@@ -35,7 +35,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  dashSpeed: 20
+  dashSpeed: 17
   dashDuration: 0.15
   dashCooldown: 0.5
   comboDamage: 010000000100000002000000
@@ -67,6 +67,8 @@ MonoBehaviour:
   parryWindow: 0.15
   defendCooldown: 0.25
   blockDamageMultiplier: 0.5
+  parryHitStop: 0.1
+  counterStartFrame: 5
   maxHealth: 8
   damageLayers:
     serializedVersion: 2

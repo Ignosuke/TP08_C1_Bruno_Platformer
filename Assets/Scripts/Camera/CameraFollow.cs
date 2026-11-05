@@ -106,10 +106,7 @@ public class CameraFollow : MonoBehaviour
         return new Vector3(x + offset.x, y + offset.y, followPosition.z);
     }
 
-    private Vector2 GetDeadZoneCenter()
-    {
-        return (Vector2)followPosition - offset;
-    }
+    private Vector2 GetDeadZoneCenter() => (Vector2)followPosition - offset;
 
     private Vector3 ClampToBounds(Vector3 position)
     {

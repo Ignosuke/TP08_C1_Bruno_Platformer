@@ -6,17 +6,14 @@ public class PlayerGroundChecker : MonoBehaviour
     [SerializeField] private PlayerSo playerData;
 
     [SerializeField] private Transform origin;        // Punto a la altura de los pies
-    private float feetWidth = 0.3f;  // Ancho del personaje a la altura de los pies
-    private float checkDistance = 0.2f; // Distancia del raycast para detectar el suelo
+    private float feetWidth;            // Ancho del personaje a la altura de los pies
+    private float checkDistance;        // Distancia del raycast para detectar el suelo
     private LayerMask groundLayer;
 
-    private bool IsGrounded;
-    public bool GetIsGrounded() => IsGrounded;
-    private bool IsFullyGrounded;
-    public bool GetIsFullyGrounded() => IsFullyGrounded;
+    private bool isGrounded;
+    public bool GetIsGrounded() => isGrounded;
 
     public event Action OnLanded;
-    public event Action OnLeftGround;
 
     private void Awake()
     {
@@ -32,14 +29,11 @@ public class PlayerGroundChecker : MonoBehaviour
 
     private void FixedUpdate()
     {
-        bool wasGrounded = IsGrounded;
+        bool wasGrounded = isGrounded;
 
         CheckGround();
 
-        if (IsGrounded && !wasGrounded)
-            OnLanded?.Invoke();
-        else if (!IsGrounded && wasGrounded)
-            OnLeftGround?.Invoke();
+        if (isGrounded && !wasGrounded) OnLanded?.Invoke();
     }
 
     // Tres rayos, centro y ambos extremos, para no perder el salto parado en el borde de una plataforma
@@ -48,21 +42,13 @@ public class PlayerGroundChecker : MonoBehaviour
         float halfWidth = feetWidth * 0.5f;
         Vector2 center = origin.position;
 
-        bool centerHit = CastRay(center);
-        bool leftHit = CastRay(center + Vector2.left * halfWidth);
-        bool rightHit = CastRay(center + Vector2.right * halfWidth);
-
-        IsGrounded = centerHit || leftHit || rightHit;
-        IsFullyGrounded = centerHit && leftHit && rightHit;
+        isGrounded = CastRay(center) || CastRay(center + Vector2.left * halfWidth) || CastRay(center + Vector2.right * halfWidth);
     }
 
     private bool CastRay(Vector2 rayOrigin)
     {
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, checkDistance, groundLayer);
-
-        if (!hit) return false;
-
-        return true;
+        return hit;
     }
 
     private void OnDrawGizmosSelected()
@@ -72,7 +58,7 @@ public class PlayerGroundChecker : MonoBehaviour
         float halfWidth = feetWidth * 0.5f;
         Vector2 center = origin.position;
 
-        Gizmos.color = Application.isPlaying && IsGrounded ? Color.green : Color.red;
+        Gizmos.color = Application.isPlaying && isGrounded ? Color.green : Color.red;
 
         DrawRayGizmo(center);
         DrawRayGizmo(center + Vector2.left * halfWidth);

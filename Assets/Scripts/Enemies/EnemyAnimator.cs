@@ -2,12 +2,12 @@ using UnityEngine;
 
 // Arma la FSM de animaciones del enemigo y la actualiza cada frame, como PlayerAnimator.
 // El Animator Controller no tiene transiciones, solo los estados con estos mismos nombres
-[RequireComponent(typeof(EnemyBrain))]
+[RequireComponent(typeof(EnemyBrain), typeof(EnemyHealth))]
 public class EnemyAnimator : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
-
     private const float MoveThreshold = 0.1f;          // Velocidad minima para caminar
+
+    [SerializeField] private Animator animator;
 
     private Rigidbody2D rb;
     private EnemyHealth health;
@@ -24,6 +24,7 @@ public class EnemyAnimator : MonoBehaviour
         health = GetComponent<EnemyHealth>();
         brain = GetComponent<EnemyBrain>();
         attack = GetComponent<EnemyAttack>();
+        if (attack == null) Debug.LogError(name + " needs an EnemyAttack component", this);
 
         BuildStateMachine();
     }

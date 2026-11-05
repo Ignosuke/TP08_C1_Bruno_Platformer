@@ -10,13 +10,13 @@ public class AttackAnimState : AnimState
     // stepStartTime mayor a 0 solo en el contraataque del parry
     public void SetComboStep(int step, float stepStartTime)
     {
-        stateName = "Attack" + step;
+        SetStateName("Attack" + step);
         startTime = stepStartTime;
     }
 
     public void SetAirAttack()
     {
-        stateName = AirAttackName;
+        SetStateName(AirAttackName);
         startTime = 0f;
     }
 

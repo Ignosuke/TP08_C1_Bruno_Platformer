@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1890366665479942244}
   - component: {fileID: 7567898880485876908}
   - component: {fileID: 3918963869193767576}
+  - component: {fileID: 4199214380407438093}
   - component: {fileID: 4838831103284362508}
   - component: {fileID: 7963496588309492982}
   - component: {fileID: 1202742345141201037}
@@ -47,7 +48,6 @@ Transform:
   - {fileID: 142323552509684992}
   - {fileID: 1059243632790873667}
   - {fileID: 1439344947423469516}
-  - {fileID: 9156048963815585275}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7567898880485876908
@@ -75,6 +75,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d12f3336885da47adb8f1ffadc65b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  enemyData: {fileID: 11400000, guid: 478f3bc4c29d045478c99820fd416f49, type: 2}
+--- !u!114 &4199214380407438093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631311199161047402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d2345d55f255c48bcca918e0491d77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyKnockback
   enemyData: {fileID: 11400000, guid: 478f3bc4c29d045478c99820fd416f49, type: 2}
 --- !u!114 &4838831103284362508
 MonoBehaviour:
@@ -508,7 +521,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9156048963815585275}
   m_Father: {fileID: 1890366665479942244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &620322092529960491
@@ -634,7 +648,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1890366665479942244}
+  m_Father: {fileID: 5250609134553453507}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2223467950076590784
 SpriteRenderer:

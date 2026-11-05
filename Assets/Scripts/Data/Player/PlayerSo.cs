@@ -64,7 +64,7 @@ public class PlayerSo : ScriptableObject
     [Header("Defend")]
     [SerializeField] private float parryWindow = 0.15f;     // Primeros segundos de la defensa que cuentan como parry
     [SerializeField] private float defendCooldown = 0.25f;  // Para que no se pueda spamear el parry
-    [SerializeField] private float blockDamageMultiplier = 0.5f;    // Dano que entra al bloquear fuera del parry, redondeado para arriba
+    [SerializeField] private float blockDamageMultiplier = 0.5f;    // Daño que entra al bloquear fuera del parry, redondeado para arriba
     [Tooltip("Game freeze in real seconds on a perfect parry, the clash")]
     [SerializeField] private float parryHitStop = 0.1f;
     [Tooltip("Attack1 sheet frame (1-based) where the parry counter starts, 5 = the slash")]
@@ -73,7 +73,7 @@ public class PlayerSo : ScriptableObject
     [Header("Health")]
     [SerializeField] private int maxHealth = 8;             // En medios corazones, 8 = 4 corazones
     [SerializeField] private LayerMask damageLayers;        // Capas que lastiman al tocarlas, como el cuerpo de los demonios
-    [SerializeField] private float invulnerableTime = 0.6f; // Despues de un golpe no recibe dano, asi un contacto no saca todo
+    [SerializeField] private float invulnerableTime = 0.6f; // Despues de un golpe no recibe daño, asi un contacto no saca todo
     [SerializeField] private float hurtDuration = 0.33f;    // Lo que dura la animacion Hurt (4 frames)
     [SerializeField] private float deathDuration = 0.83f;   // Lo que dura la animacion Death (10 frames)
     [SerializeField] private float respawnDelay = 0.6f;     // Tiempo en el suelo despues de la animacion antes de reaparecer

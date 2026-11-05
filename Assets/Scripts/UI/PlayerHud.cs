@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // Conecta la vida y las curaciones del jugador con sus filas de iconos.
-// Las filas no saben del jugador, asi el jefe (historia 005) puede tener su propia barra
+// Las filas no saben del jugador, asi otro personaje, como un jefe, puede tener su propia barra
 public class PlayerHud : MonoBehaviour
 {
     [SerializeField] private PlayerHealth health;

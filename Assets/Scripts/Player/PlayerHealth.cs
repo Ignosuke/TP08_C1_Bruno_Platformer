@@ -3,6 +3,7 @@ using UnityEngine;
 
 // La vida del jugador. Suma a Health el bloqueo y el parry de frente y la reaparicion al morir.
 // La reaparicion la hace PlayerRespawner, que despues llama a Revive
+[RequireComponent(typeof(PlayerMover), typeof(PlayerDefender), typeof(PlayerRespawner))]
 public class PlayerHealth : Health
 {
     [SerializeField] private PlayerSo playerData;
@@ -11,8 +12,8 @@ public class PlayerHealth : Health
     private PlayerDefender defender;
     private PlayerRespawner respawner;
 
-    public event Action OnRespawned;                 // Para la camara, los enemigos y las monedas de la historia 006
-    public event Action<DamageInfo> OnParried;       // Parry perfecto, PlayerAttacker contraataca si fue cuerpo a cuerpo
+    public event Action OnRespawned;                 // Para lo que vuelve a su lugar al reaparecer, como la camara y los enemigos
+    public event Action<DamageInfo> OnParried;       // Parry perfecto, PlayerParryCounter contraataca si fue cuerpo a cuerpo
 
     public override int MaxHealth => playerData.GetMaxHealth();
     protected override float InvulnerableTime => playerData.GetInvulnerableTime();
@@ -55,8 +56,5 @@ public class PlayerHealth : Health
     }
 
     // Solo defiende si mira hacia el golpe, de espaldas recibe todo. PlayerKnockback lo usa para empujar menos
-    public bool GetIsBlocking(DamageInfo info)
-    {
-        return defender.GetIsDefending() && info.Direction.x * mover.GetFacing() < 0f;
-    }
+    public bool GetIsBlocking(DamageInfo info) => defender.GetIsDefending() && info.Direction.x * mover.GetFacing() < 0f;
 }

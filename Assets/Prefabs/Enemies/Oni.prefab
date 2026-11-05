@@ -5139,7 +5139,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4711118247701701292}
+  m_Father: {fileID: 4580749283485452703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2302695110827208858
 SpriteRenderer:
@@ -5211,6 +5211,7 @@ GameObject:
   - component: {fileID: 4711118247701701292}
   - component: {fileID: 3895092517902538885}
   - component: {fileID: 2458917721094318328}
+  - component: {fileID: 5059238993069275960}
   - component: {fileID: 5214818515588464447}
   - component: {fileID: 4773437045199095681}
   - component: {fileID: 1307938825781166162}
@@ -5247,7 +5248,6 @@ Transform:
   - {fileID: 1832071588286682383}
   - {fileID: 8776991703638290859}
   - {fileID: 1984377123111619337}
-  - {fileID: 3093609412943753456}
   - {fileID: 1579972180639010380}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5276,6 +5276,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d12f3336885da47adb8f1ffadc65b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  enemyData: {fileID: 11400000, guid: c890d89ee79ff5244a08d7b24037bbb4, type: 2}
+--- !u!114 &5059238993069275960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5385387853405409594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d2345d55f255c48bcca918e0491d77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyKnockback
   enemyData: {fileID: 11400000, guid: c890d89ee79ff5244a08d7b24037bbb4, type: 2}
 --- !u!114 &5214818515588464447
 MonoBehaviour:
@@ -5618,7 +5631,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3093609412943753456}
   m_Father: {fileID: 4711118247701701292}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7960007038132587148

@@ -17,6 +17,4 @@ public readonly struct DamageInfo
         Knockback = knockback;
         IsMelee = isMelee;
     }
-
-    public bool IsFrom(LayerMask mask) => mask.Contains(SourceLayer);
 }

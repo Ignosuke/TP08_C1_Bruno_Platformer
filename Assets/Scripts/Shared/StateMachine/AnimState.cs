@@ -25,9 +25,5 @@ public class AnimState : State
         stateName = newStateName;
     }
 
-    public bool GetIsFinished()
-    {
-        AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
-        return info.IsName(stateName) && info.normalizedTime >= 1f;
-    }
+    public bool GetIsFinished() => animator.GetCurrentAnimatorStateInfo(0).IsName(stateName) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f;
 }

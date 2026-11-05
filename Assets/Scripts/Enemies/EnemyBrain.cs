@@ -28,6 +28,8 @@ public class EnemyBrain : MonoBehaviour
         sight = GetComponent<EnemySight>();
         mover = GetComponent<EnemyMover>();
         attack = GetComponent<EnemyAttack>();
+        if (mover == null) Debug.LogError(name + " needs an EnemyMover component", this);
+        if (attack == null) Debug.LogError(name + " needs an EnemyAttack component", this);
         spawnPosition = transform.position;
 
         // En Awake y no en OnEnable porque muerto queda apagado y tiene que escuchar igual

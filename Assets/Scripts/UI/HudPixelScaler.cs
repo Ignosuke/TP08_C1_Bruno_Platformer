@@ -16,7 +16,7 @@ public class HudPixelScaler : MonoBehaviour
         scaler = GetComponent<CanvasScaler>();
     }
 
-    // Cada frame por si cambia el tamano de la ventana
+    // Cada frame por si cambia el tamaño de la ventana
     private void Update()
     {
         int scale = Mathf.Min(Screen.width / pixelCamera.refResolutionX, Screen.height / pixelCamera.refResolutionY);

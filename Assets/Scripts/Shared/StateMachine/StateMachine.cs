@@ -24,7 +24,7 @@ public class StateMachine
         transitions.Add(new Transition { from = from, to = to, when = when });
     }
 
-    // Vale desde cualquier estado y se revisa antes que las demas, para muerte o dano
+    // Vale desde cualquier estado y se revisa antes que las demas, para muerte o daño
     public void AddAnyTransition(State to, Func<bool> when)
     {
         anyTransitions.Add(new Transition { to = to, when = when });

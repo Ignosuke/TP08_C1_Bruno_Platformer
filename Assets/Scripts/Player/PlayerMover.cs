@@ -74,8 +74,5 @@ public class PlayerMover : MonoBehaviour
         rb.linearVelocity = new Vector2(newSpeed, rb.linearVelocity.y);
     }
 
-    public int GetFacing()
-    {
-        return facing;
-    }
+    public int GetFacing() => facing;
 }

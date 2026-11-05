@@ -4,13 +4,16 @@ using UnityEngine;
 // Los demas componentes manejan el juego, aca solo se elige que animacion se ve.
 // El Animator Controller no tiene transiciones, solo los estados con estos mismos nombres.
 // Sin Animator o sin controller asignado no hace nada.
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerMover), typeof(PlayerJumper))]
+[RequireComponent(typeof(PlayerDasher), typeof(PlayerAttacker), typeof(PlayerDefender))]
+[RequireComponent(typeof(PlayerHealth), typeof(PlayerHealer))]
 public class PlayerAnimator : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
-    [SerializeField] private Transform visualRoot;      // Se da vuelta segun hacia donde mira
-
     private const float MoveThreshold = 0.1f;       // Velocidad minima para correr / para considerar que sube
     private const float ApexThreshold = 1f;         // Debajo de esta velocidad de subida empieza el punto alto
+
+    [SerializeField] private Animator animator;
+    [SerializeField] private Transform visualRoot;      // Se da vuelta segun hacia donde mira
 
     private Rigidbody2D rb;
     private PlayerGroundChecker groundChecker;
@@ -60,7 +63,7 @@ public class PlayerAnimator : MonoBehaviour
         AnimState death = new AnimState(animator, "Death");
         AnimState healing = new AnimState(animator, "Healing");
 
-        // Globales, el orden es la prioridad, muerte, dano, curacion, dash, ataque y defensa
+        // Globales, el orden es la prioridad, muerte, daño, curacion, dash, ataque y defensa
         fsm.AddAnyTransition(death, () => health.GetIsDead());
         fsm.AddAnyTransition(hurt, () => health.GetIsHurt());
         fsm.AddAnyTransition(healing, () => healer.GetIsHealing());

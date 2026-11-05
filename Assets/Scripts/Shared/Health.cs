@@ -53,7 +53,7 @@ public abstract class Health : MonoBehaviour, IDamageable
     // Un parry no saca vida y avisa al atacante, por defecto nadie hace parry
     protected virtual bool IsParried(DamageInfo info) => false;
 
-    // El dano que entra de verdad, por defecto todo
+    // El daño que entra de verdad, por defecto todo
     protected virtual int ModifyDamage(DamageInfo info) => info.Amount;
 
     protected abstract void Die();

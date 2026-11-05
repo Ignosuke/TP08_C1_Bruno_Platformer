@@ -100,8 +100,5 @@ public class PlayerDasher : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
     }
 
-    public bool GetIsDashing()
-    {
-        return isDashing;
-    }
+    public bool GetIsDashing() => isDashing;
 }

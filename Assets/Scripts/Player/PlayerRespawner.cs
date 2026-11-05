@@ -29,6 +29,8 @@ public class PlayerRespawner : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<PlayerHealth>();
         healer = GetComponent<PlayerHealer>();
+
+        // A diferencia de PlayerKnockback tambien apaga la defensa y la curacion, muerto no puede hacer nada hasta reaparecer
         controls = new Behaviour[]
         {
             GetComponent<PlayerMover>(), GetComponent<PlayerJumper>(), GetComponent<PlayerDasher>(),

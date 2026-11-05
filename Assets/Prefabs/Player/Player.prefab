@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 8734632208493566517}
   - component: {fileID: 896392920327532147}
   - component: {fileID: 2782667245408224403}
+  - component: {fileID: 3102486186770463005}
   - component: {fileID: 7500916708750134503}
   - component: {fileID: 1442056896882286569}
   - component: {fileID: 5088062005014307678}
@@ -180,7 +181,6 @@ GameObject:
   - component: {fileID: 6577981422973734674}
   - component: {fileID: 6922600848525102278}
   - component: {fileID: 1617383170895923685}
-  - component: {fileID: 3554611097664970341}
   - component: {fileID: 1524570342585205822}
   - component: {fileID: 5888456878614784258}
   - component: {fileID: 8795685557769512161}
@@ -287,6 +287,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDefender
   playerData: {fileID: 11400000, guid: 7ea74dba68ebd274b9b0f0f9821f4298, type: 2}
+--- !u!114 &3102486186770463005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4507087158210081793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186bf8fc14c5b1e4997929673609b9bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerParryCounter
+  playerData: {fileID: 11400000, guid: 7ea74dba68ebd274b9b0f0f9821f4298, type: 2}
+  animator: {fileID: 274832521623492624}
 --- !u!114 &7500916708750134503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,20 +394,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAudio
   playerData: {fileID: 11400000, guid: 7ea74dba68ebd274b9b0f0f9821f4298, type: 2}
---- !u!114 &3554611097664970341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4507087158210081793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd43d8f04116523489284e0c1c8a78ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DebugDamageKey
-  damage: 2
-  knockback: 6
 --- !u!50 &1524570342585205822
 Rigidbody2D:
   serializedVersion: 5

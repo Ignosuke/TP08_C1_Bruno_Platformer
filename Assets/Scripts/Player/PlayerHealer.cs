@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 // Curarse gasta una carga al empezar y devuelve vida al terminar la animacion.
 // Mientras dura se queda quieto, y si lo golpean se corta y la carga se pierde
+[RequireComponent(typeof(PlayerHealth), typeof(PlayerDasher), typeof(PlayerDefender))]
 public class PlayerHealer : MonoBehaviour
 {
     [SerializeField] private PlayerSo playerData;

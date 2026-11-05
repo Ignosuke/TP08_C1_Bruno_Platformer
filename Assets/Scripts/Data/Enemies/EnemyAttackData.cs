@@ -26,7 +26,7 @@ public class EnemyAttackData
     // Unity lo necesita para que un ataque nuevo en el inspector arranque con los valores de arriba
     public EnemyAttackData() { }
 
-    // Lo usan los builders para cargar los valores iniciales
+    // Para cargar los valores iniciales desde codigo
     public EnemyAttackData(string stateName, int damage, int hitFrame, int commitFrame, float duration, Vector2 hitboxOffset,
         Vector2 hitboxSize, float knockback, float hitStop, float shakeMagnitude, float shakeDuration)
     {
