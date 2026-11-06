@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerGroundChecker : MonoBehaviour
 {
     private const float BoxHeight = 0.05f;
@@ -8,9 +9,11 @@ public class PlayerGroundChecker : MonoBehaviour
     [SerializeField] private PlayerSo playerData;
 
     [SerializeField] private Transform origin;        // Punto a la altura de los pies
-    private float feetWidth;            // Ancho del personaje a la altura de los pies
-    private float checkDistance;        // Distancia del raycast para detectar el suelo
+    private float feetWidth;
+    private float checkDistance;
     private LayerMask groundLayer;
+    private Rigidbody2D body;
+    private ContactFilter2D floorFilter;
 
     private bool isGrounded;
     public bool GetIsGrounded() => isGrounded;
@@ -22,6 +25,12 @@ public class PlayerGroundChecker : MonoBehaviour
         feetWidth = playerData.GetFeetWidth();
         checkDistance = playerData.GetCheckDistance();
         groundLayer = playerData.GetGroundLayer();
+        body = GetComponent<Rigidbody2D>();
+
+        // Solo contactos que empujan hacia arriba, las paredes no cuentan
+        floorFilter = new ContactFilter2D();
+        floorFilter.SetLayerMask(groundLayer);
+        floorFilter.SetNormalAngle(45f, 135f);
     }
 
     private void Reset()
@@ -38,11 +47,12 @@ public class PlayerGroundChecker : MonoBehaviour
         if (isGrounded && !wasGrounded) OnLanded?.Invoke();
     }
 
-    // Una caja del ancho de los pies en vez de rayos sueltos, asi apoyado en una esquina no queda ningun hueco sin revisar.
-    // Un poco mas angosta que el collider para no tomar una pared de costado como piso
+    // La caja de los pies da margen antes de tocar el piso. Es un poco mas angosta que el collider para no tomar una pared como piso.
+    // Apoyado justo en la punta de una esquina la caja no llega, pero la fisica igual lo sostiene, por eso tambien vale el contacto
     private void CheckGround()
     {
-        isGrounded = Physics2D.BoxCast(origin.position, GetBoxSize(), 0f, Vector2.down, checkDistance, groundLayer);
+        isGrounded = Physics2D.BoxCast(origin.position, GetBoxSize(), 0f, Vector2.down, checkDistance, groundLayer)
+            || body.IsTouching(floorFilter);
     }
 
     private Vector2 GetBoxSize() => new Vector2(feetWidth, BoxHeight);
