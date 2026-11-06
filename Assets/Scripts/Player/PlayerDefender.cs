@@ -19,10 +19,12 @@ public class PlayerDefender : MonoBehaviour
     private PlayerDasher dasher;
     private PlayerAttacker attacker;
     private PlayerHealer healer;
+    private PlayerHealth health;
 
     private bool defendRequested;
     private bool isHeld;
     private bool isDefending;
+    private bool wasHit;
 
     public event Action OnDefendStarted;
 
@@ -36,6 +38,7 @@ public class PlayerDefender : MonoBehaviour
         dasher = GetComponent<PlayerDasher>();
         attacker = GetComponent<PlayerAttacker>();
         healer = GetComponent<PlayerHealer>();
+        health = GetComponent<PlayerHealth>();
     }
 
     private void OnEnable()
@@ -43,6 +46,7 @@ public class PlayerDefender : MonoBehaviour
         defendAction.action.performed += OnDefendPerformed;
         defendAction.action.canceled += OnDefendCanceled;
         defendAction.action.Enable();
+        health.OnDamaged += OnHit;
     }
 
     private void OnDisable()
@@ -50,7 +54,9 @@ public class PlayerDefender : MonoBehaviour
         defendAction.action.performed -= OnDefendPerformed;
         defendAction.action.canceled -= OnDefendCanceled;
         defendAction.action.Disable();
+        health.OnDamaged -= OnHit;
         isDefending = false;
+        wasHit = false;
         isHeld = false;
         defendRequested = false;
     }
@@ -66,10 +72,23 @@ public class PlayerDefender : MonoBehaviour
         isHeld = false;
     }
 
+    // Se corta en el Update y no aca, asi PlayerKnockback todavia ve el bloqueo y empuja menos
+    private void OnHit(DamageInfo info)
+    {
+        wasHit = true;
+    }
+
     private void Update()
     {
         if (cooldownCounter > 0f) cooldownCounter -= Time.deltaTime;
         if (parryCounter > 0f) parryCounter -= Time.deltaTime;
+
+        // Un golpe, bloqueado o no, corta la defensa. Mantener la tecla no la vuelve a activar, performed solo llega al apretar
+        if (wasHit)
+        {
+            wasHit = false;
+            if (isDefending) StopDefend();
+        }
 
         if (defendRequested)
         {
