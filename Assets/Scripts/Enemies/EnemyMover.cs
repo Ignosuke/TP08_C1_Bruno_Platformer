@@ -28,7 +28,7 @@ public abstract class EnemyMover : MonoBehaviour
     }
 
     // Apagado no se mueve, asi el brain lo frena con solo apagarlo
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         Stop();
         pauseCounter = 0f;
@@ -58,19 +58,32 @@ public abstract class EnemyMover : MonoBehaviour
     }
 
     // Se le acaba el piso o tiene una pared enfrente
-    protected bool IsBlocked()
+    protected bool IsBlocked() => IsBlocked(direction);
+
+    // Lo mismo hacia cualquier lado sin darse vuelta, 1 derecha y -1 izquierda
+    protected bool IsBlocked(int side)
     {
-        return !HasGroundAhead() || HasWallAhead();
+        return !HasGroundAhead(side) || HasWallAhead(side);
     }
 
-    private bool HasGroundAhead()
+    private bool HasGroundAhead(int side)
     {
-        return Physics2D.Raycast(frontCheck.position, Vector2.down, enemyData.GetEdgeCheckDistance(), enemyData.GetGroundLayer());
+        return Physics2D.Raycast(GetCheckPoint(side), Vector2.down, enemyData.GetEdgeCheckDistance(), enemyData.GetGroundLayer());
     }
 
-    protected bool HasWallAhead()
+    protected bool HasWallAhead() => HasWallAhead(direction);
+
+    private bool HasWallAhead(int side)
     {
-        return Physics2D.Raycast(frontCheck.position, Vector2.right * direction, enemyData.GetWallCheckDistance(), enemyData.GetGroundLayer());
+        return Physics2D.Raycast(GetCheckPoint(side), Vector2.right * side, enemyData.GetWallCheckDistance(), enemyData.GetGroundLayer());
+    }
+
+    // frontCheck mira para donde mira el enemigo, para el otro lado se espeja
+    private Vector2 GetCheckPoint(int side)
+    {
+        Vector2 point = frontCheck.position;
+        if (side != direction) point.x -= 2f * frontCheck.localPosition.x;
+        return point;
     }
 
     public void Move(float speed)
@@ -111,6 +124,9 @@ public abstract class EnemyMover : MonoBehaviour
     }
 
     public int GetDirection() => direction;
+    public virtual bool GetIsDashing() => false;
+    // Esquivando o a punto de esquivar, el ataque a distancia espera
+    public virtual bool GetIsEvading() => false;
 
     private void OnDrawGizmosSelected()
     {

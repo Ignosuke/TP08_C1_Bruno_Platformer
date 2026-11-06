@@ -13,6 +13,7 @@ public class EnemyAnimator : MonoBehaviour
     private EnemyHealth health;
     private EnemyBrain brain;
     private EnemyAttack attack;
+    private EnemyMover mover;
 
     private StateMachine fsm;
     private AnimState hurtState;
@@ -24,7 +25,9 @@ public class EnemyAnimator : MonoBehaviour
         health = GetComponent<EnemyHealth>();
         brain = GetComponent<EnemyBrain>();
         attack = GetComponent<EnemyAttack>();
+        mover = GetComponent<EnemyMover>();
         if (attack == null) Debug.LogError(name + " needs an EnemyAttack component", this);
+        if (mover == null) Debug.LogError(name + " needs an EnemyMover component", this);
 
         BuildStateMachine();
     }
@@ -37,12 +40,14 @@ public class EnemyAnimator : MonoBehaviour
         hurtState = new AnimState(animator, "Hurt");
         attackState = new AnimState(animator, "Attack");
         AnimState death = new AnimState(animator, "Death");
+        AnimState dash = new AnimState(animator, "Dash");
         AnimState walk = new AnimState(animator, "Walk");
         AnimState idle = new AnimState(animator, "Idle");
 
         fsm.AddAnyTransition(death, () => health.GetIsDead());
         fsm.AddAnyTransition(hurtState, () => health.GetIsHurt() || brain.GetIsStunned());
         fsm.AddAnyTransition(attackState, () => attack.GetIsAttacking() || brain.GetIsRecoiling());   // En el choque sostiene el golpe
+        fsm.AddAnyTransition(dash, () => mover.GetIsDashing());     // Solo el arquero tiene Dash
         fsm.AddAnyTransition(walk, () => IsMoving());
         fsm.AddAnyTransition(idle, () => !IsMoving());
     }

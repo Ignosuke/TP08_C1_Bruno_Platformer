@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ae5800eb5697e4f97d8802127d9638, type: 3}
+  m_Name: ArcherSo
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySo
+  maxHealth: 3
+  invulnerableTime: 0.15
+  hurtDuration: 0.45
+  deathDuration: 1
+  corpseTime: 0.4
+  moveSpeed: 1.5
+  chaseSpeed: 3
+  edgeCheckDistance: 0.6
+  wallCheckDistance: 0.2
+  turnPauseDuration: 0.4
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  detectionRange: 8
+  verticalTolerance: 1.2
+  attackRange: 7
+  attackCooldown: 1.6
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 65
+  stunDuration: 1.5
+  parryRecoilTime: 0.05
+  attacks:
+  - stateName: Attack
+    damage: 2
+    hitFrame: 7
+    commitFrame: 0
+    duration: 1
+    hitboxOffset: {x: 0, y: 0}
+    hitboxSize: {x: 0, y: 0}
+    knockback: 3
+    hitStop: 0
+    shakeMagnitude: 0
+    shakeDuration: 0
+  arrowPrefab: {fileID: 5356906918847766966, guid: c86ae1ff4a1cd2c48a5d22e49c304240, type: 3}
+  arrowSpeed: 10
+  arrowLifetime: 1.5
+  arrowSpawnOffset: {x: 0.9, y: 0.75}
+  preferredDistance: 5.5
+  fleeDistance: 2.5
+  dashSpeed: 10
+  dashDuration: 0.25
+  dashCooldown: 2.5
+  contactDamage: 1
+  contactKnockback: 5
+  spriteFacesLeft: 0
+  attackClip: {fileID: 0}
+  hurtClip: {fileID: 0}
+  deathClip: {fileID: 0}

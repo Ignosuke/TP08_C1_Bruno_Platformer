@@ -1,31 +1,22 @@
 fileFormatVersion: 2
-guid: 53ee53ee746d239478e5c9efac08d998
+guid: 95b29eb27bce18046813cc494470438a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4726913989911992049
-    second: RUN_0
+      213: 1391339833291063620
+    second: ARROW HIT_0
   - first:
-      213: -1224304467317232117
-    second: RUN_1
+      213: 3902071963512744111
+    second: ARROW HIT_1
   - first:
-      213: 3159551424834153068
-    second: RUN_2
+      213: -388140496433187185
+    second: ARROW HIT_2
   - first:
-      213: -4270742793311013030
-    second: RUN_3
+      213: 9196543906699807791
+    second: ARROW HIT_3
   - first:
-      213: -4469841436486958459
-    second: RUN_4
-  - first:
-      213: -5792612846293609617
-    second: RUN_5
-  - first:
-      213: -2380123854543253929
-    second: RUN_6
-  - first:
-      213: -337668074351880697
-    second: RUN_7
+      213: 4974477683197454894
+    second: ARROW HIT_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -93,10 +84,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -147,177 +138,155 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RUN_0
+      name: ArcherArrowHit_0
       rect:
         serializedVersion: 2
-        x: 31
-        y: 15
-        width: 31
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 48
+        height: 16
+      alignment: 9
+      pivot: {x: 0.8333333, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f09a87b35c0a66eb0800000000000000
-      internalID: -4726913989911992049
+      spriteID: 4d3f16f957600aa4382ec59784439168
+      internalID: -4157778
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_1
+      name: ArcherArrowHit_1
       rect:
         serializedVersion: 2
-        x: 127
-        y: 15
-        width: 34
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 48
+        y: 0
+        width: 48
+        height: 16
+      alignment: 9
+      pivot: {x: 0.8333333, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b0ee1a8d295620fe0800000000000000
-      internalID: -1224304467317232117
+      spriteID: 314fa0629ad86ac44b8e9c7328fa95b2
+      internalID: -890155832
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_2
+      name: ArcherArrowHit_2
       rect:
         serializedVersion: 2
-        x: 223
-        y: 17
-        width: 34
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 0
+        width: 48
+        height: 16
+      alignment: 9
+      pivot: {x: 0.8333333, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c6aa1d6e74bf8db20800000000000000
-      internalID: 3159551424834153068
+      spriteID: 1a7cfbd1d0734864eadf0c2de51ed6e7
+      internalID: 379705192
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_3
+      name: ArcherArrowHit_3
       rect:
         serializedVersion: 2
-        x: 319
-        y: 15
-        width: 34
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 144
+        y: 0
+        width: 48
+        height: 16
+      alignment: 9
+      pivot: {x: 0.8333333, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a5733ad8e064bb4c0800000000000000
-      internalID: -4270742793311013030
+      spriteID: 575c81713a22c684caba564d63df6d88
+      internalID: 1824226936
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_4
+      name: ArcherArrowHit_4
       rect:
         serializedVersion: 2
-        x: 416
-        y: 15
-        width: 30
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 192
+        y: 0
+        width: 48
+        height: 16
+      alignment: 9
+      pivot: {x: 0.8333333, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5828fdf45eee7f1c0800000000000000
-      internalID: -4469841436486958459
+      spriteID: 987b4181771351f41bc028cb089fe763
+      internalID: 1219077039
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_5
+      name: ArcherArrowHit_5
       rect:
         serializedVersion: 2
-        x: 512
-        y: 15
-        width: 29
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 240
+        y: 0
+        width: 48
+        height: 16
+      alignment: 9
+      pivot: {x: 0.8333333, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f631e4f8e418c9fa0800000000000000
-      internalID: -5792612846293609617
+      spriteID: dbf0cb165306a9548820a49338ec13b8
+      internalID: 672605095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_6
+      name: ArcherArrowHit_6
       rect:
         serializedVersion: 2
-        x: 608
-        y: 16
-        width: 31
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 288
+        y: 0
+        width: 48
+        height: 16
+      alignment: 9
+      pivot: {x: 0.8333333, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 75e0488f6f918fed0800000000000000
-      internalID: -2380123854543253929
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_7
-      rect:
-        serializedVersion: 2
-        x: 704
-        y: 15
-        width: 28
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7061448ecac505bf0800000000000000
-      internalID: -337668074351880697
+      spriteID: 9dc3c2df8a10a8d4299863cc2c3c93e1
+      internalID: 971267037
       vertices: []
       indices: 
       edges: []
@@ -326,7 +295,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 57d587485d405824b8ab49a2afb731e4
     internalID: 0
     vertices: []
     indices: 
@@ -336,14 +305,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RUN_0: -4726913989911992049
-      RUN_1: -1224304467317232117
-      RUN_2: 3159551424834153068
-      RUN_3: -4270742793311013030
-      RUN_4: -4469841436486958459
-      RUN_5: -5792612846293609617
-      RUN_6: -2380123854543253929
-      RUN_7: -337668074351880697
+      ArcherArrowHit_0: -4157778
+      ArcherArrowHit_1: -890155832
+      ArcherArrowHit_2: 379705192
+      ArcherArrowHit_3: 1824226936
+      ArcherArrowHit_4: 1219077039
+      ArcherArrowHit_5: 672605095
+      ArcherArrowHit_6: 971267037
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,55 +1,49 @@
 fileFormatVersion: 2
-guid: cfe575f47518ba642b8a1ca4f0755335
+guid: 7285c4abc8b36a041b138e4502de327d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -252343562717082310
-    second: ATTACK_0
+      213: 815424164945274260
+    second: IDLE_0
   - first:
-      213: -210908623516531236
-    second: ATTACK_1
+      213: -270785710348516584
+    second: IDLE_1
   - first:
-      213: -1884070897103218386
-    second: ATTACK_2
+      213: 8443794771774750484
+    second: IDLE_2
   - first:
-      213: -5421470884539877244
-    second: ATTACK_3
+      213: 1777182293076053196
+    second: IDLE_3
   - first:
-      213: -637045071952103482
-    second: ATTACK_4
+      213: 6114163804962241700
+    second: IDLE_4
   - first:
-      213: -8222471432525534737
-    second: ATTACK_5
+      213: -7154528564402915179
+    second: IDLE_5
   - first:
-      213: -5060464365741366859
-    second: ATTACK_6
+      213: -8112586356116296526
+    second: IDLE_6
   - first:
-      213: 2732036489171911614
-    second: ATTACK_7
+      213: 6124698253077029035
+    second: IDLE_7
   - first:
-      213: -4115261504728875612
-    second: ATTACK_8
+      213: 900705793506851975
+    second: IDLE_8
   - first:
-      213: 3802779199635122695
-    second: ATTACK_9
+      213: -705124532602476047
+    second: IDLE_9
   - first:
-      213: 4098611991708678332
-    second: ATTACK_10
+      213: 5163444025004545101
+    second: IDLE_10
   - first:
-      213: -715981269168923527
-    second: ATTACK_11
+      213: -7116078867445553742
+    second: IDLE_11
   - first:
-      213: -6464717584006797268
-    second: ATTACK_12
+      213: -8842287083511043549
+    second: IDLE_12
   - first:
-      213: 5412541418613530657
-    second: ATTACK_13
-  - first:
-      213: 8157344411780354830
-    second: ATTACK_14
-  - first:
-      213: 4766081933703519410
-    second: ATTACK_15
+      213: 2029585930339359830
+    second: IDLE_13
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -82,7 +76,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -96,7 +90,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -117,10 +111,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -171,353 +165,309 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ATTACK_0
+      name: ArcherIdle_0
       rect:
         serializedVersion: 2
-        x: 34
-        y: 15
-        width: 50
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a3d44eeddde7f7cf0800000000000000
-      internalID: -252343562717082310
+      spriteID: 39e15ce94e236784ab5142765d049db4
+      internalID: -1096117700
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ATTACK_1
+      name: ArcherIdle_1
       rect:
         serializedVersion: 2
-        x: 130
-        y: 15
-        width: 50
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cd50b3f69b3b21df0800000000000000
-      internalID: -210908623516531236
+      spriteID: efcba1421a3c3154092b12ff785fc820
+      internalID: 2010859528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ATTACK_2
+      name: ArcherIdle_2
       rect:
         serializedVersion: 2
-        x: 225
-        y: 15
-        width: 44
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 192
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e29d286508f6ad5e0800000000000000
-      internalID: -1884070897103218386
+      spriteID: 1c4e7693369c9d649b66f72238b0b163
+      internalID: 1155576352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ATTACK_3
+      name: ArcherIdle_3
       rect:
         serializedVersion: 2
-        x: 319
-        y: 15
-        width: 43
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 288
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 488b0e664f013c4b0800000000000000
-      internalID: -5421470884539877244
+      spriteID: d404eefbfe0666742a598207562b695d
+      internalID: -808208359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ATTACK_4
+      name: ArcherIdle_4
       rect:
         serializedVersion: 2
-        x: 414
-        y: 15
-        width: 42
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 384
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6c7b16cd1e2c827f0800000000000000
-      internalID: -637045071952103482
+      spriteID: f828976f3fbe67a44aa36986d10ea47e
+      internalID: -2130049831
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ATTACK_5
+      name: ArcherIdle_5
       rect:
         serializedVersion: 2
-        x: 510
-        y: 15
-        width: 38
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 480
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fe9a480fbc9e3ed80800000000000000
-      internalID: -8222471432525534737
+      spriteID: 7b2bb70545e92044a8500086f872e586
+      internalID: 1294627146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ATTACK_6
+      name: ArcherIdle_6
       rect:
         serializedVersion: 2
-        x: 547
-        y: 27
-        width: 11
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 576
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5b1a679887e95c9b0800000000000000
-      internalID: -5060464365741366859
+      spriteID: 790cb7fc4a4fb0943b78bdb54847283e
+      internalID: 488764724
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ATTACK_7
+      name: ArcherIdle_7
       rect:
         serializedVersion: 2
-        x: 605
-        y: 15
-        width: 38
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 672
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: eb34f7246b42ae520800000000000000
-      internalID: 2732036489171911614
+      spriteID: 54672cacf9c765746be84577bd6d5657
+      internalID: -1011831253
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ATTACK_8
+      name: ArcherIdle_8
       rect:
         serializedVersion: 2
-        x: 642
-        y: 27
-        width: 11
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 768
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4adbbcc0777a3e6c0800000000000000
-      internalID: -4115261504728875612
+      spriteID: ecff1f7e0ac9a87488a9183657bb2924
+      internalID: -786383061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ATTACK_9
+      name: ArcherIdle_9
       rect:
         serializedVersion: 2
-        x: 646
-        y: 35
-        width: 19
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 864
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 70aee79b88f26c430800000000000000
-      internalID: 3802779199635122695
+      spriteID: d72dfc5cdbea86f418924bd686266f91
+      internalID: 473201273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ATTACK_10
+      name: ArcherIdle_10
       rect:
         serializedVersion: 2
-        x: 701
-        y: 15
-        width: 40
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 960
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cb8b3fd14e131e830800000000000000
-      internalID: 4098611991708678332
+      spriteID: 1622b43f4f0095e49aa1bb466c2fee13
+      internalID: 410212922
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ATTACK_11
+      name: ArcherIdle_11
       rect:
         serializedVersion: 2
-        x: 739
-        y: 37
-        width: 28
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1056
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 97c5a5144d25016f0800000000000000
-      internalID: -715981269168923527
+      spriteID: 8dd675b7739234c4892d416261c5cbc9
+      internalID: 2118663497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ATTACK_12
+      name: ArcherIdle_12
       rect:
         serializedVersion: 2
-        x: 797
-        y: 15
-        width: 68
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1152
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c28ad00eb95b846a0800000000000000
-      internalID: -6464717584006797268
+      spriteID: 6488163aa13300a4d9cfb6787385ebc3
+      internalID: 77826802
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ATTACK_13
+      name: ArcherIdle_13
       rect:
         serializedVersion: 2
-        x: 893
-        y: 15
-        width: 38
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1248
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1206c8c4eb53d1b40800000000000000
-      internalID: 5412541418613530657
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ATTACK_14
-      rect:
-        serializedVersion: 2
-        x: 989
-        y: 15
-        width: 38
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e039fa6e585b43170800000000000000
-      internalID: 8157344411780354830
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ATTACK_15
-      rect:
-        serializedVersion: 2
-        x: 739
-        y: 26
-        width: 9
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2bc1ec45446842240800000000000000
-      internalID: 4766081933703519410
+      spriteID: 1d75745d119bba24a98fb27ba60ae45e
+      internalID: 962597156
       vertices: []
       indices: 
       edges: []
@@ -526,7 +476,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 16ed478ad350f7846874e940f17bb584
     internalID: 0
     vertices: []
     indices: 
@@ -536,22 +486,20 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ATTACK_0: -252343562717082310
-      ATTACK_1: -210908623516531236
-      ATTACK_10: 4098611991708678332
-      ATTACK_11: -715981269168923527
-      ATTACK_12: -6464717584006797268
-      ATTACK_13: 5412541418613530657
-      ATTACK_14: 8157344411780354830
-      ATTACK_15: 4766081933703519410
-      ATTACK_2: -1884070897103218386
-      ATTACK_3: -5421470884539877244
-      ATTACK_4: -637045071952103482
-      ATTACK_5: -8222471432525534737
-      ATTACK_6: -5060464365741366859
-      ATTACK_7: 2732036489171911614
-      ATTACK_8: -4115261504728875612
-      ATTACK_9: 3802779199635122695
+      ArcherIdle_0: -1096117700
+      ArcherIdle_1: 2010859528
+      ArcherIdle_10: 410212922
+      ArcherIdle_11: 2118663497
+      ArcherIdle_12: 77826802
+      ArcherIdle_13: 962597156
+      ArcherIdle_2: 1155576352
+      ArcherIdle_3: -808208359
+      ArcherIdle_4: -2130049831
+      ArcherIdle_5: 1294627146
+      ArcherIdle_6: 488764724
+      ArcherIdle_7: -1011831253
+      ArcherIdle_8: -786383061
+      ArcherIdle_9: 473201273
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

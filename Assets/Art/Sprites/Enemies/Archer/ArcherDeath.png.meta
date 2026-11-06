@@ -67,7 +67,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -81,7 +81,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -102,10 +102,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -156,243 +156,243 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DEATH_0
+      name: ArcherDeath_0
       rect:
         serializedVersion: 2
-        x: 28
-        y: 15
-        width: 40
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 37e5a204ce736c7e0800000000000000
-      internalID: -1745646317731160461
+      spriteID: bca6cec52cc783a4f93647078bca7a3a
+      internalID: -581998202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DEATH_1
+      name: ArcherDeath_1
       rect:
         serializedVersion: 2
-        x: 124
-        y: 15
-        width: 40
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0a76230465072c4e0800000000000000
-      internalID: -1962882971833571424
+      spriteID: ef4f957bb2a07e1418f8d7663f2e00a1
+      internalID: -1395503429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DEATH_2
+      name: ArcherDeath_2
       rect:
         serializedVersion: 2
-        x: 222
-        y: 15
-        width: 38
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 192
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7449c8df8cee96360800000000000000
-      internalID: 7163519229324203079
+      spriteID: 073a7e32749590a4e91ce1f92eca81fa
+      internalID: -796921613
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DEATH_3
+      name: ArcherDeath_3
       rect:
         serializedVersion: 2
-        x: 317
-        y: 15
-        width: 38
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 288
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e6629ce039d1cc8d0800000000000000
-      internalID: -2824850348822682002
+      spriteID: 097a4d811b3e6dd48b899c61366cf592
+      internalID: -1943908686
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DEATH_4
+      name: ArcherDeath_4
       rect:
         serializedVersion: 2
-        x: 414
-        y: 15
-        width: 38
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 384
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d7d98ede4ff3003c0800000000000000
-      internalID: -4395442915117589123
+      spriteID: f30d6f9c247b81f4c9028917f152bfa2
+      internalID: 1189568306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DEATH_5
+      name: ArcherDeath_5
       rect:
         serializedVersion: 2
-        x: 509
-        y: 15
-        width: 45
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 480
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 011979d4091757860800000000000000
-      internalID: 7527047216810660112
+      spriteID: ededad50d7830fc42ac0038589aa1371
+      internalID: 1836285217
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DEATH_6
+      name: ArcherDeath_6
       rect:
         serializedVersion: 2
-        x: 606
-        y: 15
-        width: 43
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 576
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 118f206950f4f1ba0800000000000000
-      internalID: -6116082883535636463
+      spriteID: 10c74d604b53335449c72ae7addf8771
+      internalID: -2080904089
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DEATH_7
+      name: ArcherDeath_7
       rect:
         serializedVersion: 2
-        x: 702
-        y: 15
-        width: 43
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 672
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6bca3b68a1d4adfa0800000000000000
-      internalID: -5775218795824829258
+      spriteID: 153ac24fe3ccf864d84871ef6d1d2b0b
+      internalID: -112098540
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DEATH_8
+      name: ArcherDeath_8
       rect:
         serializedVersion: 2
-        x: 798
-        y: 15
-        width: 41
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 768
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: eed6cc30ff9ab22b0800000000000000
-      internalID: -5608201998214337042
+      spriteID: 1c6fbde82d2713b48a3a4d09a28abd11
+      internalID: 1796452693
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DEATH_9
+      name: ArcherDeath_9
       rect:
         serializedVersion: 2
-        x: 894
-        y: 15
-        width: 41
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 864
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3e166f82076044b50800000000000000
-      internalID: 6576388434661106147
+      spriteID: 9099e353fbcb62441854e85a40586db4
+      internalID: -2102602269
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DEATH_10
+      name: ArcherDeath_10
       rect:
         serializedVersion: 2
-        x: 990
-        y: 15
-        width: 41
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 960
+        y: 0
+        width: 96
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b8d99a2409e7affe0800000000000000
-      internalID: -1154471196408308341
+      spriteID: af0deb45986673a44a43e66aa262cfad
+      internalID: 1635634613
       vertices: []
       indices: 
       edges: []
@@ -401,7 +401,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e36fb203c34e44e4dbf30783eb3cb500
     internalID: 0
     vertices: []
     indices: 
@@ -411,17 +411,17 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      DEATH_0: -1745646317731160461
-      DEATH_1: -1962882971833571424
-      DEATH_10: -1154471196408308341
-      DEATH_2: 7163519229324203079
-      DEATH_3: -2824850348822682002
-      DEATH_4: -4395442915117589123
-      DEATH_5: 7527047216810660112
-      DEATH_6: -6116082883535636463
-      DEATH_7: -5775218795824829258
-      DEATH_8: -5608201998214337042
-      DEATH_9: 6576388434661106147
+      ArcherDeath_0: -581998202
+      ArcherDeath_1: -1395503429
+      ArcherDeath_10: 1635634613
+      ArcherDeath_2: -796921613
+      ArcherDeath_3: -1943908686
+      ArcherDeath_4: 1189568306
+      ArcherDeath_5: 1836285217
+      ArcherDeath_6: -2080904089
+      ArcherDeath_7: -112098540
+      ArcherDeath_8: 1796452693
+      ArcherDeath_9: -2102602269
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

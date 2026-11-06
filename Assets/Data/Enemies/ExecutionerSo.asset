@@ -57,6 +57,15 @@ MonoBehaviour:
     hitStop: 0.1
     shakeMagnitude: 0
     shakeDuration: 0
+  arrowPrefab: {fileID: 0}
+  arrowSpeed: 10
+  arrowLifetime: 1.5
+  arrowSpawnOffset: {x: 0.9, y: 0.75}
+  preferredDistance: 5.5
+  fleeDistance: 2.5
+  dashSpeed: 10
+  dashDuration: 0.25
+  dashCooldown: 2.5
   contactDamage: 1
   contactKnockback: 5
   spriteFacesLeft: 1
