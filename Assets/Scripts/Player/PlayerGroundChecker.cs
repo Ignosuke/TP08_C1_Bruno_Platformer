@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerGroundChecker : MonoBehaviour
 {
+    private const float BoxHeight = 0.05f;
+
     [SerializeField] private PlayerSo playerData;
 
     [SerializeField] private Transform origin;        // Punto a la altura de los pies
@@ -36,37 +38,21 @@ public class PlayerGroundChecker : MonoBehaviour
         if (isGrounded && !wasGrounded) OnLanded?.Invoke();
     }
 
-    // Tres rayos, centro y ambos extremos, para no perder el salto parado en el borde de una plataforma
+    // Una caja del ancho de los pies en vez de rayos sueltos, asi apoyado en una esquina no queda ningun hueco sin revisar.
+    // Un poco mas angosta que el collider para no tomar una pared de costado como piso
     private void CheckGround()
     {
-        float halfWidth = feetWidth * 0.5f;
-        Vector2 center = origin.position;
-
-        isGrounded = CastRay(center) || CastRay(center + Vector2.left * halfWidth) || CastRay(center + Vector2.right * halfWidth);
+        isGrounded = Physics2D.BoxCast(origin.position, GetBoxSize(), 0f, Vector2.down, checkDistance, groundLayer);
     }
 
-    private bool CastRay(Vector2 rayOrigin)
-    {
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, checkDistance, groundLayer);
-        return hit;
-    }
+    private Vector2 GetBoxSize() => new Vector2(feetWidth, BoxHeight);
 
     private void OnDrawGizmosSelected()
     {
-        if (origin == null) return;
-
-        float halfWidth = feetWidth * 0.5f;
-        Vector2 center = origin.position;
+        if (origin == null || playerData == null) return;
 
         Gizmos.color = Application.isPlaying && isGrounded ? Color.green : Color.red;
-
-        DrawRayGizmo(center);
-        DrawRayGizmo(center + Vector2.left * halfWidth);
-        DrawRayGizmo(center + Vector2.right * halfWidth);
-    }
-
-    private void DrawRayGizmo(Vector2 rayOrigin)
-    {
-        Gizmos.DrawLine(rayOrigin, rayOrigin + Vector2.down * checkDistance);
+        Vector2 size = new Vector2(playerData.GetFeetWidth(), BoxHeight + playerData.GetCheckDistance());
+        Gizmos.DrawWireCube((Vector2)origin.position + Vector2.down * playerData.GetCheckDistance() * 0.5f, size);
     }
 }

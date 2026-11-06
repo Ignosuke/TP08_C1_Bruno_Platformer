@@ -30,8 +30,8 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private float coyoteTime = 0.1f;
 
     [Header("Ground")]
-    [SerializeField] private float feetWidth = 0.5f;        // Ancho del personaje a la altura de los pies
-    [SerializeField] private float checkDistance = 0.2f;    // Distancia del raycast para detectar el suelo
+    [SerializeField] private float feetWidth = 0.5f;        // Ancho de la caja de los pies, un poco menos que el collider
+    [SerializeField] private float checkDistance = 0.2f;    // Cuanto baja la caja para detectar el suelo
     [SerializeField] private LayerMask groundLayer;         // Solo la capa Ground, los rayos salen de los pies y tocarian al propio jugador
 
     [Header("Dash")]
