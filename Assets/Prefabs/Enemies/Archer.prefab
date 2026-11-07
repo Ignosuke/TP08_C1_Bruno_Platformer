@@ -5380,7 +5380,7 @@ GameObject:
   - component: {fileID: 880504525862976206}
   - component: {fileID: 4724662646950183279}
   - component: {fileID: 6121990138027019226}
-  - component: {fileID: 7298715760075761750}
+  - component: {fileID: 7951680859492695389}
   - component: {fileID: 724935154093809387}
   - component: {fileID: 8148343238434630563}
   - component: {fileID: 2000108795332187855}
@@ -5591,7 +5591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAudio
   enemyData: {fileID: 11400000, guid: 98265d4108f2664499936c1cf25b0db8, type: 2}
---- !u!114 &7298715760075761750
+--- !u!114 &7951680859492695389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

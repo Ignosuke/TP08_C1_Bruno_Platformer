@@ -85,6 +85,7 @@ MonoBehaviour:
   healCharges: 3
   healAmount: 2
   healDuration: 1.25
+  chargesPerKill: 1
   jumpClip: {fileID: 0}
   airJumpClip: {fileID: 0}
   landClip: {fileID: 0}

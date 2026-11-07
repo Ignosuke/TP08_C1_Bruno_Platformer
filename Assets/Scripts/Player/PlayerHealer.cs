@@ -13,6 +13,7 @@ public class PlayerHealer : MonoBehaviour
 
     private int healAmount;
     private float healDuration;
+    private int chargesPerKill;
 
     private float healCounter;
 
@@ -34,6 +35,7 @@ public class PlayerHealer : MonoBehaviour
         healAction = playerData.GetHealAction();
         healAmount = playerData.GetHealAmount();
         healDuration = playerData.GetHealDuration();
+        chargesPerKill = playerData.GetChargesPerKill();
 
         charges = new ResourcePool(playerData.GetHealCharges());
         health = GetComponent<PlayerHealth>();
@@ -48,6 +50,7 @@ public class PlayerHealer : MonoBehaviour
         healAction.action.performed += OnHealPerformed;
         healAction.action.Enable();
         health.OnDamaged += CancelHeal;
+        EnemyHealth.OnAnyDied += AddKillCharge;
     }
 
     private void OnDisable()
@@ -55,6 +58,7 @@ public class PlayerHealer : MonoBehaviour
         healAction.action.performed -= OnHealPerformed;
         healAction.action.Disable();
         health.OnDamaged -= CancelHeal;
+        EnemyHealth.OnAnyDied -= AddKillCharge;
         isHealing = false;
         healRequested = false;
     }
@@ -105,7 +109,13 @@ public class PlayerHealer : MonoBehaviour
         isHealing = false;
     }
 
-    // Al reaparecer y al pasar por el campamento del herrero
+    // Cada enemigo muerto devuelve cargas, sin pasar del maximo
+    private void AddKillCharge()
+    {
+        if (charges.Add(chargesPerKill) > 0) OnChargesChanged?.Invoke(charges.GetCurrent(), charges.GetMax());
+    }
+
+    // Solo al reaparecer
     public void RefillCharges()
     {
         charges.Refill();

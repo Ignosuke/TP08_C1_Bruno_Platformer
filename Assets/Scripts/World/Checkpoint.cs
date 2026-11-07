@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-// Va en el campamento del herrero. Al tocarlo se activa, desde ahi el jugador reaparece aca al morir.
-// Su trigger tambien recarga las curaciones cada vez que el jugador pasa por el campamento
+// Va al lado de cada torii del nivel. Al tocarlo se activa, desde ahi el jugador reaparece aca al morir.
+// Como un banco, cada vez que el jugador pasa por el torii le llena la vida pero no las curaciones
 public class Checkpoint : MonoBehaviour
 {
     [Tooltip("Where the player appears after dying. Move this child to adjust it")]
@@ -17,8 +17,8 @@ public class Checkpoint : MonoBehaviour
     // Se reconoce al jugador por sus componentes, no por tag
     private void OnTriggerEnter2D(Collider2D other)
     {
-        PlayerHealer healer = other.GetComponent<PlayerHealer>();
-        if (healer != null) healer.RefillCharges();
+        PlayerHealth health = other.GetComponent<PlayerHealth>();
+        if (health != null && !health.GetIsDead()) health.Heal(health.GetMax());
 
         PlayerRespawner respawner = other.GetComponent<PlayerRespawner>();
         if (respawner == null || isActive) return;

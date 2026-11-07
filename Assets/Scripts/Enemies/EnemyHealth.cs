@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 // La vida de un enemigo. Al morir espera la animacion y se apaga, no se destruye porque vuelve cuando el jugador reaparece.
@@ -11,6 +12,9 @@ public class EnemyHealth : Health
     private EnemyAttack attack;
     private float deathCounter;
     private bool isDying;
+
+    // Static para que el jugador se entere de cualquier muerte sin conocer a cada enemigo
+    public static event Action OnAnyDied;
 
     public override int MaxHealth => enemyData.GetMaxHealth();
     protected override float InvulnerableTime => enemyData.GetInvulnerableTime();
@@ -38,6 +42,7 @@ public class EnemyHealth : Health
 
     protected override void Die()
     {
+        OnAnyDied?.Invoke();
         isDying = true;
         deathCounter = enemyData.GetDeathDuration() + enemyData.GetCorpseTime();
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);

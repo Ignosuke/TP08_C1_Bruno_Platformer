@@ -13,6 +13,8 @@ public class ShopPanel : MonoBehaviour
     [SerializeField] private Shop shop;
     [Tooltip("One text per shop item, in the same order")]
     [SerializeField] private TMP_Text[] rows;
+    [Tooltip("Key hint panel at the bottom right, shown only while the shop is open")]
+    [SerializeField] private GameObject hint;
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color selectedColor = new Color(1f, 0.85f, 0.45f);
     [SerializeField] private Color unavailableColor = new Color(0.5f, 0.5f, 0.5f);
@@ -52,6 +54,7 @@ public class ShopPanel : MonoBehaviour
         openedFrame = Time.frameCount;
         submitRequested = false;
         closeRequested = false;
+        if (hint != null) hint.SetActive(true);
         Refresh();
     }
 
@@ -62,6 +65,7 @@ public class ShopPanel : MonoBehaviour
         cancelAction.action.performed -= OnClosePressed;
         interactAction.action.started -= OnClosePressed;
         navigateAction.action.Disable();
+        if (hint != null) hint.SetActive(false);
     }
 
     private void OnSubmitPerformed(InputAction.CallbackContext context)

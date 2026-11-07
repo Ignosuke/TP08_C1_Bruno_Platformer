@@ -95,6 +95,8 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private int healCharges = 3;
     [SerializeField] private int healAmount = 2;            // En medios corazones, 2 = 1 corazon
     [SerializeField] private float healDuration = 1.25f;    // Lo que dura la animacion Healing (15 frames), quieto todo ese tiempo
+    [Tooltip("Heal charges given back for each enemy killed, never above the max")]
+    [SerializeField] private int chargesPerKill = 1;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip jumpClip;
@@ -177,6 +179,7 @@ public class PlayerSo : ScriptableObject
     public int GetHealCharges() => healCharges;
     public int GetHealAmount() => healAmount;
     public float GetHealDuration() => healDuration;
+    public int GetChargesPerKill() => chargesPerKill;
 
     public AudioClip GetJumpClip() => jumpClip;
     public AudioClip GetAirJumpClip() => airJumpClip;

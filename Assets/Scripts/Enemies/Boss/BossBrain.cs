@@ -1,18 +1,19 @@
 using System;
 using UnityEngine;
 
-// Suma al cerebro del enemigo la pelea del jefe. Arranca cuando el jugador entra a su area o lo ve,
+// Suma al cerebro del enemigo la pelea del jefe. Arranca cuando el jugador llega a la zona de pelea,
 // no ataca durante el cambio de fase, se aturde lo que diga la fase y avisa cuando lo vencen
 [RequireComponent(typeof(BossPhase))]
 public class BossBrain : EnemyBrain
 {
-    [Tooltip("Area where the fight happens, assigned by the builder")]
-    [SerializeField] private Area arena;
+    [Tooltip("Zone the player has to reach to start the fight, assigned by the builder")]
+    [SerializeField] private BoxCollider2D fightZone;
 
     private BossPhase phase;
     private bool isFighting;
 
     public event Action OnFightStarted;
+    public event Action OnFightReset;   // El jugador reaparecio y la pelea vuelve a empezar de cero
     public event Action OnDefeated;     // Para el final de la partida y el puntaje
 
     protected override void Awake()
@@ -43,11 +44,12 @@ public class BossBrain : EnemyBrain
         base.Update();
     }
 
+    // Solo la zona, asi espera quieto en el medio aunque lo vea desde la entrada
     private bool GetIsPlayerInReach()
     {
         PlayerHealth player = sight.GetPlayer();
         if (player == null || player.GetIsDead()) return false;
-        return sight.CanSeePlayer() || (arena != null && arena.Contains(player.transform.position));
+        return fightZone.OverlapPoint(player.transform.position);
     }
 
     protected override bool GetCanAttack() => isFighting && !phase.GetIsHoldingStill();
@@ -60,6 +62,7 @@ public class BossBrain : EnemyBrain
         isFighting = false;
         phase.ResetPhase();
         base.ResetToSpawn();
+        OnFightReset?.Invoke();
     }
 
     private void Defeat()

@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossBrain
   enemyData: {fileID: 11400000, guid: ad4b9deb13e19ba488f4ca019afbf3a2, type: 2}
-  arena: {fileID: 0}
+  fightZone: {fileID: 0}
 --- !u!114 &1173928361369684811
 MonoBehaviour:
   m_ObjectHideFlags: 0

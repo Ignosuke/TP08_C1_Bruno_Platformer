@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b0f560607912b44a98b81e7a62ef03, type: 3}
+  m_Name: PromptSo
+  m_EditorClassIdentifier: Assembly-CSharp::PromptSo
+  entries:
+  - id: Move
+    text: <sprite name="A"><sprite name="D"> Move
+  - id: Jump
+    text: <sprite name="Space"> Jump
+  - id: Attack
+    text: <sprite name="J"> Attack
+  - id: Parry
+    text: <sprite name="L"> Defend, right before the hit to parry
+  - id: DoubleJump
+    text: <sprite name="Space"> again in the air to double jump
+  - id: Checkpoint
+    text: Safe spot reached
+  - id: Purchase
+    text: Bought
+  - id: ShopPrompt
+    text: <sprite name="E"> Shop
+  - id: ShopHint
+    text: <sprite name="Up"><sprite name="Down"> Choose  <sprite name="J"> Buy  <sprite
+      name="K"> Close
+  - id: MenuHint
+    text: <sprite name="Up"><sprite name="Down"> Choose  <sprite name="Enter"> Confirm
