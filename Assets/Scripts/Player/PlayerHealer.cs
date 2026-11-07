@@ -112,6 +112,13 @@ public class PlayerHealer : MonoBehaviour
         OnChargesChanged?.Invoke(charges.GetCurrent(), charges.GetMax());
     }
 
+    // Mejora de la tienda, suma la carga ya llena
+    public void AddMaxCharges(int amount)
+    {
+        charges.IncreaseMax(amount);
+        OnChargesChanged?.Invoke(charges.GetCurrent(), charges.GetMax());
+    }
+
     public bool GetIsHealing() => isHealing;
     public int GetCharges() => charges.GetCurrent();
     public int GetMaxCharges() => charges.GetMax();

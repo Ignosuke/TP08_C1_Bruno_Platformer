@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59adda3185dab0c468cd319ea2688d51, type: 3}
+  m_Name: PickupSo
+  m_EditorClassIdentifier: Assembly-CSharp::PickupSo
+  coinValue: 1
+  pouchValue: 5
+  dropSideImpulse: 2.5
+  dropMinUpImpulse: 5
+  dropMaxUpImpulse: 8
+  dropHeight: 0.8
+  healAmount: 2
+  damageBonus: 1
+  damageDuration: 8
+  damageTint: {r: 1, g: 0.55, b: 0.55, a: 1}
+  invulnerableDuration: 4
+  invulnerableFlashTime: 0.3
+  invulnerableWarningTime: 1.2
+  blinkInterval: 0.08
+  coinClip: {fileID: 0}
+  pouchClip: {fileID: 0}
+  healClip: {fileID: 0}
+  damageClip: {fileID: 0}
+  invulnerabilityClip: {fileID: 0}

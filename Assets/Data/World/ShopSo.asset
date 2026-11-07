@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d669378e30035644a5dac1c3b970aef, type: 3}
+  m_Name: ShopSo
+  m_EditorClassIdentifier: Assembly-CSharp::ShopSo
+  interactAction: {fileID: 1781555164194001046, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  navigateAction: {fileID: -8784545083839296357, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  submitAction: {fileID: 1120369429361536294, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  cancelAction: {fileID: -6317549735386072006, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  items:
+  - displayName: Max Health
+    type: 0
+    amount: 2
+    prices: 0f00000016000000
+  - displayName: Sharpen
+    type: 1
+    amount: 1
+    prices: 0a0000000f00000014000000
+  - displayName: Heal Charge
+    type: 2
+    amount: 1
+    prices: 080000000c000000
+  buyClip: {fileID: 0}
+  denyClip: {fileID: 0}

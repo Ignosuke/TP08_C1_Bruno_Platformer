@@ -29,6 +29,14 @@ public class ResourcePool
         return added;
     }
 
+    // Sube el maximo y el actual por igual, para las mejoras de la tienda
+    public void IncreaseMax(int amount)
+    {
+        int added = Mathf.Max(0, amount);
+        max += added;
+        current += added;
+    }
+
     public void Refill()
     {
         current = max;

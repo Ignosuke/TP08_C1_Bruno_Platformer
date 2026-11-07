@@ -44,6 +44,7 @@ public class PlayerAttacker : MonoBehaviour
     private bool hitChecked;
     private int comboStep;              // 0, 1 o 2 segun el golpe del combo
     private int currentDamage;
+    private int bonusDamage;            // Del pickable de daño, se suma a todos los golpes
     private float currentKnockback;
     private float currentHitStop;
     private float startTime;            // Fraccion del clip donde arranco este golpe, 0 salvo en el contraataque
@@ -54,7 +55,7 @@ public class PlayerAttacker : MonoBehaviour
     private void Awake()
     {
         attackAction = playerData.GetAttackAction();
-        comboDamage = playerData.GetComboDamage();
+        comboDamage = (int[])playerData.GetComboDamage().Clone();   // Copia, el afilado de la tienda no tiene que tocar el asset
         comboDuration = playerData.GetComboDuration();
         airAttackDamage = playerData.GetAirAttackDamage();
         airAttackDuration = playerData.GetAirAttackDuration();
@@ -193,7 +194,18 @@ public class PlayerAttacker : MonoBehaviour
         if (!isAttacking || hitChecked) return;
 
         hitChecked = true;
-        hitbox.Hit(currentDamage, currentKnockback, hitboxOffset, hitboxSize, hitLayer, mover.GetFacing(), currentHitStop);
+        hitbox.Hit(currentDamage + bonusDamage, currentKnockback, hitboxOffset, hitboxSize, hitLayer, mover.GetFacing(), currentHitStop);
+    }
+
+    // El afilado de la tienda, step es 0, 1 o 2 segun el golpe del combo
+    public void AddComboDamage(int step, int amount)
+    {
+        if (step < comboDamage.Length) comboDamage[step] += amount;
+    }
+
+    public void SetBonusDamage(int amount)
+    {
+        bonusDamage = amount;
     }
 
     public bool GetIsAttacking() => isAttacking;

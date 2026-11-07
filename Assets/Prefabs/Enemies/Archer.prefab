@@ -5378,7 +5378,9 @@ GameObject:
   - component: {fileID: 4508534051780995467}
   - component: {fileID: 6250919156957690125}
   - component: {fileID: 880504525862976206}
+  - component: {fileID: 4724662646950183279}
   - component: {fileID: 6121990138027019226}
+  - component: {fileID: 7298715760075761750}
   - component: {fileID: 724935154093809387}
   - component: {fileID: 8148343238434630563}
   - component: {fileID: 2000108795332187855}
@@ -5560,6 +5562,22 @@ MonoBehaviour:
   - {fileID: 941957784, guid: 57ddc78f63d3395489f2fea679958234, type: 3}
   - {fileID: 1270485806, guid: 57ddc78f63d3395489f2fea679958234, type: 3}
   framesPerSecond: 12
+--- !u!114 &4724662646950183279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7556076576450074590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d014b57c9267184a9f0d947ef951a6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHitFlash
+  health: {fileID: 808525135334663345}
+  spriteRenderer: {fileID: 6636349642962405253}
+  flashMaterial: {fileID: 2100000, guid: fd22d7a5eec269a46b02965b7644e337, type: 2}
+  flashTime: 0.08
 --- !u!114 &6121990138027019226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5573,6 +5591,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAudio
   enemyData: {fileID: 11400000, guid: 98265d4108f2664499936c1cf25b0db8, type: 2}
+--- !u!114 &7298715760075761750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7556076576450074590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eef34ba9e6539a45ae5111765553800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyCoinDrop
+  enemyData: {fileID: 11400000, guid: 98265d4108f2664499936c1cf25b0db8, type: 2}
+  pickupData: {fileID: 11400000, guid: 9ebae654536eead47b216893523f2e7f, type: 2}
+  coinPrefab: {fileID: 7934337553611709897, guid: 32cf66e4c82c8e344bbbf2fb0833ce8f, type: 3}
 --- !u!50 &724935154093809387
 Rigidbody2D:
   serializedVersion: 5

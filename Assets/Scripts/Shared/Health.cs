@@ -66,6 +66,19 @@ public abstract class Health : MonoBehaviour, IDamageable
         if (pool.Add(amount) > 0) OnHealthChanged?.Invoke(pool.GetCurrent(), pool.GetMax());
     }
 
+    // Mas vida maxima y la misma cantidad de vida actual, el HUD rearma la fila
+    public void IncreaseMax(int amount)
+    {
+        pool.IncreaseMax(amount);
+        OnHealthChanged?.Invoke(pool.GetCurrent(), pool.GetMax());
+    }
+
+    // No recibe golpes por un rato, si ya era invulnerable por mas tiempo se queda con el mas largo
+    public void SetInvulnerable(float time)
+    {
+        invulnerableCounter = Mathf.Max(invulnerableCounter, time);
+    }
+
     // Vida llena y sin contadores, para reaparecer o reiniciar
     public void Refill()
     {

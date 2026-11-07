@@ -57,6 +57,10 @@ public class EnemySo : ScriptableObject
     [Tooltip("Push given to the player when touching the body")]
     [SerializeField] private float contactKnockback = 5f;
 
+    [Header("Reward")]
+    [Tooltip("Coins dropped the first time it dies in the run, respawns and the boss drop nothing")]
+    [SerializeField] private int coinDrop;
+
     [Header("Visual")]
     [Tooltip("True when the sprite sheets are drawn looking left")]
     [SerializeField] private bool spriteFacesLeft;
@@ -103,6 +107,8 @@ public class EnemySo : ScriptableObject
 
     public int GetContactDamage() => contactDamage;
     public float GetContactKnockback() => contactKnockback;
+
+    public int GetCoinDrop() => coinDrop;
 
     public bool GetSpriteFacesLeft() => spriteFacesLeft;
 

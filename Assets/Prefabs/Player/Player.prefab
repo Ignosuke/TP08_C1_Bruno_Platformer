@@ -181,6 +181,9 @@ GameObject:
   - component: {fileID: 6577981422973734674}
   - component: {fileID: 6922600848525102278}
   - component: {fileID: 1617383170895923685}
+  - component: {fileID: 395716652666985987}
+  - component: {fileID: 8677887007356827191}
+  - component: {fileID: 1269165191758734130}
   - component: {fileID: 1524570342585205822}
   - component: {fileID: 5888456878614784258}
   - component: {fileID: 8795685557769512161}
@@ -394,6 +397,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAudio
   playerData: {fileID: 11400000, guid: 7ea74dba68ebd274b9b0f0f9821f4298, type: 2}
+--- !u!114 &395716652666985987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4507087158210081793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4335e52cb23b5d24cb42f572fcbf330b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWallet
+--- !u!114 &8677887007356827191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4507087158210081793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8674841dd03dadb49a8d050d5a328a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDamageBuff
+  pickupData: {fileID: 11400000, guid: 9ebae654536eead47b216893523f2e7f, type: 2}
+  spriteRenderer: {fileID: 2660118162226678325}
+--- !u!114 &1269165191758734130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4507087158210081793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a3ac9b7d4bfb74798a92b536b3fb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInvulnerability
+  pickupData: {fileID: 11400000, guid: 9ebae654536eead47b216893523f2e7f, type: 2}
+  spriteRenderer: {fileID: 2660118162226678325}
 --- !u!50 &1524570342585205822
 Rigidbody2D:
   serializedVersion: 5

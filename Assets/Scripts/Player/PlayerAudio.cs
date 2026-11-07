@@ -68,8 +68,8 @@ public class PlayerAudio : MonoBehaviour
     private void PlayHurt(DamageInfo info) => Play(playerData.GetHurtClip());
     private void PlayHeal() => Play(playerData.GetHealClip());
 
-    // PlayOneShot permite que se pisen varios sonidos sin cortarse
-    private void Play(AudioClip clip)
+    // PlayOneShot permite que se pisen varios sonidos sin cortarse. Publico para los pickables y la tienda
+    public void Play(AudioClip clip)
     {
         if (clip != null) audioSource.PlayOneShot(clip);
     }

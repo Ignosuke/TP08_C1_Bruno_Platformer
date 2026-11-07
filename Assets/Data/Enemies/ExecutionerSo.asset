@@ -68,6 +68,7 @@ MonoBehaviour:
   dashCooldown: 2.5
   contactDamage: 1
   contactKnockback: 5
+  coinDrop: 5
   spriteFacesLeft: 1
   attackClip: {fileID: 0}
   hurtClip: {fileID: 0}
