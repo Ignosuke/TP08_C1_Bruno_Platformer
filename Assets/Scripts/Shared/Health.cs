@@ -32,7 +32,7 @@ public abstract class Health : MonoBehaviour, IDamageable
 
     public bool TakeDamage(DamageInfo info)
     {
-        if (pool.GetIsEmpty() || invulnerableCounter > 0f) return false;
+        if (pool.GetIsEmpty() || invulnerableCounter > 0f || GetIsIgnoringHits()) return false;
         if (IsParried(info)) return true;
 
         pool.Remove(ModifyDamage(info));
@@ -49,6 +49,9 @@ public abstract class Health : MonoBehaviour, IDamageable
         }
         return false;
     }
+
+    // Por defecto siempre recibe golpes, un hijo puede ignorarlos un rato
+    protected virtual bool GetIsIgnoringHits() => false;
 
     // Un parry no saca vida y avisa al atacante, por defecto nadie hace parry
     protected virtual bool IsParried(DamageInfo info) => false;

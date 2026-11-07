@@ -4951,6 +4951,7 @@ MonoBehaviour:
   - {fileID: 971267037, guid: 95b29eb27bce18046813cc494470438a, type: 3}
   hitFramesPerSecond: 20
   parryBurst: {fileID: 256606575187058764}
+  hitInset: 0.125
 --- !u!212 &4471159562728615182
 SpriteRenderer:
   serializedVersion: 2

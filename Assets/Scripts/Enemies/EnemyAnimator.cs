@@ -7,7 +7,7 @@ public class EnemyAnimator : MonoBehaviour
 {
     private const float MoveThreshold = 0.1f;          // Velocidad minima para caminar
 
-    [SerializeField] private Animator animator;
+    [SerializeField] protected Animator animator;
 
     private Rigidbody2D rb;
     private EnemyHealth health;
@@ -16,10 +16,12 @@ public class EnemyAnimator : MonoBehaviour
     private EnemyMover mover;
 
     private StateMachine fsm;
-    private AnimState hurtState;
-    private AnimState attackState;
+    protected AnimState idleState;
+    protected AnimState walkState;
+    protected AnimState hurtState;
+    protected AnimState attackState;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<EnemyHealth>();
@@ -41,18 +43,22 @@ public class EnemyAnimator : MonoBehaviour
         attackState = new AnimState(animator, "Attack");
         AnimState death = new AnimState(animator, "Death");
         AnimState dash = new AnimState(animator, "Dash");
-        AnimState walk = new AnimState(animator, "Walk");
-        AnimState idle = new AnimState(animator, "Idle");
+        walkState = new AnimState(animator, "Walk");
+        idleState = new AnimState(animator, "Idle");
 
         fsm.AddAnyTransition(death, () => health.GetIsDead());
+        AddPriorityTransitions(fsm);
         fsm.AddAnyTransition(hurtState, () => health.GetIsHurt() || brain.GetIsStunned());
         fsm.AddAnyTransition(attackState, () => attack.GetIsAttacking() || brain.GetIsRecoiling());   // En el choque sostiene el golpe
         fsm.AddAnyTransition(dash, () => mover.GetIsDashing());     // Solo el arquero tiene Dash
-        fsm.AddAnyTransition(walk, () => IsMoving());
-        fsm.AddAnyTransition(idle, () => !IsMoving());
+        fsm.AddAnyTransition(walkState, () => IsMoving());
+        fsm.AddAnyTransition(idleState, () => !IsMoving());
     }
 
-    private void OnEnable()
+    // Estados que le ganan a todo salvo a la muerte, por defecto ninguno
+    protected virtual void AddPriorityTransitions(StateMachine machine) { }
+
+    protected virtual void OnEnable()
     {
         fsm.ChangeState(null);   // Al volver a prenderse arranca de cero
         health.OnDamaged += PlayHurt;
@@ -60,7 +66,7 @@ public class EnemyAnimator : MonoBehaviour
         attack.OnAttackStarted += PlayAttack;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         health.OnDamaged -= PlayHurt;
         brain.OnStunned -= PlayStun;

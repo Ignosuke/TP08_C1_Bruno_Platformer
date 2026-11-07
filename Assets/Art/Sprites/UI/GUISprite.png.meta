@@ -851,6 +851,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: GUISprite_BossBarFrame
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 96
+        width: 62
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd3551ad2dc7e004d8fa6a96008ce7c4
+      internalID: -538091008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GUISprite_BossBarFill
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 117
+        width: 56
+        height: 3
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 22, y: 1, z: 20, w: 1}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30d05495c021e4c408d9b9cf7986ab70
+      internalID: -834906892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -888,6 +932,8 @@ TextureImporter:
       GUISprite_7: 6839792526583950544
       GUISprite_8: 5681612213659411090
       GUISprite_9: 2350947443652067680
+      GUISprite_BossBarFill: -834906892
+      GUISprite_BossBarFrame: -538091008
       GUISprite_ChargeEmpty: 1568158840
       GUISprite_ChargeFull: 121626215
       GUISprite_EnemyBarFill: -1960854541

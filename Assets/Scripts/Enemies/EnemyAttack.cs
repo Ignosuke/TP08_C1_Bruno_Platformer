@@ -50,7 +50,7 @@ public abstract class EnemyAttack : MonoBehaviour
         if (!isAttacking) return;
 
         attackCounter -= Time.deltaTime;
-        if (attackCounter <= 0f) Cancel();
+        if (attackCounter <= 0f) Finish();
     }
 
     protected abstract bool IsTargetInRange();
@@ -67,22 +67,39 @@ public abstract class EnemyAttack : MonoBehaviour
         isAttacking = true;
         hitDone = false;
         isCommitted = false;
-        currentAttack = enemyData.GetAttack(nextAttackIndex);
-        nextAttackIndex = (nextAttackIndex + 1) % enemyData.GetAttackCount();
+        currentAttack = PickAttack();
         attackCounter = currentAttack.GetDuration();
         OnAttackStarted?.Invoke();
     }
 
-    // Termina o corta el ataque y arranca la espera hasta el proximo
-    public void Cancel()
+    // Por defecto los ataques del EnemySo se turnan en orden
+    protected virtual EnemyAttackData PickAttack()
     {
-        if (!isAttacking) return;
-        isAttacking = false;
-        isCommitted = false;
-        cooldownCounter = enemyData.GetAttackCooldown();
+        EnemyAttackData attack = enemyData.GetAttack(nextAttackIndex);
+        nextAttackIndex = (nextAttackIndex + 1) % enemyData.GetAttackCount();
+        return attack;
     }
 
-    public void ResetAttack()
+    // El ataque llego al final, por defecto es lo mismo que cortarlo
+    protected virtual void Finish() => Cancel();
+
+    // Termina o corta el ataque y arranca la espera hasta el proximo
+    public virtual void Cancel()
+    {
+        if (!isAttacking) return;
+        EndAttack(GetCooldown());
+    }
+
+    protected void EndAttack(float cooldown)
+    {
+        isAttacking = false;
+        isCommitted = false;
+        cooldownCounter = cooldown;
+    }
+
+    protected virtual float GetCooldown() => enemyData.GetAttackCooldown();
+
+    public virtual void ResetAttack()
     {
         isAttacking = false;
         isCommitted = false;
@@ -91,7 +108,7 @@ public abstract class EnemyAttack : MonoBehaviour
     }
 
     // Desde aca el golpe sale seguro, recibe daño pero no se corta, no se queja y no lo empujan
-    private void OnCommitFrame()
+    protected virtual void OnCommitFrame()
     {
         if (isAttacking) isCommitted = true;
     }
@@ -115,5 +132,5 @@ public abstract class EnemyAttack : MonoBehaviour
 
     public EnemyAttackData GetCurrentAttack() => currentAttack;
     public bool GetIsAttacking() => isAttacking;
-    public bool GetIsArmored() => isAttacking && isCommitted;
+    public virtual bool GetIsArmored() => isAttacking && isCommitted;
 }

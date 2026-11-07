@@ -6,11 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyHealth), typeof(EnemySight))]
 public class EnemyBrain : MonoBehaviour
 {
-    [SerializeField] private EnemySo enemyData;
+    [SerializeField] protected EnemySo enemyData;
 
     private Rigidbody2D rb;
-    private EnemyHealth health;
-    private EnemySight sight;
+    protected EnemyHealth health;
+    protected EnemySight sight;
     private EnemyMover mover;
     private EnemyAttack attack;
     private PlayerHealth player;
@@ -21,7 +21,7 @@ public class EnemyBrain : MonoBehaviour
 
     public event Action OnStunned;                     // Para el indicador de aturdido (estrellitas)
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<EnemyHealth>();
@@ -37,26 +37,26 @@ public class EnemyBrain : MonoBehaviour
         if (player != null) player.OnRespawned += ResetToSpawn;
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         if (player != null) player.OnRespawned -= ResetToSpawn;
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         health.OnDamaged += FaceAttacker;
         health.OnDied += attack.Cancel;
         attack.OnParried += Stun;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         health.OnDamaged -= FaceAttacker;
         health.OnDied -= attack.Cancel;
         attack.OnParried -= Stun;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (stunCounter > 0f) stunCounter -= Time.deltaTime;
         if (recoilCounter > 0f)
@@ -66,7 +66,7 @@ public class EnemyBrain : MonoBehaviour
         }
 
         bool isBusy = health.GetIsDead() || health.GetIsHurt() || GetIsStunned() || GetIsRecoiling();
-        if (!isBusy && attack.CanStart())
+        if (!isBusy && GetCanAttack() && attack.CanStart())
         {
             mover.FaceTowards(sight.GetPlayerDistanceX());
             attack.StartAttack();
@@ -97,12 +97,17 @@ public class EnemyBrain : MonoBehaviour
         recoilCounter = 0f;
         if (health.GetIsDead()) return;
 
-        stunCounter = enemyData.GetStunDuration();
+        stunCounter = GetStunDuration();
         OnStunned?.Invoke();
     }
 
+    // Por defecto ataca siempre que pueda
+    protected virtual bool GetCanAttack() => true;
+
+    protected virtual float GetStunDuration() => enemyData.GetStunDuration();
+
     // Apagar y prender reinicia a todos los componentes, barra escondida, contacto prendido y animacion de cero
-    public void ResetToSpawn()
+    public virtual void ResetToSpawn()
     {
         gameObject.SetActive(false);
 

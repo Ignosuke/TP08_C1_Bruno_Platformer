@@ -1,7 +1,8 @@
 using UnityEngine;
 
 // Sigue al jugador con zona muerta y limites por area. Lleva su propia posicion de seguimiento
-// y le suma encima el desvio de CameraShake, asi el temblor no altera el seguimiento ni los limites
+// y le suma encima el desvio de CameraShake, asi el temblor no altera el seguimiento ni los limites.
+// Por el canal de foco puede mirar otra cosa un rato, como el jefe en su cambio de fase
 [RequireComponent(typeof(Camera))]
 public class CameraFollow : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private AreaTracker areaTracker;   // Los limites son los del area donde esta el jugador
     [SerializeField] private PlayerHealth playerHealth; // Al reaparecer la camara salta al checkpoint
     [SerializeField] private CameraShake cameraShake;
+    [SerializeField] private CameraFocusChannel cameraFocusChannel;
 
     private float halfWidth;
     private float halfHeight;
@@ -22,6 +24,7 @@ public class CameraFollow : MonoBehaviour
 
     private Vector3 smoothVelocity;
     private Vector3 followPosition;     // Donde estaria la camara sin temblor
+    private Transform focus;            // Si no es null mira esto en vez del jugador
 
     private void Awake()
     {
@@ -38,12 +41,20 @@ public class CameraFollow : MonoBehaviour
     {
         areaTracker.OnAreaChanged += SetArea;
         playerHealth.OnRespawned += SnapAfterRespawn;
+        if (cameraFocusChannel != null) cameraFocusChannel.OnRaised += SetFocus;
     }
 
     private void OnDisable()
     {
         areaTracker.OnAreaChanged -= SetArea;
         playerHealth.OnRespawned -= SnapAfterRespawn;
+        if (cameraFocusChannel != null) cameraFocusChannel.OnRaised -= SetFocus;
+    }
+
+    // Con null vuelve al jugador, el SmoothDamp hace el paneo de ida y de vuelta
+    private void SetFocus(Transform value)
+    {
+        focus = value;
     }
 
     // Al cambiar de area el SmoothDamp lleva la camara a los nuevos limites, eso hace el paneo entre areas
@@ -77,7 +88,7 @@ public class CameraFollow : MonoBehaviour
     {
         if (target == null) return;
 
-        Vector3 desired = ClampToBounds(ResolveDesiredPosition());
+        Vector3 desired = focus != null ? ResolveFocusPosition() : ClampToBounds(ResolveDesiredPosition());
 
         followPosition = Vector3.SmoothDamp(followPosition, desired, ref smoothVelocity, smoothTime);
         ApplyPosition();
@@ -104,6 +115,15 @@ public class CameraFollow : MonoBehaviour
             y = target.position.y - Mathf.Sign(delta.y) * halfHeight;
 
         return new Vector3(x + offset.x, y + offset.y, followPosition.z);
+    }
+
+    // Centrado en el foco dentro de los limites. Si los limites lo dejan muy al costado se pasan, asi nunca queda en el borde
+    private Vector3 ResolveFocusPosition()
+    {
+        Vector3 position = ClampToBounds(new Vector3(focus.position.x + offset.x, focus.position.y + offset.y, followPosition.z));
+        float maxOffset = cam.orthographicSize * cam.aspect * cameraData.GetFocusMaxOffset();
+        position.x = Mathf.Clamp(position.x, focus.position.x - maxOffset, focus.position.x + maxOffset);
+        return position;
     }
 
     private Vector2 GetDeadZoneCenter() => (Vector2)followPosition - offset;
