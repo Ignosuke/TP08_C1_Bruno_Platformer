@@ -55,6 +55,12 @@ public class PlayerGroundChecker : MonoBehaviour
             || body.IsTouching(floorFilter);
     }
 
+    // Si hay piso a esta distancia debajo de los pies
+    public bool GetIsGroundNear(float distance)
+    {
+        return Physics2D.BoxCast(origin.position, GetBoxSize(), 0f, Vector2.down, distance, groundLayer);
+    }
+
     private Vector2 GetBoxSize() => new Vector2(feetWidth, BoxHeight);
 
     private void OnDrawGizmosSelected()

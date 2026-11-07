@@ -29,6 +29,11 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private float jumpLockTime = 0.1f;
     [SerializeField] private float coyoteTime = 0.1f;
 
+    [Header("Air Jump")]
+    [Tooltip("Extra jumps in the air per airtime, 1 = double jump, 2 = triple jump")]
+    [SerializeField] private int airJumpCount = 1;
+    [SerializeField] private float airJumpForce = 13f;      // Pisa la velocidad vertical, no se suma
+
     [Header("Ground")]
     [SerializeField] private float feetWidth = 0.5f;        // Ancho de la caja de los pies, un poco menos que el collider
     [SerializeField] private float checkDistance = 0.2f;    // Cuanto baja la caja para detectar el suelo
@@ -93,6 +98,7 @@ public class PlayerSo : ScriptableObject
 
     [Header("Sounds")]
     [SerializeField] private AudioClip jumpClip;
+    [SerializeField] private AudioClip airJumpClip;
     [SerializeField] private AudioClip landClip;
     [SerializeField] private AudioClip dashClip;
     [SerializeField] private AudioClip[] attackClips = new AudioClip[3];
@@ -122,6 +128,9 @@ public class PlayerSo : ScriptableObject
     public float GetJumpBufferTime() => jumpBufferTime;
     public float GetJumpLockTime() => jumpLockTime;
     public float GetCoyoteTime() => coyoteTime;
+
+    public int GetAirJumpCount() => airJumpCount;
+    public float GetAirJumpForce() => airJumpForce;
 
     public float GetFeetWidth() => feetWidth;
     public float GetCheckDistance() => checkDistance;
@@ -170,6 +179,7 @@ public class PlayerSo : ScriptableObject
     public float GetHealDuration() => healDuration;
 
     public AudioClip GetJumpClip() => jumpClip;
+    public AudioClip GetAirJumpClip() => airJumpClip;
     public AudioClip GetLandClip() => landClip;
     public AudioClip GetDashClip() => dashClip;
     public AudioClip[] GetAttackClips() => attackClips;

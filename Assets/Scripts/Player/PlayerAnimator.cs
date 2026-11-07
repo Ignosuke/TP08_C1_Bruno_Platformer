@@ -96,6 +96,7 @@ public class PlayerAnimator : MonoBehaviour
     private void OnEnable()
     {
         jumper.OnJumped += PlayJump;
+        jumper.OnAirJumped += PlayJump;      // Mismo arranque de salto, vuelve al frame 0
         dasher.OnDashed += PlayDash;
         attacker.OnAttacked += PlayAttack;
         attacker.OnAirAttacked += PlayAirAttack;
@@ -104,6 +105,7 @@ public class PlayerAnimator : MonoBehaviour
     private void OnDisable()
     {
         jumper.OnJumped -= PlayJump;
+        jumper.OnAirJumped -= PlayJump;
         dasher.OnDashed -= PlayDash;
         attacker.OnAttacked -= PlayAttack;
         attacker.OnAirAttacked -= PlayAirAttack;

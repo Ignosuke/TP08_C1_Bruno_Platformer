@@ -33,6 +33,7 @@ public class PlayerAudio : MonoBehaviour
     {
         groundChecker.OnLanded += PlayLand;
         jumper.OnJumped += PlayJump;
+        jumper.OnAirJumped += PlayAirJump;
         dasher.OnDashed += PlayDash;
         attacker.OnAttacked += PlayAttack;
         attacker.OnAirAttacked += PlayAirAttack;
@@ -46,6 +47,7 @@ public class PlayerAudio : MonoBehaviour
     {
         groundChecker.OnLanded -= PlayLand;
         jumper.OnJumped -= PlayJump;
+        jumper.OnAirJumped -= PlayAirJump;
         dasher.OnDashed -= PlayDash;
         attacker.OnAttacked -= PlayAttack;
         attacker.OnAirAttacked -= PlayAirAttack;
@@ -57,6 +59,7 @@ public class PlayerAudio : MonoBehaviour
 
     private void PlayLand() => Play(playerData.GetLandClip());
     private void PlayJump() => Play(playerData.GetJumpClip());
+    private void PlayAirJump() => Play(playerData.GetAirJumpClip());
     private void PlayDash() => Play(playerData.GetDashClip());
     private void PlayAttack(int step) => Play(playerData.GetAttackClips()[step - 1]);
     private void PlayAirAttack() => Play(playerData.GetAirAttackClip());

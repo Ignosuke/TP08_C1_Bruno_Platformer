@@ -18,10 +18,13 @@ public class PlayerJumper : MonoBehaviour
     private float jumpBufferTime;
     private float jumpLockTime;
     private float coyoteTime;
+    private int airJumpCount;
+    private float airJumpForce;
 
     private float bufferCounter;
     private float lockCounter;
     private float coyoteCounter;
+    private int airJumpsLeft;
 
     private PlayerGroundChecker groundChecker;
     private PlayerDasher dasher;
@@ -33,6 +36,7 @@ public class PlayerJumper : MonoBehaviour
     private bool jumpCutRequested;
 
     public event Action OnJumped;
+    public event Action OnAirJumped;
 
     private void Awake()
     {
@@ -46,6 +50,8 @@ public class PlayerJumper : MonoBehaviour
         coyoteTime = playerData.GetCoyoteTime();
         jumpBufferTime = playerData.GetJumpBufferTime();
         jumpLockTime = playerData.GetJumpLockTime();
+        airJumpCount = playerData.GetAirJumpCount();
+        airJumpForce = playerData.GetAirJumpForce();
 
         if (groundChecker == null) groundChecker = GetComponentInChildren<PlayerGroundChecker>();
         dasher = GetComponent<PlayerDasher>();
@@ -100,12 +106,16 @@ public class PlayerJumper : MonoBehaviour
         HandleTapJump();
     }
 
+    // Con coyote es el salto de suelo, si no gasta uno de los saltos en el aire
     private void HandleJump()
     {
-        if (bufferCounter <= 0f || coyoteCounter <= 0f) return;
+        if (bufferCounter <= 0f) return;
         if (defender.GetIsDefending() || healer.GetIsHealing()) return;
 
-        Jump();
+        if (coyoteCounter > 0f)
+            Jump();
+        else if (airJumpsLeft > 0 && !IsLandingSoon())
+            AirJump();
     }
 
     private void Jump()
@@ -117,6 +127,23 @@ public class PlayerJumper : MonoBehaviour
         // Con masa 1 es igual que un impulso, pero la velocidad queda puesta ya y el corte del tap la puede leer en este mismo paso
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce / rb.mass);
         OnJumped?.Invoke();
+    }
+
+    private void AirJump()
+    {
+        bufferCounter = 0f;
+        lockCounter = jumpLockTime;     // Para que el piso cercano no recargue los saltos apenas despega
+        airJumpsLeft--;
+
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, airJumpForce / rb.mass);
+        OnAirJumped?.Invoke();
+    }
+
+    // Si va a tocar el piso antes de que venza el buffer se espera, asi sale el salto de suelo y no se gasta el del aire
+    private bool IsLandingSoon()
+    {
+        float fallSpeed = -rb.linearVelocity.y;
+        return fallSpeed > 0f && groundChecker.GetIsGroundNear(fallSpeed * bufferCounter);
     }
 
     // Al soltar la tecla durante la subida se corta parte de la velocidad, tap = salto bajo, hold = salto completo
@@ -142,11 +169,14 @@ public class PlayerJumper : MonoBehaviour
             rb.gravityScale = heavyFallGravity;
     }
 
-    // El coyote se recarga pisando suelo, salvo en los primeros frames despues de saltar
+    // El coyote y los saltos en el aire se recargan pisando suelo, salvo en los primeros frames despues de saltar
     private void UpdateCoyote()
     {
         if (groundChecker.GetIsGrounded() && lockCounter <= 0f)
+        {
             coyoteCounter = coyoteTime;
+            airJumpsLeft = airJumpCount;
+        }
         else if (coyoteCounter > 0f)
             coyoteCounter -= Time.deltaTime;
     }

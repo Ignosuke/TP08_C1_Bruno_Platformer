@@ -30,6 +30,8 @@ MonoBehaviour:
   jumpBufferTime: 0.12
   jumpLockTime: 0.1
   coyoteTime: 0.1
+  airJumpCount: 1
+  airJumpForce: 13
   feetWidth: 0.32
   checkDistance: 0.2
   groundLayer:
@@ -84,6 +86,7 @@ MonoBehaviour:
   healAmount: 2
   healDuration: 1.25
   jumpClip: {fileID: 0}
+  airJumpClip: {fileID: 0}
   landClip: {fileID: 0}
   dashClip: {fileID: 0}
   attackClips:
