@@ -1,7 +1,7 @@
 using UnityEngine;
 
-// Parry perfecto a un golpe cuerpo a cuerpo. Congela el choque y se ve el primer golpe del combo desde el tajo, pero no pega.
-// El aturdido lo pone el enemigo. Ya mira al atacante porque el parry solo vale de frente
+// Parry perfecto, a un golpe o a una flecha. Congela el choque y se ve el primer golpe del combo desde el tajo, pero no pega.
+// El aturdido lo pone el enemigo, solo el que pega cuerpo a cuerpo. Ya mira al atacante porque el parry solo vale de frente
 [RequireComponent(typeof(PlayerHealth), typeof(PlayerAttacker), typeof(PlayerDefender))]
 [RequireComponent(typeof(MeleeHitbox))]
 public class PlayerParryCounter : MonoBehaviour
@@ -60,7 +60,7 @@ public class PlayerParryCounter : MonoBehaviour
     // Con el ataque apagado, en el empujon o muerto, no hay contraataque
     private void Counter(DamageInfo info)
     {
-        if (!info.IsMelee || !attacker.enabled) return;
+        if (!attacker.enabled) return;
 
         hitbox.RaiseHitStop(parryHitStop);
         defender.StopDefend();

@@ -36,7 +36,7 @@ public class MeleeHitbox : MonoBehaviour
         lastSize = size;
         gizmoCounter = GizmoTime;
 
-        DamageInfo info = new DamageInfo(damage, new Vector2(facing, 0f), gameObject.layer, knockback, true);
+        DamageInfo info = new DamageInfo(damage, new Vector2(facing, 0f), gameObject.layer, knockback);
         bool parried = false;
         bool landed = false;
 
