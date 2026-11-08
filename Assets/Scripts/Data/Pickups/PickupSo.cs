@@ -26,6 +26,8 @@ public class PickupSo : ScriptableObject
 
     [Header("Invulnerability")]
     [SerializeField] private float invulnerableDuration = 4f;
+    [Tooltip("Wins over the damage tint when both are active")]
+    [SerializeField] private Color invulnerableTint = new Color(0.55f, 0.9f, 1f);
     [Tooltip("Seconds of blinking at the start, the pickup flash")]
     [SerializeField] private float invulnerableFlashTime = 0.3f;
     [Tooltip("Seconds of blinking before it ends, the warning")]
@@ -54,6 +56,7 @@ public class PickupSo : ScriptableObject
     public Color GetDamageTint() => damageTint;
 
     public float GetInvulnerableDuration() => invulnerableDuration;
+    public Color GetInvulnerableTint() => invulnerableTint;
     public float GetInvulnerableFlashTime() => invulnerableFlashTime;
     public float GetInvulnerableWarningTime() => invulnerableWarningTime;
     public float GetBlinkInterval() => blinkInterval;

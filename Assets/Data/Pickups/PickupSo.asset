@@ -26,8 +26,8 @@ MonoBehaviour:
   invulnerableFlashTime: 0.3
   invulnerableWarningTime: 1.2
   blinkInterval: 0.08
-  coinClip: {fileID: 0}
-  pouchClip: {fileID: 0}
-  healClip: {fileID: 0}
-  damageClip: {fileID: 0}
-  invulnerabilityClip: {fileID: 0}
+  coinClip: {fileID: 8300000, guid: 5d927c6f4f40c31439f356f331d9212c, type: 3}
+  pouchClip: {fileID: 8300000, guid: 5d927c6f4f40c31439f356f331d9212c, type: 3}
+  healClip: {fileID: 8300000, guid: 21b7c7a51d96d0146972c1e343cb120b, type: 3}
+  damageClip: {fileID: 8300000, guid: 21b7c7a51d96d0146972c1e343cb120b, type: 3}
+  invulnerabilityClip: {fileID: 8300000, guid: 21b7c7a51d96d0146972c1e343cb120b, type: 3}

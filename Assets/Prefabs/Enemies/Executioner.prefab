@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAudio
   enemyData: {fileID: 11400000, guid: 478f3bc4c29d045478c99820fd416f49, type: 2}
+  hurtVolume: 0.4
 --- !u!114 &9159830015481622126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,11 +345,11 @@ AudioSource:
   m_GameObject: {fileID: 631311199161047402}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6673348999546390038, guid: 5fc5392264b672745b19d5bdcfaf5a1b, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

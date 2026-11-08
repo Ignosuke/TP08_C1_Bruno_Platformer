@@ -66,6 +66,24 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private float[] comboHitStop = { 0.04f, 0.04f, 0.06f };
     [SerializeField] private float airAttackHitStop = 0.04f;
 
+    [Header("Throw")]
+    [SerializeField] private int startShurikens = 3;
+    [SerializeField] private int shurikenDamage = 1;
+    [SerializeField] private float shurikenKnockback = 1f;
+    [SerializeField] private float shurikenSpeed = 18f;
+    [Tooltip("Degrees per second")]
+    [SerializeField] private float shurikenSpinSpeed = 1080f;
+    [SerializeField] private float shurikenLifetime = 1.2f;
+    [SerializeField] private Vector2 shurikenSpawnOffset = new Vector2(0.7f, 0.1f);   // Mirando a la derecha
+    [Tooltip("Enemies and Ground, set by the builder")]
+    [SerializeField] private LayerMask shurikenHitLayer;
+    [SerializeField] private float throwDuration = 0.35f;   // Lo que dura la animacion Throw (7 frames)
+    [SerializeField] private float throwCooldown = 0.5f;    // Se cuenta desde que arranca el lanzamiento
+    [Tooltip("Sheet frame (1-based) where the shuriken leaves the hand. The builder turns it into an Animation Event")]
+    [SerializeField] private int throwHitFrame = 4;
+    [Tooltip("How far down the stick or key must be held for Attack to throw")]
+    [SerializeField] private float throwDownThreshold = 0.5f;
+
     [Header("Defend")]
     [SerializeField] private float parryWindow = 0.15f;     // Primeros segundos de la defensa que cuentan como parry
     [SerializeField] private float defendCooldown = 0.25f;  // Para que no se pueda spamear el parry
@@ -109,6 +127,7 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private AudioClip defendClip;
     [SerializeField] private AudioClip hurtClip;
     [SerializeField] private AudioClip healClip;
+    [SerializeField] private AudioClip throwClip;
 
     public InputActionReference GetMoveAction() => moveAction;
     public InputActionReference GetJumpAction() => jumpAction;
@@ -159,6 +178,19 @@ public class PlayerSo : ScriptableObject
     public float[] GetComboHitStop() => comboHitStop;
     public float GetAirAttackHitStop() => airAttackHitStop;
 
+    public int GetStartShurikens() => startShurikens;
+    public int GetShurikenDamage() => shurikenDamage;
+    public float GetShurikenKnockback() => shurikenKnockback;
+    public float GetShurikenSpeed() => shurikenSpeed;
+    public float GetShurikenSpinSpeed() => shurikenSpinSpeed;
+    public float GetShurikenLifetime() => shurikenLifetime;
+    public Vector2 GetShurikenSpawnOffset() => shurikenSpawnOffset;
+    public LayerMask GetShurikenHitLayer() => shurikenHitLayer;
+    public float GetThrowDuration() => throwDuration;
+    public float GetThrowCooldown() => throwCooldown;
+    public int GetThrowHitFrame() => throwHitFrame;
+    public float GetThrowDownThreshold() => throwDownThreshold;
+
     public float GetParryWindow() => parryWindow;
     public float GetDefendCooldown() => defendCooldown;
     public float GetBlockDamageMultiplier() => blockDamageMultiplier;
@@ -191,4 +223,5 @@ public class PlayerSo : ScriptableObject
     public AudioClip GetDefendClip() => defendClip;
     public AudioClip GetHurtClip() => hurtClip;
     public AudioClip GetHealClip() => healClip;
+    public AudioClip GetThrowClip() => throwClip;
 }

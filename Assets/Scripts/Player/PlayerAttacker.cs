@@ -37,6 +37,7 @@ public class PlayerAttacker : MonoBehaviour
     private PlayerHealer healer;
     private MeleeHitbox hitbox;
     private AnimationHitRelay hitRelay;
+    private PlayerThrower thrower;      // Puede faltar, entonces nunca lanza
 
     private bool attackRequested;
     private bool isAttacking;
@@ -76,6 +77,7 @@ public class PlayerAttacker : MonoBehaviour
         healer = GetComponent<PlayerHealer>();
         hitbox = GetComponent<MeleeHitbox>();
         hitRelay = GetComponentInChildren<AnimationHitRelay>();   // En Visual, junto al Animator
+        thrower = GetComponent<PlayerThrower>();
     }
 
     private void OnEnable()
@@ -125,8 +127,20 @@ public class PlayerAttacker : MonoBehaviour
             bufferCounter -= Time.deltaTime;
         }
 
-        if (bufferCounter > 0f && !isAttacking && !dasher.GetIsDashing() && !defender.GetIsDefending() && !healer.GetIsHealing())
-            StartAttack(0f);
+        if (bufferCounter > 0f && !isAttacking && !dasher.GetIsDashing() && !defender.GetIsDefending() && !healer.GetIsHealing()
+            && (thrower == null || !thrower.GetIsThrowing()))
+        {
+            // Abajo + ataque lanza un shuriken si queda municion, si no es un golpe normal
+            if (thrower != null && thrower.GetWantsThrow())
+            {
+                bufferCounter = 0f;
+                thrower.TryThrow();
+            }
+            else
+            {
+                StartAttack(0f);
+            }
+        }
     }
 
     // groundStartTime es la fraccion del clip donde arranca, el golpe dura solo lo que le queda al clip

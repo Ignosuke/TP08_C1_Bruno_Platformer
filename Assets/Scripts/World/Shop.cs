@@ -11,6 +11,7 @@ public class Shop : MonoBehaviour
     private PlayerWallet wallet;
     private PlayerHealer healer;
     private PlayerAttacker attacker;
+    private PlayerThrower thrower;
     private PlayerAudio playerAudio;
     private int[] levels;               // Compras hechas de cada articulo
 
@@ -21,6 +22,7 @@ public class Shop : MonoBehaviour
         wallet = player.GetComponent<PlayerWallet>();
         healer = player.GetComponent<PlayerHealer>();
         attacker = player.GetComponent<PlayerAttacker>();
+        thrower = player.GetComponent<PlayerThrower>();
         playerAudio = player.GetComponent<PlayerAudio>();
         levels = new int[shopData.GetItemCount()];
     }
@@ -56,6 +58,9 @@ public class Shop : MonoBehaviour
                 break;
             case ShopItemType.HealCharge:
                 healer.AddMaxCharges(item.GetAmount());
+                break;
+            case ShopItemType.Shuriken:
+                thrower.AddAmmo(item.GetAmount());
                 break;
         }
     }

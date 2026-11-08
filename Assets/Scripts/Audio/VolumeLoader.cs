@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 // El mixer arranca con sus valores de fabrica en cada escena, esto le pone los volumenes guardados
+[DefaultExecutionOrder(-100)]
 public class VolumeLoader : MonoBehaviour
 {
     [SerializeField] private AudioMixer mixer;

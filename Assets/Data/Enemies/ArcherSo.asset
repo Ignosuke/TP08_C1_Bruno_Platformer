@@ -59,6 +59,6 @@ MonoBehaviour:
   contactKnockback: 5
   coinDrop: 2
   spriteFacesLeft: 0
-  attackClip: {fileID: 0}
-  hurtClip: {fileID: 0}
-  deathClip: {fileID: 0}
+  attackClip: {fileID: 8300000, guid: e5f0247c94675014eaea196dc146cb75, type: 3}
+  hurtClip: {fileID: 8300000, guid: e8bd15aad4323ff4caf97ee521bd29cc, type: 3}
+  deathClip: {fileID: 8300000, guid: a88d39f5b72a1f3459f8a13b79f30661, type: 3}

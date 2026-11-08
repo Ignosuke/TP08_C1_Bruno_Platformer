@@ -5,6 +5,16 @@ using UnityEngine;
 public class PlayerAudio : MonoBehaviour
 {
     [SerializeField] private PlayerSo playerData;
+    [Tooltip("Pitch added at each combo step")]
+    [SerializeField] private float attackPitchStep = 0.1f;
+    [SerializeField] private float airJumpPitch = 1.25f;
+    [SerializeField] private float landPitch = 0.8f;
+    [Range(0f, 1f)]
+    [SerializeField] private float landVolume = 0.6f;
+    [SerializeField] private float parryPitch = 1.3f;
+    [Tooltip("The sword impact is the loudest clip")]
+    [Range(0f, 1f)]
+    [SerializeField] private float hitVolume = 0.4f;
 
     private AudioSource audioSource;
     private PlayerGroundChecker groundChecker;
@@ -40,6 +50,7 @@ public class PlayerAudio : MonoBehaviour
         hitbox.OnHit += PlayHit;
         defender.OnDefendStarted += PlayDefend;
         health.OnDamaged += PlayHurt;
+        health.OnParried += PlayParry;
         healer.OnHealStarted += PlayHeal;
     }
 
@@ -54,23 +65,29 @@ public class PlayerAudio : MonoBehaviour
         hitbox.OnHit -= PlayHit;
         defender.OnDefendStarted -= PlayDefend;
         health.OnDamaged -= PlayHurt;
+        health.OnParried -= PlayParry;
         healer.OnHealStarted -= PlayHeal;
     }
 
-    private void PlayLand() => Play(playerData.GetLandClip());
+    private void PlayLand() => Play(playerData.GetLandClip(), landPitch, landVolume);
     private void PlayJump() => Play(playerData.GetJumpClip());
-    private void PlayAirJump() => Play(playerData.GetAirJumpClip());
+    private void PlayAirJump() => Play(playerData.GetAirJumpClip(), airJumpPitch);
     private void PlayDash() => Play(playerData.GetDashClip());
-    private void PlayAttack(int step) => Play(playerData.GetAttackClips()[step - 1]);
+    private void PlayAttack(int step) => Play(playerData.GetAttackClips()[step - 1], 1f + (step - 1) * attackPitchStep);
     private void PlayAirAttack() => Play(playerData.GetAirAttackClip());
-    private void PlayHit() => Play(playerData.GetHitClip());
+    /// <summary>El impacto de espada, mas bajo que el resto. Tambien lo usa el shuriken al pegar</summary>
+    public void PlayHit() => Play(playerData.GetHitClip(), 1f, hitVolume);
     private void PlayDefend() => Play(playerData.GetDefendClip());
+    private void PlayParry(DamageInfo info) => Play(playerData.GetDefendClip(), parryPitch);
     private void PlayHurt(DamageInfo info) => Play(playerData.GetHurtClip());
     private void PlayHeal() => Play(playerData.GetHealClip());
 
-    // PlayOneShot permite que se pisen varios sonidos sin cortarse. Publico para los pickables y la tienda
-    public void Play(AudioClip clip)
+    // PlayOneShot permite que se pisen varios sonidos sin cortarse. Publico para los pickables, la tienda y el lanzador.
+    // El pitch es de la fuente entera, por eso cada sonido lo vuelve a poner
+    public void Play(AudioClip clip, float pitch = 1f, float volume = 1f)
     {
-        if (clip != null) audioSource.PlayOneShot(clip);
+        if (clip == null) return;
+        audioSource.pitch = pitch;
+        audioSource.PlayOneShot(clip, volume);
     }
 }

@@ -5,21 +5,24 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PromptSo", menuName = "Data/Prompts")]
 public class PromptSo : ScriptableObject
 {
+    public const string AttackOldText = "<sprite name=\"J\"> Attack";
+    public const string AttackText = "<sprite name=\"J\"> Attack  <sprite name=\"S\"><sprite name=\"J\"> Shuriken";
     // Tambien los usa el menu 15 para sumarlos a un PromptSo que ya existia
     public const string MenuHintText = "<sprite name=\"Up\"><sprite name=\"Down\"> Choose  <sprite name=\"J\"> Confirm  <sprite name=\"K\"> Back";
     public const string PauseHintText = "<sprite name=\"Up\"><sprite name=\"Down\"> Choose  <sprite name=\"J\"> Confirm  <sprite name=\"K\"><sprite name=\"Esc\"> Back";
     public const string CreditsText =
-        "Developed by Ignacio Molina\n\n" +
-        "Samurai, Oni, Archer, Executioner and Demon Samurai sprites\n" +
-        "Spring and Autumn tilesets, sakura trees, props and butterflies\n" +
-        "Forest backgrounds, Crimson Fantasy GUI, key icons\n\n" +
-        "Font monogram by datagoblin";
+        "Sprites: xzany.itch.io\n" +
+        "VFX: cs5475.itch.io\n" +
+        "SFX: ci.itch.io & kronbits.itch.io\n" +
+        "Music: junyua.itch.io\n" +
+        "Font: Monogram by datagoblin\n\n" +
+        "Developed by: @Ignosuke";
 
     [SerializeField] private List<PromptEntry> entries = new List<PromptEntry>
     {
         new PromptEntry("Move", "<sprite name=\"A\"><sprite name=\"D\"> Move"),
         new PromptEntry("Jump", "<sprite name=\"Space\"> Jump"),
-        new PromptEntry("Attack", "<sprite name=\"J\"> Attack"),
+        new PromptEntry("Attack", AttackText),
         new PromptEntry("Parry", "<sprite name=\"L\"> Defend, right before the hit to parry"),
         new PromptEntry("DoubleJump", "<sprite name=\"Space\"> again in the air to double jump"),
         new PromptEntry("Checkpoint", "Safe spot reached"),

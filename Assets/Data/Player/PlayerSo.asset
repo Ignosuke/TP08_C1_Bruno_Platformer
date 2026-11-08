@@ -66,6 +66,20 @@ MonoBehaviour:
   - 0.04
   - 0.06
   airAttackHitStop: 0.04
+  startShurikens: 3
+  shurikenDamage: 1
+  shurikenKnockback: 1
+  shurikenSpeed: 18
+  shurikenSpinSpeed: 1080
+  shurikenLifetime: 1.2
+  shurikenSpawnOffset: {x: 0.7, y: 0.1}
+  shurikenHitLayer:
+    serializedVersion: 2
+    m_Bits: 384
+  throwDuration: 0.35
+  throwCooldown: 0.5
+  throwHitFrame: 4
+  throwDownThreshold: 0.5
   parryWindow: 0.15
   defendCooldown: 0.25
   blockDamageMultiplier: 0.5
@@ -86,16 +100,17 @@ MonoBehaviour:
   healAmount: 2
   healDuration: 1.25
   chargesPerKill: 1
-  jumpClip: {fileID: 0}
-  airJumpClip: {fileID: 0}
-  landClip: {fileID: 0}
-  dashClip: {fileID: 0}
+  jumpClip: {fileID: 8300000, guid: 3c5ce146e0312be4b8742bcae4a97864, type: 3}
+  airJumpClip: {fileID: 8300000, guid: 3c5ce146e0312be4b8742bcae4a97864, type: 3}
+  landClip: {fileID: 8300000, guid: 3c5ce146e0312be4b8742bcae4a97864, type: 3}
+  dashClip: {fileID: 8300000, guid: 1e2add7b39028e140a8fcf8cb809e769, type: 3}
   attackClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  airAttackClip: {fileID: 0}
-  hitClip: {fileID: 0}
-  defendClip: {fileID: 0}
-  hurtClip: {fileID: 0}
-  healClip: {fileID: 0}
+  - {fileID: 8300000, guid: dcb1def69bd43da45a128e1a9cefaf70, type: 3}
+  - {fileID: 8300000, guid: dcb1def69bd43da45a128e1a9cefaf70, type: 3}
+  - {fileID: 8300000, guid: dcb1def69bd43da45a128e1a9cefaf70, type: 3}
+  airAttackClip: {fileID: 8300000, guid: dcb1def69bd43da45a128e1a9cefaf70, type: 3}
+  hitClip: {fileID: 8300000, guid: e8bd15aad4323ff4caf97ee521bd29cc, type: 3}
+  defendClip: {fileID: 8300000, guid: 12b87427883a4c34eada5785a4f2c5c1, type: 3}
+  hurtClip: {fileID: 8300000, guid: 1d786c3b39da6ee4baee41961d06f6c6, type: 3}
+  healClip: {fileID: 8300000, guid: 21b7c7a51d96d0146972c1e343cb120b, type: 3}
+  throwClip: {fileID: 8300000, guid: e5f0247c94675014eaea196dc146cb75, type: 3}

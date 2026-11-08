@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public enum ShopItemType { MaxHealth, Sharpen, HealCharge }
+public enum ShopItemType { MaxHealth, Sharpen, HealCharge, Shuriken }
 
 // Un articulo de la tienda. Se puede comprar tantas veces como precios tenga, cada compra cuesta el precio siguiente
 [Serializable]
@@ -9,7 +9,7 @@ public class ShopItem
 {
     [SerializeField] private string displayName;
     [SerializeField] private ShopItemType type;
-    [Tooltip("Max health in half hearts, damage per sharpen or heal charges")]
+    [Tooltip("Max health in half hearts, damage per sharpen, heal charges or shurikens")]
     [SerializeField] private int amount;
     [Tooltip("One price per purchase, the length is the purchase cap")]
     [SerializeField] private int[] prices = new int[0];

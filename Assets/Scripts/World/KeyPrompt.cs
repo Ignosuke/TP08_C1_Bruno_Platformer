@@ -14,8 +14,9 @@ public class KeyPrompt : MonoBehaviour
         if (other.GetComponent<PlayerMover>() != null) panel.Show(promptData.GetText(promptId));
     }
 
+    // Al descargar la escena el cartel puede destruirse antes que la zona
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.GetComponent<PlayerMover>() != null) panel.Hide();
+        if (panel != null && other.GetComponent<PlayerMover>() != null) panel.Hide();
     }
 }

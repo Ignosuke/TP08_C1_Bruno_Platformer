@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemyAudio : MonoBehaviour
 {
     [SerializeField] private EnemySo enemyData;
+    [Tooltip("The hurt clip is the sword impact, the loudest one")]
+    [Range(0f, 1f)]
+    [SerializeField] private float hurtVolume = 0.4f;
 
     private AudioSource audioSource;
     private EnemyHealth health;
@@ -38,12 +41,12 @@ public class EnemyAudio : MonoBehaviour
     // El golpe que mata suena como muerte, no como daño
     private void PlayHurt(DamageInfo info)
     {
-        if (!health.GetIsDead()) Play(enemyData.GetHurtClip());
+        if (!health.GetIsDead()) Play(enemyData.GetHurtClip(), hurtVolume);
     }
 
     // PlayOneShot permite que se pisen varios sonidos sin cortarse
-    private void Play(AudioClip clip)
+    private void Play(AudioClip clip, float volume = 1f)
     {
-        if (clip != null) audioSource.PlayOneShot(clip);
+        if (clip != null) audioSource.PlayOneShot(clip, volume);
     }
 }

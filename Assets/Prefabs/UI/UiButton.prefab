@@ -146,6 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 109251838185929242}
+  - component: {fileID: 8307694316713032734}
   - component: {fileID: 5262306330787022434}
   - component: {fileID: 4171042669672712633}
   - component: {fileID: 1053520423723054617}
@@ -177,6 +178,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 84, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8307694316713032734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542531039825106462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153fd8499eab33845ba641f26952c615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UiButtonSound
+  clickPlayer: {fileID: 0}
 --- !u!222 &5262306330787022434
 CanvasRenderer:
   m_ObjectHideFlags: 0

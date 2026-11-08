@@ -6,7 +6,7 @@ using UnityEngine;
 // Sin Animator o sin controller asignado no hace nada.
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerMover), typeof(PlayerJumper))]
 [RequireComponent(typeof(PlayerDasher), typeof(PlayerAttacker), typeof(PlayerDefender))]
-[RequireComponent(typeof(PlayerHealth), typeof(PlayerHealer))]
+[RequireComponent(typeof(PlayerHealth), typeof(PlayerHealer), typeof(PlayerThrower))]
 public class PlayerAnimator : MonoBehaviour
 {
     private const float MoveThreshold = 0.1f;       // Velocidad minima para correr / para considerar que sube
@@ -24,6 +24,7 @@ public class PlayerAnimator : MonoBehaviour
     private PlayerDefender defender;
     private PlayerHealth health;
     private PlayerHealer healer;
+    private PlayerThrower thrower;
 
     private StateMachine fsm;
     private AnimState idle;
@@ -42,6 +43,7 @@ public class PlayerAnimator : MonoBehaviour
         defender = GetComponent<PlayerDefender>();
         health = GetComponent<PlayerHealth>();
         healer = GetComponent<PlayerHealer>();
+        thrower = GetComponent<PlayerThrower>();
 
         BuildStateMachine();
     }
@@ -62,6 +64,7 @@ public class PlayerAnimator : MonoBehaviour
         AnimState hurt = new AnimState(animator, "Hurt");
         AnimState death = new AnimState(animator, "Death");
         AnimState healing = new AnimState(animator, "Healing");
+        AnimState throwing = new AnimState(animator, "Throw");
 
         // Globales, el orden es la prioridad, muerte, daño, curacion, dash, ataque y defensa
         fsm.AddAnyTransition(death, () => health.GetIsDead());
@@ -69,6 +72,7 @@ public class PlayerAnimator : MonoBehaviour
         fsm.AddAnyTransition(healing, () => healer.GetIsHealing());
         fsm.AddAnyTransition(dash, () => dasher.GetIsDashing());
         fsm.AddAnyTransition(attack, () => attacker.GetIsAttacking());
+        fsm.AddAnyTransition(throwing, () => thrower.GetIsThrowing());
         fsm.AddAnyTransition(defend, () => defender.GetIsDefending());
 
         // En la ventana del combo se queda en el ultimo frame del golpe, asi el cuerpo no salta a Idle y vuelve.
@@ -83,7 +87,7 @@ public class PlayerAnimator : MonoBehaviour
         fsm.AddTransition(jumpRise, jumpApex, () => !IsOnGround() && !IsRising());
 
         // Desde cualquier estado se vuelve al suelo o al aire
-        AnimState[] allStates = { idle, run, jumpStart, jumpRise, jumpApex, jumpFall, dash, attack, defend, hurt, death, healing };
+        AnimState[] allStates = { idle, run, jumpStart, jumpRise, jumpApex, jumpFall, dash, attack, defend, hurt, death, healing, throwing };
         foreach (AnimState from in allStates)
         {
             fsm.AddTransition(from, run, () => IsOnGround() && IsRunning());

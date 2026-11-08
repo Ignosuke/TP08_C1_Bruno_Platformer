@@ -18,7 +18,7 @@ MonoBehaviour:
   - id: Jump
     text: <sprite name="Space"> Jump
   - id: Attack
-    text: <sprite name="J"> Attack
+    text: <sprite name="J"> Attack  <sprite name="S"><sprite name="J"> Shuriken
   - id: Parry
     text: <sprite name="L"> Defend, right before the hit to parry
   - id: DoubleJump
@@ -39,17 +39,17 @@ MonoBehaviour:
     text: <sprite name="Up"><sprite name="Down"> Choose  <sprite name="J"> Confirm 
       <sprite name="K"><sprite name="Esc"> Back
   - id: Credits
-    text: 'Developed by Ignacio Molina
+    text: 'Sprites: xzany.itch.io
+
+      VFX: cs5475.itch.io
+
+      SFX: ci.itch.io
+      & kronbits.itch.io
+
+      Music: junyua.itch.io
+
+      Font: Monogram by datagoblin
 
 
-      Samurai, Oni, Archer, Executioner
-      and Demon Samurai sprites
-
-      Spring and Autumn tilesets, sakura trees,
-      props and butterflies
-
-      Forest backgrounds, Crimson Fantasy GUI, key icons
-
-
-      Font
-      monogram by datagoblin'
+      Developed
+      by: @Ignosuke'

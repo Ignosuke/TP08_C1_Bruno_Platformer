@@ -16,6 +16,12 @@ public class UiVictory : MonoBehaviour
     [SerializeField] private float rowDelay = 0.35f;        // Segundos reales entre fila y fila
     [SerializeField] private float totalDelay = 0.6f;       // Una espera mas larga antes del total
 
+    [Header("Sound")]
+    [SerializeField] private UiClickPlayer clickPlayer;
+    [SerializeField] private float rowPitch = 1.3f;
+    [SerializeField] private float totalPitch = 1.5f;
+    [SerializeField] private float newBestPitch = 1.7f;
+
     [Header("Rows")]
     [SerializeField] private UiScoreRow timeRow;
     [SerializeField] private UiScoreRow coinsRow;
@@ -61,25 +67,36 @@ public class UiVictory : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(rowDelay);
         timeRow.Show(FormatTime(result.Seconds), result.TimePoints.ToString());
+        PlayClick(rowPitch);
         yield return new WaitForSecondsRealtime(rowDelay);
         coinsRow.Show(result.Coins.ToString(), result.CoinPoints.ToString());
+        PlayClick(rowPitch);
         yield return new WaitForSecondsRealtime(rowDelay);
         parriesRow.Show(result.Parries.ToString(), result.ParryPoints.ToString());
+        PlayClick(rowPitch);
         yield return new WaitForSecondsRealtime(rowDelay);
         // Invariante para que salga x1.2 y no x1,2 con la PC en español
         deathsRow.Show(result.Deaths.ToString(), "x" + result.DeathMultiplier.ToString("0.0#", CultureInfo.InvariantCulture));
+        PlayClick(rowPitch);
         yield return new WaitForSecondsRealtime(totalDelay);
         totalRow.Show("", result.Total.ToString());
+        PlayClick(totalPitch);
 
         if (result.IsNewBest)
         {
             yield return new WaitForSecondsRealtime(rowDelay);
             newBest.Play();
+            PlayClick(newBestPitch);
         }
 
         yield return new WaitForSecondsRealtime(rowDelay);
         buttons.Play();
         if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(replayButton.gameObject);
+    }
+
+    private void PlayClick(float pitch)
+    {
+        if (clickPlayer != null) clickPlayer.Play(pitch);
     }
 
     // Minutos y segundos, siempre con dos cifras

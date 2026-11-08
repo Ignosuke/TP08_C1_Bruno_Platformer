@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 public static class VolumeSettings
 {
     private const float MinDecibels = -80f;     // Silencio en el mixer
-    private const float DefaultVolume = 1f;
+    private const float DefaultVolume = 0.5f;
 
     public static float GetVolume(string parameter) => PlayerPrefs.GetFloat(parameter, DefaultVolume);
 

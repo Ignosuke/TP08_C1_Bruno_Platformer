@@ -19,6 +19,7 @@ public class ShopSo : ScriptableObject
         new ShopItem("Max Health", ShopItemType.MaxHealth, 2, 15, 22),
         new ShopItem("Sharpen", ShopItemType.Sharpen, 1, 10, 15, 20),
         new ShopItem("Heal Charge", ShopItemType.HealCharge, 1, 8, 12),
+        new ShopItem("Shurikens +3", ShopItemType.Shuriken, 3, 5, 6, 7),
     };
 
     [Header("Sounds")]

@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 395716652666985987}
   - component: {fileID: 8677887007356827191}
   - component: {fileID: 1269165191758734130}
+  - component: {fileID: 5025703110010303519}
   - component: {fileID: 1524570342585205822}
   - component: {fileID: 5888456878614784258}
   - component: {fileID: 8795685557769512161}
@@ -397,6 +398,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAudio
   playerData: {fileID: 11400000, guid: 7ea74dba68ebd274b9b0f0f9821f4298, type: 2}
+  attackPitchStep: 0.1
+  airJumpPitch: 1.25
+  landPitch: 0.8
+  landVolume: 0.6
+  parryPitch: 1.3
+  hitVolume: 0.4
 --- !u!114 &395716652666985987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,6 +444,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInvulnerability
   pickupData: {fileID: 11400000, guid: 9ebae654536eead47b216893523f2e7f, type: 2}
   spriteRenderer: {fileID: 2660118162226678325}
+--- !u!114 &5025703110010303519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4507087158210081793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1acf55ad88765084696067c9776cfad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerThrower
+  playerData: {fileID: 11400000, guid: 7ea74dba68ebd274b9b0f0f9821f4298, type: 2}
+  shurikenPrefab: {fileID: 4204873565449048638, guid: 85c8ba73bb1e3bb4fac7d92f7f124726, type: 3}
 --- !u!50 &1524570342585205822
 Rigidbody2D:
   serializedVersion: 5
@@ -519,11 +540,11 @@ AudioSource:
   m_GameObject: {fileID: 4507087158210081793}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6673348999546390038, guid: 5fc5392264b672745b19d5bdcfaf5a1b, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
