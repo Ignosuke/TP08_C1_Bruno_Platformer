@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8867155865227239426}
   - component: {fileID: 3779982589907391914}
+  - component: {fileID: 8146325408798712236}
   - component: {fileID: 2640734877815182884}
   m_Layer: 0
   m_Name: Coin
@@ -48,6 +49,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pickup
   pickupData: {fileID: 11400000, guid: 9ebae654536eead47b216893523f2e7f, type: 2}
   type: 0
+--- !u!114 &8146325408798712236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5264210397428224179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edae3be420e32b04493550ed67ba2b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupBob
+  visual: {fileID: 1667791141718327875}
+  steps: 2
+  stepPause: 0.15
+  endPause: 0.5
 --- !u!58 &2640734877815182884
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -83,7 +100,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.25
+  m_Radius: 0.225
 --- !u!1 &5715440009238639661
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1667791141718327875}
   - component: {fileID: 4912813719976926904}
+  - component: {fileID: 4424114833558821750}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -111,7 +129,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8867155865227239426}
@@ -165,8 +183,8 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: f6d291f4ab5a1b748b250bcbf1959cc5, type: 3}
-  m_Color: {r: 1, g: 0.85, b: 0.1, a: 1}
+  m_Sprite: {fileID: 881203500, guid: f84cf91db06582f4baca0f5bd9ad8e5e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -175,3 +193,25 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &4424114833558821750
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715440009238639661}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7e1f4ee5cd9cc3f4fb509d1eab301906, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

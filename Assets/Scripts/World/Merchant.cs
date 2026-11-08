@@ -36,7 +36,7 @@ public class Merchant : MonoBehaviour
     {
         interactAction.action.started += OnInteractStarted;
         interactAction.action.Enable();
-        panel.OnClosed += Release;
+        panel.OnClosed += OnPanelClosed;
         player.OnDamaged += CloseOnHit;
     }
 
@@ -44,7 +44,7 @@ public class Merchant : MonoBehaviour
     {
         interactAction.action.started -= OnInteractStarted;
         interactAction.action.Disable();
-        panel.OnClosed -= Release;
+        panel.OnClosed -= OnPanelClosed;
         player.OnDamaged -= CloseOnHit;
     }
 
@@ -55,11 +55,25 @@ public class Merchant : MonoBehaviour
 
         SetPlayerFrozen(true);
         panel.Open();
+        RefreshPrompt();
     }
 
-    private void Update()
+    private void Start()
+    {
+        RefreshPrompt();
+    }
+
+    // Se llama solo cuando algo cambia, al entrar, salir, abrir o cerrar la tienda
+    private void RefreshPrompt()
     {
         prompt.SetActive(isInRange && !panel.GetIsOpen());
+    }
+
+    // Cerrar la tienda vuelve a mostrar el aviso aunque el golpe la haya cerrado
+    private void OnPanelClosed()
+    {
+        RefreshPrompt();
+        Release();
     }
 
     private void Release()
@@ -88,11 +102,15 @@ public class Merchant : MonoBehaviour
     // Se reconoce al jugador por sus componentes, no por tag
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<PlayerHealth>() == player) isInRange = true;
+        if (other.GetComponent<PlayerHealth>() != player) return;
+        isInRange = true;
+        RefreshPrompt();
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.GetComponent<PlayerHealth>() == player) isInRange = false;
+        if (other.GetComponent<PlayerHealth>() != player) return;
+        isInRange = false;
+        RefreshPrompt();
     }
 }

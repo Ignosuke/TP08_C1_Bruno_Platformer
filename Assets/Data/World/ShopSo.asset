@@ -21,13 +21,21 @@ MonoBehaviour:
     type: 0
     amount: 2
     prices: 0f00000016000000
+    icons:
+    - {fileID: 156061741, guid: f84cf91db06582f4baca0f5bd9ad8e5e, type: 3}
   - displayName: Sharpen
     type: 1
     amount: 1
     prices: 0a0000000f00000014000000
+    icons:
+    - {fileID: 1851437212, guid: f84cf91db06582f4baca0f5bd9ad8e5e, type: 3}
+    - {fileID: -597659208, guid: f84cf91db06582f4baca0f5bd9ad8e5e, type: 3}
+    - {fileID: -952548679, guid: f84cf91db06582f4baca0f5bd9ad8e5e, type: 3}
   - displayName: Heal Charge
     type: 2
     amount: 1
     prices: 080000000c000000
+    icons:
+    - {fileID: -1186794865, guid: f84cf91db06582f4baca0f5bd9ad8e5e, type: 3}
   buyClip: {fileID: 0}
   denyClip: {fileID: 0}

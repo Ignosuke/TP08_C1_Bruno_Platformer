@@ -1,36 +1,40 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-// Cuando cae el jefe muestra la victoria unos segundos y vuelve al menu
+// Cuando RunStats termina el puntaje muestra la victoria unos segundos y despues abre el panel con el puntaje
 public class VictoryBanner : MonoBehaviour
 {
-    [SerializeField] private BossBrain brain;
+    [SerializeField] private RunStats runStats;
     [SerializeField] private GameObject banner;
-    [Tooltip("Real seconds the banner stays before loading the menu")]
+    [SerializeField] private UiPanel victoryPanel;
+    [SerializeField] private UiVictory victory;
+    [Tooltip("Real seconds the banner stays before the score")]
     [SerializeField] private float showTime = 4f;
-    [SerializeField] private string menuSceneName = "MainMenu";
 
     private void OnEnable()
     {
         banner.SetActive(false);
-        brain.OnDefeated += Show;
+        victoryPanel.Close();
+        runStats.OnRunScored += Show;
     }
 
     private void OnDisable()
     {
-        brain.OnDefeated -= Show;
+        runStats.OnRunScored -= Show;
     }
 
-    private void Show()
+    private void Show(ScoreResult result)
     {
-        StartCoroutine(ShowThenLeave());
+        StartCoroutine(ShowThenScore(result));
     }
 
-    private IEnumerator ShowThenLeave()
+    // Tiempo real por si el ultimo golpe dejo el hitstop
+    private IEnumerator ShowThenScore(ScoreResult result)
     {
         banner.SetActive(true);
         yield return new WaitForSecondsRealtime(showTime);
-        SceneManager.LoadScene(menuSceneName);
+        banner.SetActive(false);
+        victory.SetResult(result);
+        victoryPanel.Open();
     }
 }

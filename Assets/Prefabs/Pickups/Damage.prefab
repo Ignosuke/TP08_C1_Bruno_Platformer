@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2479852436666865136}
   - component: {fileID: 7090657707646124792}
+  - component: {fileID: 2612835952832632094}
   - component: {fileID: 894539234524497509}
   m_Layer: 0
   m_Name: Damage
@@ -48,6 +49,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pickup
   pickupData: {fileID: 11400000, guid: 9ebae654536eead47b216893523f2e7f, type: 2}
   type: 3
+--- !u!114 &2612835952832632094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4094971725732571838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edae3be420e32b04493550ed67ba2b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupBob
+  visual: {fileID: 2998484734808896002}
+  steps: 2
+  stepPause: 0.15
+  endPause: 0.5
 --- !u!58 &894539234524497509
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -111,7 +128,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2479852436666865136}
@@ -165,8 +182,8 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: f6d291f4ab5a1b748b250bcbf1959cc5, type: 3}
-  m_Color: {r: 0.95, g: 0.25, b: 0.2, a: 1}
+  m_Sprite: {fileID: 1650944628, guid: f84cf91db06582f4baca0f5bd9ad8e5e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

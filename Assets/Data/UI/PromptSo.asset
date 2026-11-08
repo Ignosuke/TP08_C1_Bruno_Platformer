@@ -33,4 +33,23 @@ MonoBehaviour:
     text: <sprite name="Up"><sprite name="Down"> Choose  <sprite name="J"> Buy  <sprite
       name="K"> Close
   - id: MenuHint
-    text: <sprite name="Up"><sprite name="Down"> Choose  <sprite name="Enter"> Confirm
+    text: <sprite name="Up"><sprite name="Down"> Choose  <sprite name="J"> Confirm 
+      <sprite name="K"> Back
+  - id: PauseHint
+    text: <sprite name="Up"><sprite name="Down"> Choose  <sprite name="J"> Confirm 
+      <sprite name="K"><sprite name="Esc"> Back
+  - id: Credits
+    text: 'Developed by Ignacio Molina
+
+
+      Samurai, Oni, Archer, Executioner
+      and Demon Samurai sprites
+
+      Spring and Autumn tilesets, sakura trees,
+      props and butterflies
+
+      Forest backgrounds, Crimson Fantasy GUI, key icons
+
+
+      Font
+      monogram by datagoblin'

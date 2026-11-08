@@ -5,6 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PromptSo", menuName = "Data/Prompts")]
 public class PromptSo : ScriptableObject
 {
+    // Tambien los usa el menu 15 para sumarlos a un PromptSo que ya existia
+    public const string MenuHintText = "<sprite name=\"Up\"><sprite name=\"Down\"> Choose  <sprite name=\"J\"> Confirm  <sprite name=\"K\"> Back";
+    public const string PauseHintText = "<sprite name=\"Up\"><sprite name=\"Down\"> Choose  <sprite name=\"J\"> Confirm  <sprite name=\"K\"><sprite name=\"Esc\"> Back";
+    public const string CreditsText =
+        "Developed by Ignacio Molina\n\n" +
+        "Samurai, Oni, Archer, Executioner and Demon Samurai sprites\n" +
+        "Spring and Autumn tilesets, sakura trees, props and butterflies\n" +
+        "Forest backgrounds, Crimson Fantasy GUI, key icons\n\n" +
+        "Font monogram by datagoblin";
+
     [SerializeField] private List<PromptEntry> entries = new List<PromptEntry>
     {
         new PromptEntry("Move", "<sprite name=\"A\"><sprite name=\"D\"> Move"),
@@ -16,7 +26,9 @@ public class PromptSo : ScriptableObject
         new PromptEntry("Purchase", "Bought"),
         new PromptEntry("ShopPrompt", "<sprite name=\"E\"> Shop"),
         new PromptEntry("ShopHint", "<sprite name=\"Up\"><sprite name=\"Down\"> Choose  <sprite name=\"J\"> Buy  <sprite name=\"K\"> Close"),
-        new PromptEntry("MenuHint", "<sprite name=\"Up\"><sprite name=\"Down\"> Choose  <sprite name=\"Enter\"> Confirm"),
+        new PromptEntry("MenuHint", MenuHintText),
+        new PromptEntry("PauseHint", PauseHintText),
+        new PromptEntry("Credits", CreditsText),
     };
 
     // Si falta el id se muestra el id, asi el error se ve en pantalla y no queda un panel vacio

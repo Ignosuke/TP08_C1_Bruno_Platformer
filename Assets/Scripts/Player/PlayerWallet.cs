@@ -39,6 +39,7 @@ public class PlayerWallet : MonoBehaviour
     }
 
     public int GetCoins() => coins;
+    public int GetCollected() => collected;   // Para el puntaje, lo gastado tambien cuenta
 
     // Para que el menu muestre el record
     public static int GetBestCoins() => PlayerPrefs.GetInt(BestCoinsKey, 0);

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 // La barra del jefe en el HUD, muestra lo que queda de la fase actual.
 // Con un golpe el relleno baja rapido y una franja clara se queda en el valor viejo, espera y baja despacio.
 // Golpes seguidos la dejan en el valor mas alto hasta que baja. Al llenarse para la segunda fase
-// la franja sube primero y el relleno la alcanza al final. Solo se ve durante la pelea
+// la franja sube primero y el relleno la alcanza al final. Solo se ve durante la pelea, la prenden y apagan los avisos del jefe
 public class BossHealthBar : MonoBehaviour
 {
     [SerializeField] private BossBrain brain;
@@ -29,23 +29,43 @@ public class BossHealthBar : MonoBehaviour
     private float fillSpeed;
     private float chipSpeed;
     private float chipDelayCounter;
+    private bool isVisible;
 
     private void OnEnable()
     {
         health.OnHealthChanged += OnHealthChanged;
         phase.OnPhaseChanged += Refresh;
+        brain.OnFightStarted += Show;
+        brain.OnFightReset += Hide;
+        brain.OnDefeated += Hide;
     }
 
     private void OnDisable()
     {
         health.OnHealthChanged -= OnHealthChanged;
         phase.OnPhaseChanged -= Refresh;
+        brain.OnFightStarted -= Show;
+        brain.OnFightReset -= Hide;
+        brain.OnDefeated -= Hide;
     }
 
     // En Start porque la vida se crea en el Awake del jefe
     private void Start()
     {
         Refresh();
+        SetVisible(false);
+    }
+
+    private void Show() => SetVisible(true);
+    private void Hide() => SetVisible(false);
+
+    // Al prenderse o apagarse queda al dia sin animar, asi al aparecer no se ve un relleno viejo
+    private void SetVisible(bool visible)
+    {
+        isVisible = visible;
+        container.SetActive(visible);
+        fill.fillAmount = target;
+        chip.fillAmount = target;
     }
 
     private void OnHealthChanged(int current, int max) => Refresh();
@@ -64,16 +84,7 @@ public class BossHealthBar : MonoBehaviour
     // Tiempo sin escala, asi el hitstop no la frena
     private void Update()
     {
-        bool isVisible = brain.GetIsFighting() && !health.GetIsDead();
-        container.SetActive(isVisible);
-
-        // Escondida queda al dia sin animar, asi al aparecer no se ve un relleno viejo
-        if (!isVisible)
-        {
-            fill.fillAmount = target;
-            chip.fillAmount = target;
-            return;
-        }
+        if (!isVisible) return;
 
         if (fill.fillAmount > target) fill.fillAmount = Mathf.MoveTowards(fill.fillAmount, target, fillSpeed * Time.unscaledDeltaTime);
 

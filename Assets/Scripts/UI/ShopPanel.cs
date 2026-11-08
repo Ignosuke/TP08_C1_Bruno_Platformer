@@ -2,12 +2,14 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 // La ventana de la tienda en el HUD. Arriba y abajo eligen, confirmar compra, cancelar o interactuar cierra.
 // Esta apagada hasta que el mercader la abre, al prenderse escucha las teclas y al apagarse las suelta
 public class ShopPanel : MonoBehaviour
 {
     private const float NavigateThreshold = 0.5f;   // Cuanto hay que inclinar el stick para moverse
+    private const string NameStart = "<pos=30>";   // El nombre arranca siempre en el mismo lugar, con o sin icono
 
     [SerializeField] private ShopSo shopData;
     [SerializeField] private Shop shop;
@@ -18,11 +20,15 @@ public class ShopPanel : MonoBehaviour
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color selectedColor = new Color(1f, 0.85f, 0.45f);
     [SerializeField] private Color unavailableColor = new Color(0.5f, 0.5f, 0.5f);
+    [Tooltip("Item icon between the cursor and the name, in HUD pixels")]
+    [SerializeField] private Vector2 iconSize = new Vector2(16f, 16f);
+    [SerializeField] private float iconX = 12f;     // Justo despues del cursor
 
     private InputActionReference navigateAction;
     private InputActionReference submitAction;
     private InputActionReference cancelAction;
     private InputActionReference interactAction;
+    private Image[] icons;
 
     private int selected;
     private int lastDirection;          // Para moverse una vez por toque y no cada frame
@@ -38,6 +44,27 @@ public class ShopPanel : MonoBehaviour
         submitAction = shopData.GetSubmitAction();
         cancelAction = shopData.GetCancelAction();
         interactAction = shopData.GetInteractAction();
+
+        // Los iconos se crean aca, asi las filas de la escena no cambian
+        icons = new Image[rows.Length];
+        for (int i = 0; i < rows.Length; i++) icons[i] = CreateIcon(rows[i].rectTransform);
+    }
+
+    private Image CreateIcon(RectTransform row)
+    {
+        GameObject iconObject = new GameObject("Icon", typeof(RectTransform));
+        iconObject.transform.SetParent(row, false);
+        Image icon = iconObject.AddComponent<Image>();
+        icon.raycastTarget = false;
+        icon.preserveAspect = true;
+
+        RectTransform rect = icon.rectTransform;
+        rect.anchorMin = new Vector2(0f, 0.5f);
+        rect.anchorMax = new Vector2(0f, 0.5f);
+        rect.pivot = new Vector2(0f, 0.5f);
+        rect.anchoredPosition = new Vector2(iconX, 0f);
+        rect.sizeDelta = iconSize;
+        return icon;
     }
 
     private void OnEnable()
@@ -122,7 +149,7 @@ public class ShopPanel : MonoBehaviour
         }
     }
 
-    // Nombre, compras hechas sobre el maximo y precio, o MAX si ya no se puede comprar mas
+    // Icono, nombre, compras hechas sobre el maximo y precio, o MAX si ya no se puede comprar mas
     private void Refresh()
     {
         for (int i = 0; i < rows.Length; i++)
@@ -132,8 +159,13 @@ public class ShopPanel : MonoBehaviour
             string price = shop.GetIsMaxed(i) ? "MAX" : item.GetPrice(level).ToString();
             string cursor = i == selected ? "> " : "  ";
 
-            rows[i].text = cursor + item.GetDisplayName() + "<pos=60%>" + level + "/" + item.GetMaxLevel() + "<pos=80%>" + price;
+            rows[i].text = cursor + NameStart + item.GetDisplayName() + "<pos=60%>" + level + "/" + item.GetMaxLevel() + "<pos=80%>" + price;
             rows[i].color = i == selected ? selectedColor : shop.GetCanBuy(i) ? normalColor : unavailableColor;
+
+            // El icono muestra la proxima compra, si ya esta al maximo o no tiene icono se oculta
+            Sprite icon = item.GetIcon(level);
+            icons[i].sprite = icon;
+            icons[i].enabled = icon != null && !shop.GetIsMaxed(i);
         }
     }
 
