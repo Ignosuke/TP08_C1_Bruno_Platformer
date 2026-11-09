@@ -53,3 +53,5 @@ MonoBehaviour:
 
       Developed
       by: @Ignosuke'
+  - id: FirstHurt
+    text: Press <sprite name="Q"> to heal

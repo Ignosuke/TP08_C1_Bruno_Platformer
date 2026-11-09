@@ -44365,6 +44365,8 @@ MonoBehaviour:
   - {fileID: 1291838573}
   - {fileID: 747113304}
   shop: {fileID: 1004519586}
+  playerHealth: {fileID: 1949218469}
+  playerHealer: {fileID: 1949218468}
   showTime: 2
   fadeTime: 0.5
 --- !u!1 &1471813582
@@ -46410,9 +46412,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GongPlayer
   gongClip: {fileID: 8300000, guid: bc232f8a5ae3cab458ea00b1da8f8b60, type: 3}
   checkpoints:
+  - {fileID: 747113304}
   - {fileID: 1291838573}
   - {fileID: 934640156}
-  - {fileID: 747113304}
   runStats: {fileID: 1957711167}
 --- !u!4 &1662111501
 Transform:

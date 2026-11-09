@@ -10,6 +10,8 @@ public class PromptSo : ScriptableObject
     // Tambien los usa el menu 15 para sumarlos a un PromptSo que ya existia
     public const string MenuHintText = "<sprite name=\"Up\"><sprite name=\"Down\"> Choose  <sprite name=\"J\"> Confirm  <sprite name=\"K\"> Back";
     public const string PauseHintText = "<sprite name=\"Up\"><sprite name=\"Down\"> Choose  <sprite name=\"J\"> Confirm  <sprite name=\"K\"><sprite name=\"Esc\"> Back";
+    public const string FirstHurtId = "FirstHurt";
+    public const string FirstHurtText = "Press <sprite name=\"Q\"> to heal";
     public const string CreditsText =
         "Sprites: xzany.itch.io\n" +
         "VFX: cs5475.itch.io\n" +
@@ -26,6 +28,7 @@ public class PromptSo : ScriptableObject
         new PromptEntry("Parry", "<sprite name=\"L\"> Defend, right before the hit to parry"),
         new PromptEntry("DoubleJump", "<sprite name=\"Space\"> again in the air to double jump"),
         new PromptEntry("Checkpoint", "Safe spot reached"),
+        new PromptEntry(FirstHurtId, FirstHurtText),
         new PromptEntry("Purchase", "Bought"),
         new PromptEntry("ShopPrompt", "<sprite name=\"E\"> Shop"),
         new PromptEntry("ShopHint", "<sprite name=\"Up\"><sprite name=\"Down\"> Choose  <sprite name=\"J\"> Buy  <sprite name=\"K\"> Close"),
