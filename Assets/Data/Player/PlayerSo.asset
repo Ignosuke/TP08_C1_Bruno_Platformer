@@ -51,8 +51,8 @@ MonoBehaviour:
   airAttackHitFrame: 3
   comboWindow: 0.2
   attackBufferTime: 0.18
-  hitboxOffset: {x: 0.9, y: 0}
-  hitboxSize: {x: 1.2, y: 1.2}
+  hitboxOffset: {x: 0.8, y: 0}
+  hitboxSize: {x: 1.1, y: 1.1}
   hitLayer:
     serializedVersion: 2
     m_Bits: 4294967295
