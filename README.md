@@ -12,17 +12,17 @@ A 2D action platformer built in Unity, in the spirit of Hollow Knight. An old sa
 
 ### How to play
 
-| | Keyboard | Gamepad |
-|---|---|---|
-| **Move** | `A` `D` / arrows | Left stick |
-| **Jump / double jump** | `Space` | South button |
-| **Attack** (3-hit combo, air attack) | `J` | West button |
-| **Throw shuriken** | `S` + `J` | Right trigger |
-| **Dash** | `K` | |
-| **Defend / parry** | `L` | |
-| **Heal** | `Q` | |
-| **Talk to the blacksmith** | `E` | |
-| **Pause** | `Esc` / `P` | Start |
+| | Keyboard |
+|---|---|
+| **Move** | `A` `D` / arrows |
+| **Jump / double jump** | `Space` |
+| **Attack** (3-hit combo, air attack) | `J` |
+| **Throw shuriken** | `S` + `J` |
+| **Dash** | `K` |
+| **Defend / parry** | `L` |
+| **Heal** | `Q` |
+| **Talk to the blacksmith** | `E` |
+| **Pause** | `Esc` / `P` |
 
 Menus use the arrows to choose, `J` to confirm and `K` or `Esc` to go back.
 
@@ -134,17 +134,17 @@ Un plataformero de acción 2D hecho en Unity, al estilo Hollow Knight. Un samura
 
 ### Cómo se juega
 
-| | Teclado | Joystick |
-|---|---|---|
-| **Moverse** | `A` `D` / flechas | Stick izquierdo |
-| **Saltar / doble salto** | `Espacio` | Botón de abajo |
-| **Atacar** (combo de 3, ataque aéreo) | `J` | Botón de la izquierda |
-| **Lanzar shuriken** | `S` + `J` | Gatillo derecho |
-| **Dash** | `K` | |
-| **Defender / parry** | `L` | |
-| **Curarse** | `Q` | |
-| **Hablar con el herrero** | `E` | |
-| **Pausa** | `Esc` / `P` | Start |
+| | Teclado |
+|---|---|
+| **Moverse** | `A` `D` / flechas |
+| **Saltar / doble salto** | `Espacio` |
+| **Atacar** (combo de 3, ataque aéreo) | `J` |
+| **Lanzar shuriken** | `S` + `J` |
+| **Dash** | `K` |
+| **Defender / parry** | `L` |
+| **Curarse** | `Q` |
+| **Hablar con el herrero** | `E` |
+| **Pausa** | `Esc` / `P` |
 
 En los menús se elige con las flechas, se confirma con `J` y se vuelve con `K` o `Esc`.
 
