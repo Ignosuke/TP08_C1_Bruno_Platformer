@@ -53,6 +53,7 @@ public class PlayerJumper : MonoBehaviour
         airJumpCount = playerData.GetAirJumpCount();
         airJumpForce = playerData.GetAirJumpForce();
 
+        // Suggestion: groundChecker es private y no serializado, en Awake siempre es null. El if sobra, asignalo directo como en PlayerMover.
         if (groundChecker == null) groundChecker = GetComponentInChildren<PlayerGroundChecker>();
         dasher = GetComponent<PlayerDasher>();
         defender = GetComponent<PlayerDefender>();

@@ -78,6 +78,10 @@ public class Merchant : MonoBehaviour
 
     private void Release()
     {
+        // Bug: si un golpe con empujon cierra la tienda, aca se sale sin devolver nada y el control lo devuelve PlayerKnockback,
+        // que solo prende Mover, Jumper, Dasher y Attacker (PlayerKnockback.cs:35). PlayerDefender y PlayerHealer quedan apagados
+        // hasta la proxima muerte: el jugador no puede defenderse ni curarse. Devolve los 6 controles al terminar el empujon
+        // (por ejemplo, esperando a que mover.enabled vuelva a true) o centraliza el congelado en un solo componente.
         if (isClosingOnHit || player.GetIsDead()) return;
         SetPlayerFrozen(false);
     }

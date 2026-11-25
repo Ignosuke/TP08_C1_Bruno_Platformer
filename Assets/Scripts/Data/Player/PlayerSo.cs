@@ -49,6 +49,8 @@ public class PlayerSo : ScriptableObject
     [SerializeField] private float[] comboDuration = { 0.25f, 0.25f, 0.4f };
     [SerializeField] private int airAttackDamage = 1;
     [SerializeField] private float airAttackDuration = 0.3f;
+    // Suggestion: comboHitFrames, airAttackHitFrame y throwHitFrame (y sus getters) no los lee ningun script del repo, los tooltips
+    // hablan de un "builder" que no esta versionado. Los frames reales viven en los Animation Events de los .anim. Borralos o subi el builder.
     [Tooltip("Sheet frame (1-based) where each combo hit lands. The builder turns it into an Animation Event")]
     [SerializeField] private int[] comboHitFrames = { 5, 4, 3 };
     [SerializeField] private int airAttackHitFrame = 3;
@@ -161,6 +163,9 @@ public class PlayerSo : ScriptableObject
     public float GetDashDuration() => dashDuration;
     public float GetDashCooldown() => dashCooldown;
 
+    // Warning: devolver el array expone el asset a escritura desde cualquier clase. PlayerAttacker.cs:59 tuvo que clonarlo para
+    // que la tienda no modifique el .asset; GetComboDuration, GetComboKnockback y GetComboHitStop tienen el mismo riesgo.
+    // Devolve IReadOnlyList<int> o un getter por indice (GetComboDamage(int step)).
     public int[] GetComboDamage() => comboDamage;
     public float[] GetComboDuration() => comboDuration;
     public int GetAirAttackDamage() => airAttackDamage;

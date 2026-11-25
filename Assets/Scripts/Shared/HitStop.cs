@@ -26,6 +26,8 @@ public class HitStop : MonoBehaviour
     // Si dos pedidos se pisan queda el mas largo. En pausa no hace nada
     private void Stop(float duration)
     {
+        // Warning: comparacion de float con == (y != FrozenScale en la linea siguiente y en Restore). Funciona porque los
+        // valores se asignan exactos, pero conviene Mathf.Approximately o guardar un bool isFrozen propio.
         if (Time.timeScale == 0f) return;
 
         if (Time.timeScale != FrozenScale) savedScale = Time.timeScale;

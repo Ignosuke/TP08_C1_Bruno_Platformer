@@ -60,6 +60,7 @@ public class PlayerKnockback : MonoBehaviour
     {
         float strength = info.Knockback;
         if (health.GetIsBlocking(info)) strength *= blockMultiplier;
+        // Warning: comparacion de float con ==. Usa Mathf.Approximately(info.Direction.x, 0f) o Mathf.Abs(...) < un epsilon.
         if (strength <= 0f || info.Direction.x == 0f) return;
 
         SetControls(false);
@@ -73,6 +74,10 @@ public class PlayerKnockback : MonoBehaviour
     // Nunca devuelve el control si murio, de eso se encarga PlayerRespawner
     private void RestoreControl()
     {
+        // Warning: prende los controles aunque otro sistema los haya apagado a proposito. Si el empujon llega durante el cambio
+        // de fase del jefe (BossPhaseCutscene congela al jugador) el jugador se libera antes de tiempo, y en la tienda deja
+        // apagados PlayerDefender y PlayerHealer (ver Merchant.cs). Tres clases (PlayerRespawner, Merchant, BossPhaseCutscene)
+        // mas esta tocan los mismos enabled sin coordinarse: conviene un contador de bloqueos o un unico PlayerControlLock.
         if (health.GetIsDead()) return;
         SetControls(true);
     }

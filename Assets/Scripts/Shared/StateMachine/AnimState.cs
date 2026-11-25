@@ -25,5 +25,6 @@ public class AnimState : State
         stateName = newStateName;
     }
 
+    // Suggestion: llama dos veces a GetCurrentAnimatorStateInfo(0). Guardalo en una variable local y usalo en las dos condiciones.
     public bool GetIsFinished() => animator.GetCurrentAnimatorStateInfo(0).IsName(stateName) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f;
 }

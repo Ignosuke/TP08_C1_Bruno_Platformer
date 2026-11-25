@@ -2,6 +2,7 @@ using UnityEngine;
 
 // Muñeco de prueba, parpadea y loguea al recibir un golpe, nunca muere
 [RequireComponent(typeof(SpriteRenderer))]
+// Suggestion: este componente no esta en ninguna escena ni prefab (codigo muerto de prueba). Borralo o movelo a una carpeta Test/.
 public class TrainingDummy : MonoBehaviour, IDamageable
 {
     [SerializeField] private Color flashColor = Color.white;

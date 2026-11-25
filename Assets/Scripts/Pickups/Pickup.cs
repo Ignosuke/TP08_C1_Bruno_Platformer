@@ -40,6 +40,9 @@ public class Pickup : MonoBehaviour
             case PickupType.Damage:
                 health.GetComponent<PlayerDamageBuff>().Apply();
                 return pickupData.GetDamageClip();
+            // Suggestion: la invulnerabilidad queda en el default, asi cualquier PickupType nuevo que se agregue al enum sin su case
+            // daria invulnerabilidad. Usa case PickupType.Invulnerability: y deja el default para un error. Con herencia
+            // (Pickup abstracto y un hijo por tipo, como en clase) este switch desaparece.
             default:
                 health.GetComponent<PlayerInvulnerability>().Apply();
                 return pickupData.GetInvulnerabilityClip();

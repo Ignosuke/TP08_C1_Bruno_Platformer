@@ -87,6 +87,9 @@ public class PlayerAudio : MonoBehaviour
     public void Play(AudioClip clip, float pitch = 1f, float volume = 1f)
     {
         if (clip == null) return;
+        // Warning: el pitch de la fuente tambien afecta a los PlayOneShot que siguen sonando. Si el tercer golpe (pitch 1.2)
+        // todavia suena cuando llega el impacto (pitch 1), el tajo cambia de tono a mitad del clip. Usa una AudioSource por
+        // tipo de sonido o deja el pitch fijo y varia solo el volumen.
         audioSource.pitch = pitch;
         audioSource.PlayOneShot(clip, volume);
     }

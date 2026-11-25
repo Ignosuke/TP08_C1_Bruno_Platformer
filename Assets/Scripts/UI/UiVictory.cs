@@ -10,6 +10,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(UiPanel))]
 public class UiVictory : MonoBehaviour
 {
+    // Suggestion: los nombres de escena estan repetidos como string en UiVictory, UiMainMenuCanvas, UiGameCanvas y UiSplash.
+    // Si se renombra una escena hay que tocar 4 componentes en 3 escenas. Centralizalos en una clase de constantes o en un SO.
     [Tooltip("Must match scenes in the build settings")]
     [SerializeField] private string gameplaySceneName = "Gameplay";
     [SerializeField] private string menuSceneName = "MainMenu";

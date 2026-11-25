@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PromptSo", menuName = "Data/Prompts")]
 public class PromptSo : ScriptableObject
 {
+    // Suggestion: AttackOldText no se usa en ningun lado y el comentario que sigue a AttackText habla de un "menu 15" que no esta en el repo.
+    // Borra la constante y el comentario.
     public const string AttackOldText = "<sprite name=\"J\"> Attack";
     public const string AttackText = "<sprite name=\"J\"> Attack  <sprite name=\"S\"><sprite name=\"J\"> Shuriken";
     // Tambien los usa el menu 15 para sumarlos a un PromptSo que ya existia

@@ -42,5 +42,7 @@ public class PlayerWallet : MonoBehaviour
     public int GetCollected() => collected;   // Para el puntaje, lo gastado tambien cuenta
 
     // Para que el menu muestre el record
+    // Suggestion: el menu no lo muestra (UiBestScore solo lee RunStats.GetBestScore), asi que BestRunCoins se guarda y nunca se ve.
+    // Mostralo en el menu o saca el comentario.
     public static int GetBestCoins() => PlayerPrefs.GetInt(BestCoinsKey, 0);
 }

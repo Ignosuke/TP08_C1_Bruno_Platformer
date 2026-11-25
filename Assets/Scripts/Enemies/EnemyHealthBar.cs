@@ -22,6 +22,8 @@ public class EnemyHealthBar : MonoBehaviour
 
     private void UpdateBar(int current, int max)
     {
+        // Suggestion: la barra se achica escalando el transform. Lo visto en clase es una Image Filled con fillAmount = current / max
+        // (como ya hiciste en BossHealthBar.cs), que no depende del pivot del sprite.
         fill.localScale = new Vector3(max > 0 ? (float)current / max : 0f, 1f, 1f);
         container.SetActive(current > 0 && current < max);
     }

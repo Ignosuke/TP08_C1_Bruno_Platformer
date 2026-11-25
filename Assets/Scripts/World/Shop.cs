@@ -54,6 +54,8 @@ public class Shop : MonoBehaviour
                 player.IncreaseMax(item.GetAmount());
                 break;
             case ShopItemType.Sharpen:
+                // Suggestion: el afilado N solo sube el golpe N del combo (no el ataque aereo ni el shuriken), pero el README dice
+                // "+1 damage on every hit". Hace coincidir el texto con el codigo, o suma el daño a todos los pasos.
                 attacker.AddComboDamage(level, item.GetAmount());
                 break;
             case ShopItemType.HealCharge:

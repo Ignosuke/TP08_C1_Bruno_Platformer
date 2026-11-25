@@ -39,6 +39,7 @@ public class ParallaxSwitcher : MonoBehaviour
 
     private void Update()
     {
+        // Warning: comparacion de float con ==. Usa Mathf.Approximately(autumnAlpha, targetAlpha).
         if (autumnAlpha == targetAlpha) return;
 
         autumnAlpha = Mathf.MoveTowards(autumnAlpha, targetAlpha, Time.deltaTime / fadeTime);
